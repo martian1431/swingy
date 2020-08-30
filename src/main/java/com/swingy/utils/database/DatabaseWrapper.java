@@ -52,7 +52,7 @@ public class DatabaseWrapper {
             System.out.println("table added");
         } catch (SQLException e) {
             System.out.println(e.getMessage() + "\nError: cannot create table");
-            System.exit(0);
+            System.exit(-1);
         }
     }
 
@@ -76,28 +76,16 @@ public class DatabaseWrapper {
 
     public boolean heroExists(String name) throws SQLException {
         boolean exists = false;
-//        System.out.println("Does hero exists??");
-//        System.out.println(line);
         String sql = "SELECT * FROM heroes WHERE heroName='" + name + "'";
         Statement stmt = conn.createStatement();
         ResultSet resultSet = stmt.executeQuery(sql);
         if (resultSet.next()) {
             exists = true;
         }
-        System.out.println(exists);
-//        return resultSet.next();
         return exists;
     }
 
     public void insertHero(Hero newHero) throws SQLException {
-        System.out.println("Let's insert a hero to database...");
-//        System.out.println(newHero.getType());
-//        System.out.println(newHero.getName());
-//        System.out.println(newHero.getLevel());
-//        System.out.println(newHero.getExperience());
-//        System.out.println(newHero.getHitPoints());
-//        System.out.println(newHero.getAttack());
-//        System.out.println(newHero.getDefense());
         String sql = "INSERT INTO heroes (" +
                 "heroName, heroClass, " +
                 "heroLevel, heroExperience, " +
@@ -111,11 +99,13 @@ public class DatabaseWrapper {
         pstmt.setInt(5, newHero.getHitPoints());
         pstmt.setInt(6, newHero.getAttack());
         pstmt.setInt(7, newHero.getDefense());
-        System.out.println(pstmt.execute());
-//        if (pstmt.execute()) {
-//            System.out.println("Yeboooo");
+
+        pstmt.execute();
+//        TODO return true or false
+        //        if (pstmt.execute()) {
+//            System.out.println("(Remove) Failed for create Hero");
 //        } else {
-//            System.out.println("Hero not added to database");
+//            System.out.println("(Remove) Hero Created");
 //        }
     }
 
@@ -142,10 +132,12 @@ public class DatabaseWrapper {
         }
     }
 
+//    TODO
     public Hero retrieveHeroData(String trim) {
         return HeroFactory.newHero("test", HeroEnum.DEADPOOL);
     }
 
+//    TODO
     public void updateHero(Hero hero) {
     }
 
