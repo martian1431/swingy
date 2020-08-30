@@ -1,6 +1,7 @@
 package com.swingy.view.console;
 
 import com.swingy.controller.ConsoleController;
+import com.swingy.model.hero.Hero;
 import com.swingy.utils.Logo;
 
 import java.util.Scanner;
@@ -77,5 +78,10 @@ public class ConsoleView {
                 log(ANSI_RED + " >>> Incorrect Choice, Try Again!");
             }
         }
+    }
+
+    public static void displayHeroStats(Hero hero) {
+        System.out.println(hero.getType());
+
     }
 }
