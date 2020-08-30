@@ -6,6 +6,7 @@ import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
+import java.awt.*;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -49,20 +50,27 @@ public class ConsoleController {
 
         log(ANSI_YELLOW + "::: Enter The Name Of The Hero");
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String heroName = scanner.nextLine();
 
             /**
              * Check if the name has atleast 2 and atmost 25
              * characters.
              */
-            if (line.length() >= 2 && line.length() < 26) {
+            if (heroName.length() >= 2 && heroName.length() < 26) {
                 try {
                     // Create the hero and store it in the database.
-                    if (!DatabaseWrapper.getInstance().heroExists(line)) {
-                        DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(line.trim(), type));
-                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + line);
+                    if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
+                        DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
+                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
+//                        TODO refactor
+                        hero = DatabaseWrapper.getInstance().retrieveHeroData(heroName.trim());
+                        ConsoleView.displayHeroStats(hero);
+                        map = MapFactory.generateMap(hero);
+                        if (CONSOLE_MODE == true) {
+                            directions();
+                        }
                     } else {
-                        log(ANSI_RED + " >>> " + line + " Hero Exists, Try again!" + ANSI_RESET);
+                        log(ANSI_RED + " >>> " + heroName + " Hero Exists, Try again!" + ANSI_RESET);
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -71,9 +79,8 @@ public class ConsoleController {
 //                    exception.printStackTrace();
 //                }
                 break;
-            } else if (line.length() < 3 || line.length() > 25) {
-                log(
-                        ANSI_RED + ">>> Name Must Have 2 - 25 Characters, Try Again:" + ANSI_RESET);
+            } else {
+                log(ANSI_RED + ">>> Name Must Have 2 - 25 Characters, Try Again:" + ANSI_RESET);
             }
         }
     }
