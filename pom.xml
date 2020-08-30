@@ -7,6 +7,7 @@
     <groupId>com.wethinkcode</groupId>
     <artifactId>swingy</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <properties>
         <maven.compiler.source>1.14</maven.compiler.source>
@@ -59,29 +60,37 @@
 
     <build>
         <plugins>
-<!--            <plugin>-->
-<!--            <artifactId>maven-compiler-plugin</artifactId>-->
-<!--            <version>2.3.2</version>-->
-<!--            </plugin>-->
+            <!-- http://maven.apache.org/plugins/maven-assembly-plugin/usage.html -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <finalName>swingy</finalName>
+                    <appendAssemblyId>true</appendAssemblyId>
+                    <!--   https://stackoverflow.com/questions/1334999/is-it-possible-to-rename-a-maven-jar-with-dependencies -->
+                        <archive>
+                            <manifest>
+                                <mainClass>
+                                    com.swingy.Swingy
+                                </mainClass>
+                            </manifest>
+                        </archive>
+                </configuration>
                 <executions>
                     <execution>
-                        <id>copy-dependencies</id>
-                        <phase>prepare-package</phase>
+<!--                        <id>jar-with-dependencies</id>-->
+                        <phase>package</phase>
                         <goals>
-                            <goal>copy-dependencies</goal>
+                            <goal>single</goal>
                         </goals>
-                        <configuration>
-                            <outputDirectory>
-
-                            </outputDirectory>
-                        </configuration>
                     </execution>
                 </executions>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -92,22 +101,6 @@
                 </configuration>
             </plugin>
 
-            <plugin>
-                <!-- Build an executable JAR -->
-                <!-- https://maven.apache.org/plugins/maven-jar-plugin/ -->
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.2.0</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.wethinkcode.swingy.Swingy</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
 </project>
