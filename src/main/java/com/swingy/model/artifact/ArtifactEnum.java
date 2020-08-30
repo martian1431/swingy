@@ -1,4 +1,7 @@
 package com.swingy.model.artifact;
 
-public class ArtifactEnum {
+public enum  ArtifactEnum {
+    WEAPON,
+    ARMOR,
+    HELM
 }
