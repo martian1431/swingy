@@ -1,5 +1,6 @@
 package com.swingy;
 
+import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GameWindow;
 
@@ -7,7 +8,7 @@ public class Swingy {
     public static void main(String[] args) {
         try {
             String view = args[0];
-            DatabaseHandler.getInstance().setupDatabase("Swingy.db");
+            DatabaseWrapper.getInstance().setupDatabase();
             if (view.toLowerCase().equals("console")) {
                 ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
