@@ -1,4 +1,10 @@
 package com.swingy.model.hero;
 
-public class HeroEnum {
+public enum  HeroEnum {
+    DEADPOOL,
+    THOR,
+    WOLVERINE,
+    MAGNETO,
+    ULTRON
+
 }
