@@ -1,4 +1,7 @@
 package com.swingy.model.hero;
 
-public class Enemy {
+public abstract class Enemy extends Hero {
+    public Enemy(int level) {
+        this.level = level;
+    }
 }
