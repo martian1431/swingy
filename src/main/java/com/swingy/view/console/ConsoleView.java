@@ -14,8 +14,8 @@ public class ConsoleView {
 
     /** Display menu choices after launching the game. */
     public static void displayMenuChoices() {
-        System.out.println("um here");
-        boolean isValid;
+        System.out.println("um here again");
+        boolean validInput = false;
         Scanner scanner = new Scanner(System.in);
 
         do {
@@ -24,11 +24,13 @@ public class ConsoleView {
             log(ANSI_CYAN + "\t2." + ANSI_RESET + " Select A Hero.");
             log(ANSI_CYAN + "\t3." + ANSI_RESET + " Switch To GUI view.");
 
-            String line = scanner.nextLine();
-            if (line.equals("1") || line.equals("2")
-                    || line.equals("3")) {
-                int choice = Integer.parseInt(line);
-                switch (choice) {
+            String input = scanner.nextLine();
+            if (input.equals("1") || input.equals("2")
+                    || input.equals("3")) {
+                validInput = true;
+                int option = Integer.parseInt(input);
+                ConsoleController.chooseHeroType();
+                switch (option) {
                     case 1:
                         ConsoleController.chooseHeroType();
                         break;
@@ -38,39 +40,15 @@ public class ConsoleView {
                     case 3:
 //                        GameWindow.run();
                         break;
+                    default:
+//                        TODO handle exection
+                        break;
                 }
-                isValid = true;
             } else {
-                isValid = false;
-                log(ANSI_RED + " >>> Incorrect Choice, Try Again!");
+                log(ANSI_RED + "\t::: Invalid input, please choose between (1-3) :::" + ANSI_RESET);
+                log("");
             }
-        } while (scanner.hasNextLine() && !isValid);
-
-//        while(scanner.hasNextLine()) {
-//            log(Colors.ANSI_YELLOW + "\t:::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT YOUR CHOICE " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
-//            log(ANSI_CYAN + "\t1." + ANSI_RESET + " Create A New Hero.");
-//            log(ANSI_CYAN + "\t2." + ANSI_RESET + " Select A Hero.");
-//            log(ANSI_CYAN + "\t3." + ANSI_RESET + " Switch To GUI view.");
-//
-//            String line = scanner.nextLine();
-//            if (line.equals("1") || line.equals("2")
-//                    || line.equals("3")) {
-//                Integer choice = Integer.parseInt(line);
-//                switch (choice) {
-//                    case 1:
-//                        ConsoleController.chooseHeroType();
-//                        break;
-//                    case 2:
-//                        ConsoleController.selectExistingHero();
-//                        break;
-//                    case 3:
-//                        GameWindow.run();
-//                        break;
-//                }
-//            } else {
-//                log(ANSI_RED + " >>> Incorrect Choice, Try Again!");
-//            }
-//        }
+        } while (!validInput);
     }
 
     /** Display all validtypes of heroes. */
