@@ -16,32 +16,27 @@ import static com.swingy.utils.StaticGlobal.map;
 
 public class ConsoleController {
 
-    public static void chooseHeroType() {
-        Scanner scanner = new Scanner(System.in);
 
-        log(ANSI_YELLOW + "::: SELECT A HERO TYPE" + ANSI_RESET);
-        ConsoleView.displayHeroTypes();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            if (line.equals("1") || line.equals("2") || line.equals("3")) {
-                Integer choice = Integer.parseInt(line);
-                switch (choice) {
-                    case 1:
-                        createHero(CharacterType.DEADPOOL);
-                        break;
-                    case 2:
-                        createHero(CharacterType.THOR);
-                        break;
-                    case 3:
-                        createHero(CharacterType.WOLVERINE);
-                        break;
-                }
-                break;
-            } else {
-                log(ANSI_RED + ">>> Hero Type Does Not Exist, Try Again!" + ANSI_RESET);
+    public static boolean heroType(String input) {
+        if (input.equals("1") || input.equals("2") || input.equals("3")) {
+            int choice = Integer.parseInt(input);
+            switch (choice) {
+                case 1:
+                    createHero(CharacterType.DEADPOOL);
+                    break;
+                case 2:
+                    createHero(CharacterType.THOR);
+                    break;
+                case 3:
+                    createHero(CharacterType.WOLVERINE);
+                    break;
+                default:
+                    return false;
             }
+            return true;
         }
-        ConsoleView.displayMenuChoices();
+//        ConsoleView.menuOptions();
+        return false;
     }
 
     public static void createHero(CharacterType type) {
@@ -84,9 +79,7 @@ public class ConsoleController {
         }
     }
 
-    public static void selectExistingHero() {
-        Scanner scanner = new Scanner(System.in);
-
+    public static void selectExistingHero(Scanner scanner) {
         try {
             // First check if there are heroes in the database.
             if (DatabaseWrapper.getInstance().numberOfHeroes() > 0) {
@@ -101,7 +94,7 @@ public class ConsoleController {
                 DatabaseWrapper.getInstance().retrieveAllHeroes();
             } else {
                 log(ANSI_RED + ">>> No Heroes Available!" + ANSI_RESET);
-                ConsoleView.displayMenuChoices();
+                ConsoleView.menuOptions();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -152,5 +145,37 @@ public class ConsoleController {
             ConsoleView.displayMoveList();
         }
         scanner.close();
+    }
+
+
+//    TODO change name
+    public static boolean menuOptionValidation(String input) {
+        if (input.equals("1") || input.equals("2")
+                || input.equals("3")) {
+            int option = Integer.parseInt(input);
+//            ConsoleController.heroType();
+            switch (option) {
+                case 1:
+                    ConsoleView.heroOptions();
+//                    ConsoleController.chooseHeroType();
+                    break;
+                case 2:
+                    ConsoleView.existingHero();
+//                    ConsoleController.selectHeroOptions();
+//                    ConsoleController.selectExistingHero();
+                    break;
+                case 3:
+//                  GameWindow.run();
+                    break;
+                default:
+                    return false;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static void run() {
+        ConsoleView.welcomeBanner();
     }
 }
