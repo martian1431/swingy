@@ -1,6 +1,8 @@
-package com.swingy.model.hero;
+package com.swingy.model.character.villian;
 
-public class Ultron extends Enemy {
+import com.swingy.model.character.Villian;
+
+public class Ultron extends Villian {
 
     public Ultron(int level) {
         super(level);

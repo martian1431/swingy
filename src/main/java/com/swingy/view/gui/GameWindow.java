@@ -1,8 +1,8 @@
 package com.swingy.view.gui;
 
 import com.swingy.controller.GameController;
-import com.swingy.model.hero.Hero;
-import com.swingy.model.hero.HeroEnum;
+import com.swingy.model.character.Hero;
+import com.swingy.model.character.CharacterType;
 import com.swingy.utils.Logo;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
@@ -209,7 +209,7 @@ public class GameWindow extends JFrame{
 
                                 if (fightOption == JOptionPane.YES_OPTION) {
                                     GameController.fight();
-                                    if (enemy.getHitPoints() <= 0) {
+                                    if (villian.getHitPoints() <= 0) {
                                         JOptionPane.showMessageDialog(GameWindow.this, "You Won The Battle!");
                                         displayTextArea.setText("::: HERO STATISTICS :::"
                                                 + "\nName: " + hero.getName()
@@ -229,7 +229,7 @@ public class GameWindow extends JFrame{
                                     }
                                 } else if (fightOption == JOptionPane.NO_OPTION) {
                                     GameController.run();
-                                    if (enemy.getHitPoints() <= 0) {
+                                    if (villian.getHitPoints() <= 0) {
                                         JOptionPane.showMessageDialog(GameWindow.this, "You Won The Battle!");
                                         displayTextArea.setText("::: HERO STATISTICS :::"
                                                 + "\nName: " + hero.getName()
@@ -322,13 +322,13 @@ public class GameWindow extends JFrame{
                 } else {
                     switch (index) {
                         case 0:
-                            hero = HeroFactory.newHero(inputTextField.getText(), HeroEnum.DEADPOOL);
+                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.DEADPOOL);
                             break;
                         case 1:
-                            hero = HeroFactory.newHero(inputTextField.getText(), HeroEnum.THOR);
+                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.THOR);
                             break;
                         case 2:
-                            hero = HeroFactory.newHero(inputTextField.getText(), HeroEnum.WOLVERINE);
+                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.WOLVERINE);
                         default:
                             break;
                     }

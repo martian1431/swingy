@@ -1,12 +1,17 @@
 package com.swingy.utils.factory;
 
-import com.swingy.model.hero.*;
+import com.swingy.model.character.*;
+import com.swingy.model.character.heros.Deadpool;
+import com.swingy.model.character.heros.Thor;
+import com.swingy.model.character.heros.Wolverine;
+import com.swingy.model.character.villian.Magneto;
+import com.swingy.model.character.villian.Ultron;
 
 public abstract class HeroFactory {
     private static Hero newHero;
     private static Hero newEnemy;
 
-    public static Hero newHero(String name, HeroEnum type) {
+    public static Hero newHero(String name, CharacterType type) {
         switch (type) {
             case DEADPOOL:
                 newHero = new Deadpool(name);
@@ -23,7 +28,7 @@ public abstract class HeroFactory {
         return newHero;
     }
 
-    public static Hero newEnemy(Hero hero, HeroEnum type) {
+    public static Hero newEnemy(Hero hero, CharacterType type) {
         switch (type) {
             case MAGNETO:
                 newEnemy = new Magneto(hero.getLevel());

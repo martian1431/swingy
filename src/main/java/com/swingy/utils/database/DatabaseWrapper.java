@@ -1,7 +1,7 @@
 package com.swingy.utils.database;
 
-import com.swingy.model.hero.Hero;
-import com.swingy.model.hero.HeroEnum;
+import com.swingy.model.character.Hero;
+import com.swingy.model.character.CharacterType;
 import com.swingy.utils.factory.HeroFactory;
 
 import java.io.File;
@@ -134,7 +134,7 @@ public class DatabaseWrapper {
 
 //    TODO
     public Hero retrieveHeroData(String trim) {
-        return HeroFactory.newHero("test", HeroEnum.DEADPOOL);
+        return HeroFactory.newHero("test", CharacterType.DEADPOOL);
     }
 
 //    TODO

@@ -1,6 +1,8 @@
-package com.swingy.model.hero;
+package com.swingy.model.character.villian;
 
-public class Magneto extends Enemy {
+import com.swingy.model.character.Villian;
+
+public class Magneto extends Villian {
 
     public Magneto(int level) {
         super(level);

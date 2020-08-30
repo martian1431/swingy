@@ -1,6 +1,8 @@
-package com.swingy.model.hero;
+package com.swingy.model.character.heros;
 
-public class Deadpool extends Hero{
+import com.swingy.model.character.Hero;
+
+public class Deadpool extends Hero {
 
     public Deadpool() { super(); }
 

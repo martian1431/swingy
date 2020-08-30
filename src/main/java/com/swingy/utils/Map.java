@@ -1,6 +1,6 @@
 package com.swingy.utils;
 
-import com.swingy.model.hero.Hero;
+import com.swingy.model.character.Hero;
 
 import java.util.Random;
 
@@ -27,12 +27,12 @@ public class Map {
     }
 
     /**
-     * Registers the hero to the map and set
-     * the initial position of the hero(H) as the
-     * center of the map. The hero(H) will always
+     * Registers the character to the map and set
+     * the initial position of the character(H) as the
+     * center of the map. The character(H) will always
      * start at the center of the map.
      *
-     * @param hero The hero to be registered.
+     * @param hero The character to be registered.
      */
     public void registerHero(Hero hero) {
 
@@ -47,9 +47,9 @@ public class Map {
     }
 
     /**
-     * Updates the position of the hero, sets the previous position to '.'
+     * Updates the position of the character, sets the previous position to '.'
      * character and set the current coordinates to the previous position
-     * coordinates. If the hero(H) gets to an enemy(E)'s position, set 'X'
+     * coordinates. If the character(H) gets to an enemy(E)'s position, set 'X'
      * to show that the Hero(H) came accross an enemy(E) and then display
      * the updated positions on the map.
      */
@@ -91,7 +91,7 @@ public class Map {
 
     /**
      * Dipslay the current position of the
-     * randomly spred villians and the hero
+     * randomly spred villians and the character
      * on the map with some cool colors.
      */
     public void displayMap() {

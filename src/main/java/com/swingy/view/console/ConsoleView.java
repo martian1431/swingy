@@ -1,7 +1,7 @@
 package com.swingy.view.console;
 
 import com.swingy.controller.ConsoleController;
-import com.swingy.model.hero.Hero;
+import com.swingy.model.character.Hero;
 import com.swingy.utils.Colors;
 import com.swingy.utils.Logo;
 
@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.log;
-import static com.swingy.utils.StaticGlobal.DISPLAY_LOGO;
 
 public class ConsoleView {
 

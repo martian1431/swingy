@@ -1,4 +1,4 @@
-package com.swingy.model.hero;
+package com.swingy.model.character;
 
 import com.swingy.model.artifact.*;
 import com.swingy.utils.Map;
@@ -28,11 +28,11 @@ public abstract class Hero {
     protected Weapon weapon;
     private Map observer;
 
-    Hero() {
+    protected Hero() {
 
     }
 
-    Hero(String name) {
+    protected Hero(String name) {
         this.name = name;
         this.level = 1;
         this.experience = 0;
@@ -91,7 +91,7 @@ public abstract class Hero {
     }
 
     /**
-     * Level up the hero.
+     * Level up the character.
      */
     private void levelUp() {
         int levelUp;

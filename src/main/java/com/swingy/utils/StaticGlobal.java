@@ -1,8 +1,8 @@
 package com.swingy.utils;
 
 import com.swingy.model.artifact.Artifact;
-import com.swingy.model.hero.Enemy;
-import com.swingy.model.hero.Hero;
+import com.swingy.model.character.Villian;
+import com.swingy.model.character.Hero;
 
 public class StaticGlobal {
     private StaticGlobal() {
@@ -20,5 +20,5 @@ public class StaticGlobal {
     public static Hero hero;
     public static Map map;
     public static Artifact artifact;
-    public static Enemy enemy;
+    public static Villian villian;
 }

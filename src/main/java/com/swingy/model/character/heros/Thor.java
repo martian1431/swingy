@@ -1,4 +1,6 @@
-package com.swingy.model.hero;
+package com.swingy.model.character.heros;
+
+import com.swingy.model.character.Hero;
 
 public class Thor extends Hero {
     public Thor() { super();}

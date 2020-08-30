@@ -3,8 +3,8 @@ package com.swingy.controller;
 import com.swingy.model.artifact.Armor;
 import com.swingy.model.artifact.Helm;
 import com.swingy.model.artifact.Weapon;
-import com.swingy.model.hero.Enemy;
-import com.swingy.model.hero.HeroEnum;
+import com.swingy.model.character.Villian;
+import com.swingy.model.character.CharacterType;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
@@ -46,9 +46,9 @@ public class GameController {
         if (map.getMap()[hero.getXCoordinate()][hero.getYCoordinate()] == 'X') {
             int random = new Random().nextInt(3);
             if (random == 2) {
-                enemy = (Enemy) HeroFactory.newEnemy(hero, HeroEnum.MAGNETO);
+                villian = (Villian) HeroFactory.newEnemy(hero, CharacterType.MAGNETO);
             } else {
-                enemy = (Enemy) HeroFactory.newEnemy(hero, HeroEnum.ULTRON);
+                villian = (Villian) HeroFactory.newEnemy(hero, CharacterType.ULTRON);
             }
             if (CONSOLE_MODE == true) {
                 action();
@@ -57,8 +57,8 @@ public class GameController {
     }
 
     /**
-     * When a hero moves to a position occupied by
-     * an enemy, the hero has two options.
+     * When a character moves to a position occupied by
+     * an enemy, the character has two options.
      *
      * 1. Fight: {@code fight()}, which engages him in
      * a battle with the enemy.
@@ -70,7 +70,7 @@ public class GameController {
     public static void action() {
         Scanner scanner = new Scanner(System.in);
 
-        log(ANSI_YELLOW + "::: You Are Facing: " + enemy.getName() + ANSI_RESET);
+        log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
         ConsoleView.displayActions();
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
@@ -97,23 +97,23 @@ public class GameController {
 
     /**
      * Engages the Hero in a battle with
-     * the enemy. If the hero ran and the odds
+     * the enemy. If the character ran and the odds
      * were against him, the enemy will attack first
-     * otherwise the hero will attack first.
+     * otherwise the character will attack first.
      */
     public static void fight() {
         if (HERO_RAN == false) {
-            while (hero.getHitPoints() > 0 && enemy.getHitPoints() > 0) {
-                hero.attack(enemy);
-                if (enemy.getHitPoints() > 0) {
-                    enemy.attack(hero);
+            while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
+                hero.attack(villian);
+                if (villian.getHitPoints() > 0) {
+                    villian.attack(hero);
                 }
             }
         } else if (HERO_RAN == true) {
-            while (hero.getHitPoints() > 0 && enemy.getHitPoints() > 0) {
-                enemy.attack(hero);
+            while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
+                villian.attack(hero);
                 if (hero.getHitPoints() > 0) {
-                    hero.attack(enemy);
+                    hero.attack(villian);
                 }
             }
         }
@@ -138,9 +138,9 @@ public class GameController {
     }
 
     /**
-     * Gives the hero a 50% chance of returning to
+     * Gives the character a 50% chance of returning to
      * the previous position. If the odds arent on
-     * their side, the hero must fight the Enemy.
+     * their side, the character must fight the Enemy.
      */
     public static void run() {
         int chance = new Random().nextInt(2);
@@ -157,7 +157,7 @@ public class GameController {
     }
 
     /**
-     * If hero wins a battle, he gains:
+     * If character wins a battle, he gains:
      * 1. Experience points, based on the enemy power.
      * 2. An artifact, which he can keep or leave.
      * But winning a battle does guarantee that an arifact
@@ -192,7 +192,7 @@ public class GameController {
                     log(ANSI_YELLOW + "::: Healed Up, Current Health: " + hero.getHitPoints());
                     return;
                 }
-                // Equip the hero.
+                // Equip the character.
                 equip(artifactType);
             } catch (Exception exception) {
                 exception.printStackTrace();
@@ -203,8 +203,8 @@ public class GameController {
     }
 
     /**
-     * Equip the hero with the chosen artifact.
-     * The hero wont be equiped if the Experience
+     * Equip the character with the chosen artifact.
+     * The character wont be equiped if the Experience
      * is chosen instead of an Artifact.
      *
      * @param artifactType The artifact type.
@@ -232,7 +232,7 @@ public class GameController {
     }
 
     /**
-     * The hero wins if he reaches one of
+     * The character wins if he reaches one of
      * the borders of the map.
      */
     public static void goal() {

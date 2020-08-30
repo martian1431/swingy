@@ -1,12 +1,11 @@
 package com.swingy.controller;
 
-import com.swingy.model.hero.HeroEnum;
+import com.swingy.model.character.CharacterType;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
-import java.awt.*;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -28,13 +27,13 @@ public class ConsoleController {
                 Integer choice = Integer.parseInt(line);
                 switch (choice) {
                     case 1:
-                        createHero(HeroEnum.DEADPOOL);
+                        createHero(CharacterType.DEADPOOL);
                         break;
                     case 2:
-                        createHero(HeroEnum.THOR);
+                        createHero(CharacterType.THOR);
                         break;
                     case 3:
-                        createHero(HeroEnum.WOLVERINE);
+                        createHero(CharacterType.WOLVERINE);
                         break;
                 }
                 break;
@@ -45,7 +44,7 @@ public class ConsoleController {
         ConsoleView.displayMenuChoices();
     }
 
-    public static void createHero(HeroEnum type) {
+    public static void createHero(CharacterType type) {
         Scanner scanner = new Scanner(System.in);
 
         log(ANSI_YELLOW + "::: Enter The Name Of The Hero");
@@ -58,7 +57,7 @@ public class ConsoleController {
              */
             if (heroName.length() >= 2 && heroName.length() < 26) {
                 try {
-                    // Create the hero and store it in the database.
+                    // Create the character and store it in the database.
                     if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
                         DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
                         log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
@@ -114,8 +113,8 @@ public class ConsoleController {
             String line = scanner.nextLine();
 
             try {
-                // Check if the specified hero name exist in the database,
-                // If the hero name exist in the database, retrieve the data to hero object,
+                // Check if the specified character name exist in the database,
+                // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
                 System.out.println(DatabaseWrapper.getInstance().heroExists(line));
                 if (DatabaseWrapper.getInstance().heroExists(line)) {

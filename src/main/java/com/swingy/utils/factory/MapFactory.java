@@ -1,6 +1,6 @@
 package com.swingy.utils.factory;
 
-import com.swingy.model.hero.Hero;
+import com.swingy.model.character.Hero;
 import com.swingy.utils.Map;
 
 import static com.swingy.utils.Log.log;

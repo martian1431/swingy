@@ -1,6 +1,6 @@
-package com.swingy.model.hero;
+package com.swingy.model.character;
 
-public enum  HeroEnum {
+public enum CharacterType {
     DEADPOOL,
     THOR,
     WOLVERINE,
