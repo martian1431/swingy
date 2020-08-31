@@ -28,21 +28,21 @@ public class Logo {
 //        "\tGood Luck on your Journey... STAY AWAY FROM THANOS at a lower Level";
 //        TODO (N.B) use this as soon as the user starts the game
 //        "\t * Villains are in Red_-_ Heros are Blue (Refactor)\n"+
-        return  Colors.CYAN_BOLD_BRIGHT + "\tHi, Welcome!!!\n\n" + Colors.ANSI_RESET +
-                "\tSwingy is a minimalistic text-based Role Play Game in Java Swing...(TODO)\n\n" +
-                Colors.ANSI_YELLOW + "\t:::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HOW TO PLAY " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
-                "\t * North: Move Up\n" +
-                "\t * East: Move Right\n" +
-                "\t * West: Move Left\n" +
-                "\t * South: Move Down\n\n" +
+        return  Colors.CYAN_BOLD_BRIGHT + "Hi, Welcome!!!\n\n" + Colors.ANSI_RESET +
+                "Swingy is a minimalistic text-based Role Play Game in Java Swing...(TODO)\n\n" +
+                Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HOW TO PLAY " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
+                "  * North: Move Up\n" +
+                "  * East: Move Right\n" +
+                "  * West: Move Left\n" +
+                "  * South: Move Down\n\n" +
 
-                Colors.ANSI_YELLOW + "\t:::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HERE ARE THE RULES " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
-                "\t * To win you need to pass the End of the MAP\n" +
-                "\t * To Advance to next Level You need to accumulate above 1000xp\n" +
-                "\t * The Map's are based on your level... \n" +
-                "\t * Fighting a Viilain can boost your XP \n" +
-                "\t * When Fighting a Villain, if you Lose you will die and start over.\n" +
-                "\t * If you defeat a villain, You will get more powerful, Your XP,ATT,DEF,HP will Increase\n";
+                Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HERE ARE THE RULES " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
+                "  * To win you need to pass the End of the MAP\n" +
+                "  * To Advance to next Level You need to accumulate above 1000xp\n" +
+                "  * The Map's are based on your level... \n" +
+                "  * Fighting a Viilain can boost your XP \n" +
+                "  * When Fighting a Villain, if you Lose you will die and start over.\n" +
+                "  * If you defeat a villain, You will get more powerful, Your XP,ATT,DEF,HP will Increase\n";
 
     }
 
