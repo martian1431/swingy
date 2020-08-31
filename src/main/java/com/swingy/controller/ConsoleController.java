@@ -1,6 +1,7 @@
 package com.swingy.controller;
 
 import com.swingy.model.character.CharacterType;
+import com.swingy.utils.Colors;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
@@ -17,18 +18,21 @@ import static com.swingy.utils.StaticGlobal.map;
 public class ConsoleController {
 
 
-    public static boolean heroType(String input) {
+    public static boolean heroType() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
         if (input.equals("1") || input.equals("2") || input.equals("3")) {
             int choice = Integer.parseInt(input);
             switch (choice) {
                 case 1:
-                    createHero(CharacterType.DEADPOOL);
+                    ConsoleView.heroNameOption(CharacterType.DEADPOOL);
                     break;
                 case 2:
-                    createHero(CharacterType.THOR);
+                    ConsoleView.heroNameOption(CharacterType.THOR);
                     break;
                 case 3:
-                    createHero(CharacterType.WOLVERINE);
+                    ConsoleView.heroNameOption(CharacterType.WOLVERINE);
                     break;
                 default:
                     return false;
@@ -39,46 +43,45 @@ public class ConsoleController {
         return false;
     }
 
+
+//    Refactor TODO fix return statement
     public static void createHero(CharacterType type) {
         Scanner scanner = new Scanner(System.in);
+        String heroName = scanner.nextLine();
 
-        log(ANSI_YELLOW + "::: Enter The Name Of The Hero");
-        while (scanner.hasNextLine()) {
-            String heroName = scanner.nextLine();
-
-            /**
-             * Check if the name has atleast 2 and atmost 25
-             * characters.
-             */
-            if (heroName.length() >= 2 && heroName.length() < 26) {
-                try {
-                    // Create the character and store it in the database.
-                    if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
-                        DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
-                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
+        /**
+         * Check if the name has atleast 2 and atmost 25
+         * characters.
+         */
+        if (heroName.length() >= 2 && heroName.length() < 26) {
+            try {
+                // Create the character and store it in the database.
+                if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
+                    DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
+                    log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
 //                        TODO refactor
-                        hero = DatabaseWrapper.getInstance().retrieveHeroData(heroName.trim());
-                        ConsoleView.displayHeroStats(hero);
-                        map = MapFactory.generateMap(hero);
-                        if (CONSOLE_MODE == true) {
-                            directions();
-                        }
-                    } else {
-                        log(ANSI_RED + " >>> " + heroName + " Hero Exists, Try again!" + ANSI_RESET);
+                    hero = DatabaseWrapper.getInstance().retrieveHeroData(heroName.trim());
+//                    ConsoleView.displayHeroStats(hero);
+                    map = MapFactory.generateMap(hero);
+                    if (CONSOLE_MODE == true) {
+//                        directions();
+                        ConsoleView.displayMoveList();
                     }
-                } catch (Exception e) {
-                    System.out.println(e.getMessage());
+                } else {
+                    log(ANSI_RED + ":::ERROR:::" + heroName + " Hero Exists, Try again!" + ANSI_RESET);
                 }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
 //                catch (SQLException | IOException | ClassNotFoundException exception) {
 //                    exception.printStackTrace();
 //                }
-                break;
-            } else {
-                log(ANSI_RED + ">>> Name Must Have 2 - 25 Characters, Try Again:" + ANSI_RESET);
-            }
+        } else {
+            log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 25 Characters, Try Again:" + ANSI_RESET);
         }
     }
 
+//   TODO Refactor
     public static void selectExistingHero(Scanner scanner) {
         try {
             // First check if there are heroes in the database.
@@ -114,10 +117,11 @@ public class ConsoleController {
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(line.trim());
                     map = MapFactory.generateMap(hero);
                     if (CONSOLE_MODE == true) {
-                        directions();
+//                        directions();
+                        ConsoleView.displayMoveList();
                     }
                 } else {
-                    log(ANSI_RED + ">>> Hero Does not Exist, Try Again!!" + ANSI_RESET);
+                    log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
                 }
             } catch (Exception e) {
                 System.out.println(e.getMessage());
@@ -128,41 +132,39 @@ public class ConsoleController {
         }
     }
 
-    public static void directions() {
-        Scanner scanner = new Scanner(System.in);
 
-        ConsoleView.displayMoveList();
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            Integer direction = Integer.parseInt(line);
-            if (direction == 1 || direction == 2 ||
-                    direction == 3 || direction == 4) {
-                GameController.moveHero(direction);
-                GameController.goal();
-            } else {
-                log(ANSI_RED + ">>> Incorrect Choice, Try Again!" + ANSI_RESET);
-            }
-            ConsoleView.displayMoveList();
+//    TODO refactor
+    public static boolean directions() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+
+//        ConsoleView.displayMoveList();
+//        while (scanner.hasNextLine()) {
+        int direction = Integer.parseInt(input);
+        if (direction == 1 || direction == 2 ||
+                direction == 3 || direction == 4) {
+            GameController.moveHero(direction);
+            GameController.goal();
+            return true;
+        } else {
+            return false;
         }
-        scanner.close();
     }
 
 
 //    TODO change name
-    public static boolean menuOptionValidation(String input) {
+    public static boolean menuOptionValidation() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         if (input.equals("1") || input.equals("2")
                 || input.equals("3")) {
             int option = Integer.parseInt(input);
-//            ConsoleController.heroType();
             switch (option) {
                 case 1:
                     ConsoleView.heroOptions();
-//                    ConsoleController.chooseHeroType();
                     break;
                 case 2:
                     ConsoleView.existingHero();
-//                    ConsoleController.selectHeroOptions();
-//                    ConsoleController.selectExistingHero();
                     break;
                 case 3:
 //                  GameWindow.run();
@@ -177,5 +179,19 @@ public class ConsoleController {
 
     public static void run() {
         ConsoleView.welcomeBanner();
+    }
+
+    public static int welcomeOption() {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine().trim();
+
+        if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+            return 0;
+        } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
+            return 1;
+
+        } else {
+            return -1;
+        }
     }
 }
