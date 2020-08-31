@@ -120,16 +120,10 @@ public class DatabaseWrapper {
         return rowCount;
     }
 
-    public void retrieveAllHeroes() throws SQLException {
+    public ResultSet retrieveAllHeroes() throws SQLException {
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
-        ResultSet resultSet = stmt.executeQuery(sql);
-        ResultSetMetaData rsmd = resultSet.getMetaData();
-        int columnsNumber = rsmd.getColumnCount();
-        log(ANSI_YELLOW + "::: SELECT YOUR HERO");
-        while (resultSet.next()) {
-            log(ANSI_CYAN + resultSet.getString("heroName") + ANSI_RESET);
-        }
+        return stmt.executeQuery(sql);
     }
 
 //    TODO
