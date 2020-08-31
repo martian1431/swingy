@@ -2,6 +2,7 @@ package com.swingy.utils.factory;
 
 import com.swingy.model.character.Hero;
 import com.swingy.utils.Map;
+import com.swingy.view.console.ConsoleView;
 
 import static com.swingy.utils.Log.log;
 
@@ -17,7 +18,7 @@ public class MapFactory {
         Map map = new Map(mapSize);
         map.registerHero(hero);
         map.spreadEnemies();
-        log("Level: " + hero.getLevel() + "; Mapsize: " + mapSize);
+        ConsoleView.selectedHero(hero, mapSize);
         return (map);
     }
 }
