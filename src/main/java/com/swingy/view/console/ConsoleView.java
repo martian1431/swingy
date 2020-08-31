@@ -17,16 +17,16 @@ public class ConsoleView {
     public static void menuOptions() {
         boolean validInput = false;
 
+        log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT YOUR CHOICE " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
+        log(ANSI_CYAN + "  1." + ANSI_RESET + " Create A New Hero.");
+        log(ANSI_CYAN + "  2." + ANSI_RESET + " Select A Hero.");
+        log(ANSI_CYAN + "  3." + ANSI_RESET + " Switch To GUI view.");
         do {
-            log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT YOUR CHOICE " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
-            log(ANSI_CYAN + "  1." + ANSI_RESET + " Create A New Hero.");
-            log(ANSI_CYAN + "  2." + ANSI_RESET + " Select A Hero.");
-            log(ANSI_CYAN + "  3." + ANSI_RESET + " Switch To GUI view.");
             if (ConsoleController.menuOptionValidation()) {
                 validInput = true;
 //                TODO
             } else {
-                log(ANSI_RED + ":::ERROR::: Invalid input, please choose between (1-3), Try Again!" + ANSI_RESET);
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-3). Try Again!\n" + ANSI_RESET);
                 log("");
             }
         } while (!validInput);
@@ -36,8 +36,8 @@ public class ConsoleView {
     public static void heroNameOption(CharacterType type) {
         boolean validInput = false;
 
+        log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " NAME YOUR HERO " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
         do {
-            log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " NAME YOUR HERO " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
             ConsoleController.createHero(type);
         } while (!validInput);
     }
@@ -48,12 +48,12 @@ public class ConsoleView {
     /** Display all validtypes of heroes. */
     public static void heroOptions() {
         boolean validInput = false;
-        do {
-            log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT A HERO TYPE " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
-            log(ANSI_CYAN + "  1." + ANSI_RESET + " Deadpool");
-            log(ANSI_CYAN + "  2." + ANSI_RESET + " Thor");
-            log(ANSI_CYAN + "  3." + ANSI_RESET + " Wolverine");
 
+        log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT A HERO TYPE " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
+        log(ANSI_CYAN + "  1." + ANSI_RESET + " Deadpool");
+        log(ANSI_CYAN + "  2." + ANSI_RESET + " Thor");
+        log(ANSI_CYAN + "  3." + ANSI_RESET + " Wolverine");
+        do {
             if (ConsoleController.heroType()) {
                 validInput = true;
             } else {
@@ -68,9 +68,8 @@ public class ConsoleView {
         boolean validInput = false;
 
         Logo.displayLogo();
-
+        log(ANSI_YELLOW + ":::WARNING:::" + "Are ready to go down the Rabit hole? (Y)es or (N)o\n" + ANSI_RESET);
         do {
-            log(ANSI_YELLOW + ":::WARNING:::" + "Are ready to go down the Rabit hole? (Y)es or (N)o\n" + ANSI_RESET);
             int errorNum = ConsoleController.welcomeOption();
             switch (errorNum) {
                 case 0:
@@ -93,17 +92,16 @@ public class ConsoleView {
     public static void displayMoveList() {
         boolean validInput = false;
 
+        log(ANSI_YELLOW + ":::Move:::" + ANSI_RESET);
+        log(ANSI_RED + "1." + ANSI_CYAN + " North" + ANSI_RESET);
+        log(ANSI_RED + "2." + ANSI_CYAN + " East" + ANSI_RESET);
+        log(ANSI_RED + "3." + ANSI_CYAN + " South" + ANSI_RESET);
+        log(ANSI_RED + "4." + ANSI_CYAN + " West" + ANSI_RESET);
         do {
-            log(ANSI_YELLOW + ":::Move:::" + ANSI_RESET);
-            log(ANSI_RED + "1." + ANSI_CYAN + " North" + ANSI_RESET);
-            log(ANSI_RED + "2." + ANSI_CYAN + " East" + ANSI_RESET);
-            log(ANSI_RED + "3." + ANSI_CYAN + " South" + ANSI_RESET);
-            log(ANSI_RED + "4." + ANSI_CYAN + " West" + ANSI_RESET);
-
             if (ConsoleController.directions()) {
                 validInput = true;
             } else {
-                log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!\n" + ANSI_RESET);
             }
         } while (!validInput);
     }

@@ -140,13 +140,17 @@ public class ConsoleController {
 
 //        ConsoleView.displayMoveList();
 //        while (scanner.hasNextLine()) {
-        int direction = Integer.parseInt(input);
-        if (direction == 1 || direction == 2 ||
-                direction == 3 || direction == 4) {
-            GameController.moveHero(direction);
-            GameController.goal();
-            return true;
-        } else {
+        try {
+            int direction = Integer.parseInt(input);
+            if (direction == 1 || direction == 2 ||
+                    direction == 3 || direction == 4) {
+                GameController.moveHero(direction);
+                GameController.goal();
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
             return false;
         }
     }
