@@ -5,7 +5,10 @@ import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
 import com.swingy.utils.Colors;
 import com.swingy.utils.Logo;
+import com.swingy.utils.database.DatabaseWrapper;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -118,8 +121,13 @@ public class ConsoleView {
         welcomeBanner(); // TODO refactor to promt.WelcomeBanner
     }
 
-    public static void displayHeroStats(Hero hero) {
-        System.out.println(hero.getType());
+    public static void selectedHero(Hero hero, int mapSize) {
+        log(Colors.CYAN_BOLD_BRIGHT + " PLAYER STATS" + Colors.ANSI_RESET);
+        log( " Level " + Colors.ANSI_YELLOW + ":" + Colors.ANSI_RESET + hero.getLevel() + ANSI_YELLOW + ":" + ANSI_RESET
+                + " Hit Points " + Colors.ANSI_YELLOW + ":" + Colors.ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + ":" + ANSI_RESET
+                + " Map size " + Colors.ANSI_YELLOW + ":"
+                + Colors.ANSI_RESET + mapSize + ANSI_YELLOW + ":" + ANSI_RESET);
+        System.out.println();
     }
 
     public static void existingHero() {
@@ -128,5 +136,24 @@ public class ConsoleView {
 
 //        String input = scanner.nextLine().trim();
         ConsoleController.selectExistingHero(scanner);
+    }
+
+    public static void heroCount(int count) {
+        if (count == 1) {
+            log(ANSI_YELLOW + count + " Hero Available " + ANSI_RESET);
+        } else {
+            log(count + " Heroes Available " + ANSI_RESET);
+        }
+    }
+
+    public static void availableHeros(ResultSet heros) throws SQLException {
+        log(BLACK_BACKGROUND_BRIGHT + ":\tHERO NAME\t:" + ANSI_RESET);
+        while (heros.next()) {
+            System.out.format("\t%s%n", heros.getString("heroName"));
+//            TODO use this
+//            log(":\t" + heros.getString("heroName") + "\t");
+        }
+        System.out.println();
+        log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " SELECT YOUR HERO " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n" + Colors.ANSI_RESET);
     }
 }
