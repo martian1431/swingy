@@ -1,12 +1,12 @@
 package com.swingy.controller;
 
 import com.swingy.model.character.CharacterType;
-import com.swingy.utils.Colors;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
+import java.sql.ResultSet;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -50,18 +50,19 @@ public class ConsoleController {
         String heroName = scanner.nextLine();
 
         /**
-         * Check if the name has atleast 2 and atmost 25
+         * Check if the name has atleast 2 and atmost 10
          * characters.
          */
-        if (heroName.length() >= 2 && heroName.length() < 26) {
+        if (heroName.length() >= 2 && heroName.length() <= 10) {
             try {
                 // Create the character and store it in the database.
                 if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
                     DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
+//                    TODO refactor
                     log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
 //                        TODO refactor
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(heroName.trim());
-//                    ConsoleView.displayHeroStats(hero);
+//                    ConsoleView.selectedHero(hero);
                     map = MapFactory.generateMap(hero);
                     if (CONSOLE_MODE == true) {
 //                        directions();
@@ -77,7 +78,7 @@ public class ConsoleController {
 //                    exception.printStackTrace();
 //                }
         } else {
-            log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 25 Characters, Try Again:" + ANSI_RESET);
+            log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 10 Characters, Try Again:" + ANSI_RESET);
         }
     }
 
@@ -85,18 +86,14 @@ public class ConsoleController {
     public static void selectExistingHero(Scanner scanner) {
         try {
             // First check if there are heroes in the database.
-            if (DatabaseWrapper.getInstance().numberOfHeroes() > 0) {
-                if (DatabaseWrapper.getInstance().numberOfHeroes() == 1) {
-                    log(ANSI_YELLOW + DatabaseWrapper.getInstance().numberOfHeroes()
-                            + " Hero Available, Choose: " + ANSI_RESET);
-                } else {
-                    log(ANSI_YELLOW + DatabaseWrapper.getInstance().numberOfHeroes()
-                            + " Heroes Available: " + ANSI_RESET);
-                }
+            int count = DatabaseWrapper.getInstance().numberOfHeroes();
+            if (count > 0) {
+                ConsoleView.heroCount(count);
                 // Display all the available heroes in the database.
-                DatabaseWrapper.getInstance().retrieveAllHeroes();
+                ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+                ConsoleView.availableHeros(heros);
             } else {
-                log(ANSI_RED + ">>> No Heroes Available!" + ANSI_RESET);
+                log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
                 ConsoleView.menuOptions();
             }
         } catch (Exception e) {
@@ -105,6 +102,7 @@ public class ConsoleController {
 //        catch (IOException | ClassNotFoundException | SQLException exception) {
 //            exception.printStackTrace();
 //        }
+//        TODO refactor
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
 
@@ -112,7 +110,6 @@ public class ConsoleController {
                 // Check if the specified character name exist in the database,
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
-                System.out.println(DatabaseWrapper.getInstance().heroExists(line));
                 if (DatabaseWrapper.getInstance().heroExists(line)) {
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(line.trim());
                     map = MapFactory.generateMap(hero);
