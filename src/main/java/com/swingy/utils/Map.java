@@ -108,7 +108,7 @@ public class Map {
                         System.out.print(Colors.ANSI_PURPLE + map[i][j] + "  " + Colors.ANSI_RESET);
                         break;
                     default:
-                        System.out.print(Colors.ANSI_YELLOW + ".  " + Colors.ANSI_RESET);
+                        System.out.print(Colors.ANSI_YELLOW + "*  " + Colors.ANSI_RESET);
                         break;
                 }
             }
