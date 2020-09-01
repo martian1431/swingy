@@ -7,6 +7,7 @@ import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -105,7 +106,9 @@ public class ConsoleController {
             if (count > 0) {
                 ConsoleView.heroCount(count);
                 // Display all the available heroes in the database.
-                ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+//                ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+//                ConsoleView.availableHeros(heros);
+                ArrayList<ArrayList<Object>> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
                 ConsoleView.availableHeros(heros);
             } else {
                 //                TODO refactor
