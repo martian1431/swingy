@@ -18,7 +18,6 @@ public class MapFactory {
         Map map = new Map(mapSize);
         map.registerHero(hero);
         map.spreadEnemies();
-        ConsoleView.selectedHero(hero, mapSize);
         return (map);
     }
 }
