@@ -228,7 +228,6 @@ public class ConsoleController {
             String input = scanner.nextLine();
             if (input.equals("1") || input.equals("2")
                     || input.equals("3")) {
-                System.out.println("testing");
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
