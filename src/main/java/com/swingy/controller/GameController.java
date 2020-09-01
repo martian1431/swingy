@@ -34,12 +34,12 @@ public class GameController {
                 previousPosition[1] = 0;
                 break;
             case 3:
-                hero.setPosition(1, 0);
+                hero.setPosition(0, -1);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
             case 4:
-                hero.setPosition(0, -1);
+                hero.setPosition(1, 0);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
