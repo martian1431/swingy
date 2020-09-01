@@ -50,7 +50,7 @@ public class GameController {
             } else {
                 villian = (Villian) HeroFactory.newEnemy(hero, CharacterType.ULTRON);
             }
-            if (CONSOLE_MODE == true) {
+            if (CONSOLE_MODE) {
                 action();
             }
         }
@@ -73,8 +73,8 @@ public class GameController {
         log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
         ConsoleView.displayActions();
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            Integer choice = Integer.parseInt(line);
+            String input = scanner.nextLine();
+            int choice = Integer.parseInt(input);
 
             if (choice == 1 || choice == 2) {
                 switch (choice) {
@@ -102,14 +102,14 @@ public class GameController {
      * otherwise the character will attack first.
      */
     public static void fight() {
-        if (HERO_RAN == false) {
+        if (!HERO_RAN) {
             while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
                 hero.attack(villian);
                 if (villian.getHitPoints() > 0) {
                     villian.attack(hero);
                 }
             }
-        } else if (HERO_RAN == true) {
+        } else {
             while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
                 villian.attack(hero);
                 if (hero.getHitPoints() > 0) {
@@ -118,8 +118,8 @@ public class GameController {
             }
         }
         if (hero.getHitPoints() <= 0) {
-            if (CONSOLE_MODE == true) {
-                log(ANSI_RED + ">>> You Lost, Game Over!");
+            if (CONSOLE_MODE) {
+                log(ANSI_RED + "::: You Lost, Game Over!");
                 ConsoleView.run();
             }
         } else {
@@ -127,7 +127,7 @@ public class GameController {
                 DatabaseWrapper.getInstance().updateHero(hero);
                 hero.setPosition(0, 0);
                 battleGains();
-                log(ANSI_CYAN + "::: Congratulations, You Won The Battle!");
+                log(GREEN_BOLD_BRIGHT + ":::" + "Congratulations, You Won The Battle!" + ANSI_RESET);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -146,12 +146,12 @@ public class GameController {
         int chance = new Random().nextInt(2);
 
         if (chance == 1) {
-            log(ANSI_PURPLE + ">>> Hahaha, You Can't Run My Friend, We Gonna Fight!" + ANSI_RESET);
+            log(ANSI_YELLOW + "::: Hahaha, You Can't Run My Friend, We Gonna Fight!" + ANSI_RESET);
             HERO_RAN = true;
             fight();
         } else {
             HERO_RAN = false;
-            log(ANSI_RED + ">>> Coward! You Ran Away!" + ANSI_RESET);
+            log(ANSI_RED + "::: Coward! You Ran Away!" + ANSI_RESET);
             hero.setPosition(previousPosition[0] * -1, previousPosition[1] * -1);
         }
     }
@@ -165,9 +165,9 @@ public class GameController {
      */
     private static void battleGains() {
         int drop = new Random().nextInt(2);
-        boolean artifactIsDropped = drop == 1 ? true : false;
+        boolean artifactIsDropped = drop == 1;
 
-        if (artifactIsDropped == true) {
+        if (artifactIsDropped) {
             ARTIFACT_DROPPED = true;
             try {
                 log(ANSI_YELLOW + "::: Artifact is Dropped!");
@@ -178,18 +178,18 @@ public class GameController {
                 if ("ARMOR".equals(artifactType)) {
                     artifact = new Armor("Dropped Armor", variety);
                     int gainedDefense = (((Armor) artifact).getDefense() - hero.getArmor().getDefense());
-                    log(ANSI_CYAN + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + ".");
+                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + ".");
                 } else if ("HELM".equals(artifactType)) {
                     artifact = new Helm("Dropped Helmet", variety);
                     int gainedHitPoints = (((Helm) artifact).getHitPoints() - hero.getHelm().getHitPoints());
-                    log(ANSI_CYAN + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + ".");
+                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + ".");
                 } else if ("WEAPON".equals(artifactType)) {
                     artifact = new Weapon("Dropped Weapon", variety);
                     int gainedAttack = (((Weapon) artifact).getAttack() - hero.getWeapon().getAttack());
-                    log(ANSI_CYAN + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + ".");
+                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + ".");
                 } else if ("EXPERIENCE".equals(artifactType)) {
                     hero.setHitPoints(hero.getHitPoints() + variety);
-                    log(ANSI_YELLOW + "::: Healed Up, Current Health: " + hero.getHitPoints());
+                    log(ANSI_YELLOW  + "::: Healed Up, Current Health: " + hero.getHitPoints());
                     return;
                 }
                 // Equip the character.
@@ -197,8 +197,8 @@ public class GameController {
             } catch (Exception exception) {
                 exception.printStackTrace();
             }
-        } else if (artifactIsDropped == false) {
-            log( ANSI_RED + ">>> Sorry, No Artifact Dropped!");
+        } else if (!artifactIsDropped) {
+            log( ANSI_RED + "::: Sorry, No Artifact Dropped!");
         }
     }
 
@@ -210,22 +210,22 @@ public class GameController {
      * @param artifactType The artifact type.
      */
     private static void equip(String artifactType) {
-        if (CONSOLE_MODE == true) {
+        if (CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
             log(ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + ANSI_RESET);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
                 if (line.equals("1") || line.equals("2")) {
-                    Integer choice = Integer.parseInt(line.trim());
+                    int choice = Integer.parseInt(line.trim());
                     if (choice == 1) {
                         hero.equipHero(artifact, artifact.getType());
-                        log(ANSI_PURPLE +"::: " + hero.getName() + " Is Equipped With " + artifactType);
+                        log("::: " + hero.getName() + " Is Equipped With " + artifactType);
                         break;
                     } else if (choice == 2) {
                         break;
                     }
                 } else {
-                    log(ANSI_RED + ">>> Incorrect Choice, Try Again!" + ANSI_RESET);
+                    log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
                 }
             }
         }
@@ -240,7 +240,7 @@ public class GameController {
                 hero.getYCoordinate() == map.getSize() - 1 ||
                 hero.getXCoordinate() == 0 ||
                 hero.getYCoordinate() == 0) {
-            log(ANSI_CYAN + "::: Congratutations, You Reached Your Goal!" + ANSI_RESET);
+            log(GREEN_BRIGHT + "::: Congratutations, You Reached Your Goal!" + ANSI_RESET);
             map = MapFactory.generateMap(hero);
             GOAL_REACHED = true;
         } else {
