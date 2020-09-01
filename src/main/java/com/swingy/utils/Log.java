@@ -8,4 +8,7 @@ public class Log {
             System.out.println(message);
         }
     }
+    public static void inputSign() {
+        System.out.format("$ ");
+    }
 }
