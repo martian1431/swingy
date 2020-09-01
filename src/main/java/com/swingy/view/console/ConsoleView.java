@@ -109,6 +109,7 @@ public class ConsoleView {
     * https://github.com/freva/ascii-table.git
     * */
 //    TODO: use the collection feature to have the ability to format the table
+//    TODO: change parameter type to String[][]
     public static void availableHeros(ArrayList<ArrayList<Object>> heros) {
         int rows = heros.size();
         int colums = 7;
