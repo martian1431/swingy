@@ -89,10 +89,11 @@ public class ConsoleView {
     }
 
     public static void selectedHero(Hero hero, int mapSize) {
-        log(CYAN_BOLD_BRIGHT + " PLAYER STATS" + ANSI_RESET);
-        log( " Level " + ANSI_YELLOW + ":" + ANSI_RESET + hero.getLevel() + ANSI_YELLOW + ":" + ANSI_RESET
-                + " Hit Points " + ANSI_YELLOW + ":" + ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + ":" + ANSI_RESET
-                + " Map size " + ANSI_YELLOW + ":" + ANSI_RESET + mapSize + ANSI_YELLOW + ":" + ANSI_RESET);
+        log( "Stats: " + "Name" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getName() + ANSI_YELLOW + "] " + ANSI_RESET
+                + "Type" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getType() + ANSI_YELLOW + "] "
+                + ANSI_RESET + " Level" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getLevel() + ANSI_YELLOW + "] " + ANSI_RESET
+                + " Hit Points" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + "] " + ANSI_RESET
+                + " Map size" + ANSI_YELLOW + "[" + ANSI_RESET + mapSize + ANSI_YELLOW + "] " + ANSI_RESET);
     }
 
     public static void existingHero() {
