@@ -7,6 +7,7 @@ import com.swingy.utils.factory.HeroFactory;
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 //TODO debug
@@ -120,10 +121,27 @@ public class DatabaseWrapper {
         return rowCount;
     }
 
-    public ResultSet retrieveAllHeroes() throws SQLException {
+    public ArrayList<ArrayList<Object>> retrieveAllHeroes() throws SQLException {
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
-        return stmt.executeQuery(sql);
+        ResultSet resultSet = stmt.executeQuery(sql);
+        return (parseResultset(resultSet));
+    }
+
+    public ArrayList<ArrayList<Object>> parseResultset(ResultSet resultSet) throws SQLException {
+        ArrayList<ArrayList<Object>> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            ArrayList<Object> row =  new ArrayList<>();
+            row.add(resultSet.getString("heroName"));
+            row.add(resultSet.getString("heroClass"));
+            row.add(resultSet.getString("heroAttack"));
+            row.add(resultSet.getString("heroDefense"));
+            row.add(resultSet.getString("heroExperience"));
+            row.add(resultSet.getString("heroHP"));
+            row.add(resultSet.getString("heroLevel"));
+            resultList.add(row);
+        }
+        return resultList;
     }
 
 //    TODO
