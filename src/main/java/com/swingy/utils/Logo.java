@@ -1,5 +1,6 @@
 package com.swingy.utils;
 
+//TODO: Refactor
 public class Logo {
     public static void displayLogo() {
         System.out.println();
@@ -37,13 +38,15 @@ public class Logo {
                 "  * South: Move Down\n\n" +
 
                 Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HERE ARE THE RULES " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
-                "  * To win you need to pass the End of the MAP\n" +
-                "  * To Advance to next Level You need to accumulate above 1000xp\n" +
-                "  * The Map's are based on your level... \n" +
-                "  * Fighting a Viilain can boost your XP \n" +
-                "  * When Fighting a Villain, if you Lose you will die and start over.\n" +
-                "  * If you defeat a villain, You will get more powerful, Your XP,ATT,DEF,HP will Increase\n";
-
+                "  * You can have multiple heros of different types\n" +
+                "  * Stats are affected by the hero's level and artifacts \n" +
+                "  * If you reach the end of the border of the map you win \n" +
+                "  * When you move to a position occupied by a villian you have two options; Run or Fight. \n" +
+                "  * If you win the fight you will gain experience and an artifact which you can choose to keep or drop. \n" +
+                "    You will also level up when you reach the next level experience \n" +
+                "  * If you Lose you will die and start over.\n" +
+                "  * To Advance to next Level You need to accumulate above 1000xp \n" +
+                "  * The Map is based on your level \n";
     }
 
 
