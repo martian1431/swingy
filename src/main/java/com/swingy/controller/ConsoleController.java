@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
 import static com.swingy.utils.StaticGlobal.CONSOLE_MODE;
 import static com.swingy.utils.StaticGlobal.hero;
@@ -38,7 +39,9 @@ public class ConsoleController {
                 }
                 break;
             } else {
-                log(ANSI_RED + ":::ERROR::: Hero Type Does Not Exist, Try Again!\n" + ANSI_RESET);
+//                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Hero Type Does Not Exist, Try Again!" + ANSI_RESET);
+                inputSign();
             }
         }
         scanner.close();
@@ -73,7 +76,9 @@ public class ConsoleController {
 //                        ConsoleView.displayMoveList();
 
                     } else {
+                        //                TODO refactor
                         log(ANSI_RED + " :::ERROR::: " + input + " Hero Exists, Try again!" + ANSI_RESET);
+                        inputSign();
                     }
                 } catch (Exception e) {
                     System.out.println(e.getMessage());
@@ -83,7 +88,9 @@ public class ConsoleController {
 //                }
 //                break;
             } else if (input.length() < 3 || input.length() > 10) {
-                log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 10 Characters, Try Again!" + ANSI_RESET);
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Name Must Have 2 - 10 Characters, Try Again!" + ANSI_RESET);
+                inputSign();
             }
         }
         scanner.close();
@@ -101,7 +108,9 @@ public class ConsoleController {
                 ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
                 ConsoleView.availableHeros(heros);
             } else {
+                //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
+                inputSign();
                 ConsoleView.menuOptions();
             }
         } catch (Exception e) {
@@ -125,10 +134,15 @@ public class ConsoleController {
                     directions();
 //                    ConsoleView.displayMoveList();
                 } else {
+                    //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
+                    inputSign();
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
+                inputSign();
+//                System.out.println(e.getMessage());
             }
 //            catch (ClassNotFoundException | SQLException | IOException exception) {
 //                exception.printStackTrace();
@@ -153,10 +167,14 @@ public class ConsoleController {
                     ConsoleView.selectedHero(hero, map.getSize());
                     ConsoleView.displayMoveList();
                 } else {
-                    log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!\n" + ANSI_RESET);
+                    //                TODO refactor
+                    log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!" + ANSI_RESET);
+                    inputSign();
                 }
             } catch (Exception e) {
-                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!\n" + ANSI_RESET);
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!" + ANSI_RESET);
+                inputSign();
             }
         }
         scanner.close();
@@ -193,7 +211,9 @@ public class ConsoleController {
                 log(ANSI_RED + ":::" + "SCARED?::: Go drink some water and try again later" + ANSI_RESET);
                 System.exit(-1);
             }
-            log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!\n" + ANSI_RESET);
+            //                TODO refactor
+            log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
+            inputSign();
         }
         scanner.close();
     }
@@ -220,7 +240,9 @@ public class ConsoleController {
                     default:
                 }
             } else {
-                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-3). Try Again!\n" + ANSI_RESET);
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-3). Try Again!" + ANSI_RESET);
+                inputSign();
             }
         }
         scanner.close();
