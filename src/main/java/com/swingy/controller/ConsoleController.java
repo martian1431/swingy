@@ -1,6 +1,7 @@
 package com.swingy.controller;
 
 import com.swingy.model.character.CharacterType;
+import com.swingy.utils.Colors;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
@@ -71,8 +72,8 @@ public class ConsoleController {
                         DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(input.trim(), type));
                         log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
                         hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
-                        map = MapFactory.generateMap(hero);
                         ConsoleView.selectedHero(hero, map.getSize());
+                        map = MapFactory.generateMap(hero);
                         directions();
 //                        ConsoleView.displayMoveList();
 
@@ -131,6 +132,8 @@ public class ConsoleController {
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
                 if (DatabaseWrapper.getInstance().heroExists(input)) {
+//                    TODO: refactor
+                    log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                     map = MapFactory.generateMap(hero);
                     ConsoleView.selectedHero(hero, map.getSize());
