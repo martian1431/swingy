@@ -117,7 +117,6 @@ public class DatabaseWrapper {
         ResultSet resultSet = stmt.executeQuery(sql);
         while (resultSet.next())
             rowCount++;
-//        System.out.println("hshsh" + rowCount);
         return rowCount;
     }
 
