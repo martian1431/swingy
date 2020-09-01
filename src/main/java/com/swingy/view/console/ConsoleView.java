@@ -11,6 +11,7 @@ import com.swingy.utils.database.DatabaseWrapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -104,46 +105,22 @@ public class ConsoleView {
         log(count + " Heroes Available " + ANSI_RESET);
     }
 
+    /*
+    * https://github.com/freva/ascii-table.git
+    * */
+//    TODO: use the collection feature to have the ability to format the table
     public static void availableHeros(ArrayList<ArrayList<Object>> heros) {
-//        List<String> headers = new ArrayList<>();
-//                headers.add("Hero Name");
-//                headers.add("Hero Class");
-//                headers.add("Attack");
-//                headers.add("Defense");
-//                headers.add("Experience");
-//                headers.add("Hit points");
-//                headers.add("Level");
-//        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
-//        String[][] data = {
-//                {"Mercury", "0.382", "0.06", "minimal"},
-//                {"Venus", "0.949", "0.82", "Carbon dioxide, Nitrogen"},
-//                {"Earth", "1.000", "1.00", "Nitrogen, Oxygen, Argon"},
-//                {"Mars", "0.532", "0.11", "Carbon dioxide, Nitrogen, Argon"}};
-
-//        ArrayList<Object> data = new ArrayList<>();
-//        for (int i = 0; i < heros.size(); i++) {
-//            data.add(heros.get(i));
-//        }
-//        System.out.println(AsciiTable.getTable(headers, data));
-//        AsciiTable table = new AsciiTable();
-//        String rend = table.render();
-//        table.addRule();
-//        table.addRow("Hero Name");
-//        table.addRule();
-//        for (int i = 0; i < heros.size(); i++) {
-//            table.addRule();
-//            table.addRow(
-//                    heros.get(i).get(0),
-//                    heros.get(i).get(1),
-//                    heros.get(i).get(2),
-//                    heros.get(i).get(3),
-//                    heros.get(i).get(4),
-//                    heros.get(i).get(5),
-//                    heros.get(i).get(6));
-//            table.addRule();
-//        }
-//        System.out.println(rend.length());
-        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
+        int rows = heros.size();
+        int colums = 7;
+        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
+        String[][] data = new String[rows][colums];
+        for (int i = 0; i < heros.size(); i++) {
+            for (int j = 0; j < colums; j++) {
+                data[i][j] = (String) heros.get(i).get(j);
+            }
+        }
+        log(AsciiTable.getTable(headers, data));
+        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         inputSign();
     }
 }
