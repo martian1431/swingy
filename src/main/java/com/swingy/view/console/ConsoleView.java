@@ -25,16 +25,17 @@ public class ConsoleView {
     public static void menuOptions() {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your choice "
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
-        log(ANSI_CYAN + "  1." + ANSI_RESET + " Create A New Hero.");
-        log(ANSI_CYAN + "  2." + ANSI_RESET + " Select A Hero.");
-        log(ANSI_CYAN + "  3." + ANSI_RESET + " Switch To GUI view.");
+        log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero.");
+        log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero.");
+        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
+        log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
         inputSign();
         ConsoleController.menuOption();
     }
 
 //    TODO
     public static void heroNameOption(CharacterType type) {
-        log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Name your hero" + Colors.ANSI_RESET + Colors.ANSI_YELLOW + Colors.ANSI_RESET);
+        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         inputSign();
         ConsoleController.createHero(type);
     }
@@ -47,9 +48,10 @@ public class ConsoleView {
 //        boolean validInput = false;
 
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
-        log(ANSI_CYAN + "  1." + ANSI_RESET + " Deadpool");
-        log(ANSI_CYAN + "  2." + ANSI_RESET + " Thor");
-        log(ANSI_CYAN + "  3." + ANSI_RESET + " Wolverine");
+        log(ANSI_RED + "  1." + ANSI_RESET + " Deadpool");
+        log(ANSI_RED + "  2." + ANSI_RESET + " Thor");
+        log(ANSI_RED + "  3." + ANSI_RESET + " Wolverine");
+        log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
         inputSign();
         ConsoleController.heroType();
     }
@@ -69,8 +71,9 @@ public class ConsoleView {
         log(CYAN_BOLD_BRIGHT + ">> Move <<" + ANSI_RESET);
         log(ANSI_RED + "1." + ANSI_CYAN + " North" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " East" + ANSI_RESET);
-        log(ANSI_RED + "3." + ANSI_CYAN + " South" + ANSI_RESET);
-        log(ANSI_RED + "4." + ANSI_CYAN + " West" + ANSI_RESET);
+        log(ANSI_RED + "3." + ANSI_CYAN + " West" + ANSI_RESET);
+        log(ANSI_RED + "4." + ANSI_CYAN + " South" + ANSI_RESET);
+        log(ANSI_RED + "5." + ANSI_CYAN + " Quit" + ANSI_RESET);
         inputSign();
     }
 
@@ -79,6 +82,7 @@ public class ConsoleView {
         log(CYAN_BOLD_BRIGHT + ">> Action <<");
         log(ANSI_RED + "1." + ANSI_CYAN + " Fight" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " Run" + ANSI_RESET);
+        log(ANSI_RED + "3." + ANSI_RESET + " Quit");
         inputSign();
     }
 
