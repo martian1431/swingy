@@ -18,72 +18,80 @@ import static com.swingy.utils.StaticGlobal.map;
 public class ConsoleController {
 
 
-    public static boolean heroType() {
+    public static void heroType() {
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
 
-        if (input.equals("1") || input.equals("2") || input.equals("3")) {
-            int choice = Integer.parseInt(input);
-            switch (choice) {
-                case 1:
-                    ConsoleView.heroNameOption(CharacterType.DEADPOOL);
-                    break;
-                case 2:
-                    ConsoleView.heroNameOption(CharacterType.THOR);
-                    break;
-                case 3:
-                    ConsoleView.heroNameOption(CharacterType.WOLVERINE);
-                    break;
-                default:
-                    return false;
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if (input.equals("1") || input.equals("2") || input.equals("3")) {
+                int choice = Integer.parseInt(input);
+                switch (choice) {
+                    case 1:
+                        ConsoleView.heroNameOption(CharacterType.DEADPOOL);
+                        break;
+                    case 2:
+                        ConsoleView.heroNameOption(CharacterType.THOR);
+                        break;
+                    case 3:
+                        ConsoleView.heroNameOption(CharacterType.WOLVERINE);
+                        break;
+                }
+                break;
+            } else {
+                log(ANSI_RED + ":::ERROR::: Hero Type Does Not Exist, Try Again!\n" + ANSI_RESET);
             }
-            return true;
         }
-//        ConsoleView.menuOptions();
-        return false;
+        scanner.close();
     }
 
 
 //    Refactor TODO fix return statement
     public static void createHero(CharacterType type) {
         Scanner scanner = new Scanner(System.in);
-        String heroName = scanner.nextLine();
 
         /**
          * Check if the name has atleast 2 and atmost 10
          * characters.
          */
-        if (heroName.length() >= 2 && heroName.length() <= 10) {
-            try {
-                // Create the character and store it in the database.
-                if (!DatabaseWrapper.getInstance().heroExists(heroName)) {
-                    DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(heroName.trim(), type));
-//                    TODO refactor
-                    log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + heroName);
-//                        TODO refactor
-                    hero = DatabaseWrapper.getInstance().retrieveHeroData(heroName.trim());
-//                    ConsoleView.selectedHero(hero);
-                    map = MapFactory.generateMap(hero);
-                    if (CONSOLE_MODE == true) {
-//                        directions();
-                        ConsoleView.displayMoveList();
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+
+            /**
+             * Check if the name has atleast 2 and atmost 25
+             * characters.
+             */
+            if (input.length() >= 2 && input.length() < 10) {
+                try {
+                    // Create the hero and store it in the database.
+                    if (!DatabaseWrapper.getInstance().heroExists(input)) {
+                        DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(input.trim(), type));
+                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
+                        hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
+                        map = MapFactory.generateMap(hero);
+                        ConsoleView.selectedHero(hero, map.getSize());
+                        directions();
+//                        ConsoleView.displayMoveList();
+
+                    } else {
+                        log(ANSI_RED + " :::ERROR::: " + input + " Hero Exists, Try again!" + ANSI_RESET);
                     }
-                } else {
-                    log(ANSI_RED + ":::ERROR:::" + heroName + " Hero Exists, Try again!" + ANSI_RESET);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
                 }
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
 //                catch (SQLException | IOException | ClassNotFoundException exception) {
 //                    exception.printStackTrace();
 //                }
-        } else {
-            log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 10 Characters, Try Again:" + ANSI_RESET);
+//                break;
+            } else if (input.length() < 3 || input.length() > 10) {
+                log(ANSI_RED + "\":::ERROR::: Name Must Have 2 - 10 Characters, Try Again!" + ANSI_RESET);
+            }
         }
+        scanner.close();
     }
 
 //   TODO Refactor
-    public static void selectExistingHero(Scanner scanner) {
+    public static void selectExistingHero() {
+        Scanner scanner = new Scanner(System.in);
         try {
             // First check if there are heroes in the database.
             int count = DatabaseWrapper.getInstance().numberOfHeroes();
@@ -104,19 +112,18 @@ public class ConsoleController {
 //        }
 //        TODO refactor
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String input = scanner.nextLine();
 
             try {
                 // Check if the specified character name exist in the database,
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
-                if (DatabaseWrapper.getInstance().heroExists(line)) {
-                    hero = DatabaseWrapper.getInstance().retrieveHeroData(line.trim());
+                if (DatabaseWrapper.getInstance().heroExists(input)) {
+                    hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                     map = MapFactory.generateMap(hero);
-                    if (CONSOLE_MODE == true) {
-//                        directions();
-                        ConsoleView.displayMoveList();
-                    }
+                    ConsoleView.selectedHero(hero, map.getSize());
+                    directions();
+//                    ConsoleView.displayMoveList();
                 } else {
                     log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
                 }
@@ -129,53 +136,30 @@ public class ConsoleController {
         }
     }
 
-
 //    TODO refactor
-    public static boolean directions() {
+    public static void directions() {
+//        System.out.println("test");
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
 
-//        ConsoleView.displayMoveList();
-//        while (scanner.hasNextLine()) {
-        try {
-            int direction = Integer.parseInt(input);
-            if (direction == 1 || direction == 2 ||
-                    direction == 3 || direction == 4) {
-                GameController.moveHero(direction);
-                GameController.goal();
-                return true;
-            } else {
-                return false;
+        ConsoleView.displayMoveList();
+        while (scanner.hasNextLine()) {
+            try {
+                String line = scanner.nextLine();
+                int direction = Integer.parseInt(line);
+                if (direction == 1 || direction == 2 ||
+                        direction == 3 || direction == 4) {
+                    GameController.moveHero(direction);
+                    GameController.goal();
+                    ConsoleView.selectedHero(hero, map.getSize());
+                    ConsoleView.displayMoveList();
+                } else {
+                    log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!\n" + ANSI_RESET);
+                }
+            } catch (Exception e) {
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!\n" + ANSI_RESET);
             }
-        } catch (Exception e) {
-            return false;
         }
-    }
-
-
-//    TODO change name
-    public static boolean menuOptionValidation() {
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        if (input.equals("1") || input.equals("2")
-                || input.equals("3")) {
-            int option = Integer.parseInt(input);
-            switch (option) {
-                case 1:
-                    ConsoleView.heroOptions();
-                    break;
-                case 2:
-                    ConsoleView.existingHero();
-                    break;
-                case 3:
-//                  GameWindow.run();
-                    break;
-                default:
-                    return false;
-            }
-            return true;
-        }
-        return false;
+        scanner.close();
     }
 
     public static void run() {
@@ -194,5 +178,51 @@ public class ConsoleController {
         } else {
             return -1;
         }
+    }
+
+    public static void startGame() {
+        Scanner scanner = new Scanner(System.in);
+
+        while(scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+                ConsoleView.menuOptions();
+            }
+
+            if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
+                log(ANSI_RED + ":::" + "SCARED?::: Go drink some water and try again later" + ANSI_RESET);
+                System.exit(-1);
+            }
+            log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!\n" + ANSI_RESET);
+        }
+        scanner.close();
+    }
+
+    public static void menuOption() {
+
+        Scanner scanner = new Scanner(System.in);
+        while(scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            if (input.equals("1") || input.equals("2")
+                    || input.equals("3")) {
+                System.out.println("testing");
+                int option = Integer.parseInt(input);
+                switch (option) {
+                    case 1:
+                        ConsoleView.heroOptions();
+                        break;
+                    case 2:
+                        ConsoleView.existingHero();
+                        break;
+                    case 3:
+//                  GameWindow.run();
+                        break;
+                    default:
+                }
+            } else {
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-3). Try Again!\n" + ANSI_RESET);
+            }
+        }
+        scanner.close();
     }
 }
