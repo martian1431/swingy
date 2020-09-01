@@ -1,5 +1,6 @@
 package com.swingy.view.console;
 
+import com.github.freva.asciitable.AsciiTable;
 import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
@@ -9,6 +10,8 @@ import com.swingy.utils.database.DatabaseWrapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -99,16 +102,47 @@ public class ConsoleView {
         if (count == 1)
             log(ANSI_YELLOW + count + " Hero Available " + ANSI_RESET);
         log(count + " Heroes Available " + ANSI_RESET);
-        inputSign();
     }
 
-    public static void availableHeros(ResultSet heros) throws SQLException {
-        log(BLACK_BACKGROUND_BRIGHT + ":\tHERO NAME\t:" + ANSI_RESET);
-        while (heros.next()) {
-            System.out.format("\t%s%n", heros.getString("heroName"));
-//            TODO use this
-//            log(":\t" + heros.getString("heroName") + "\t");
-        }
+    public static void availableHeros(ArrayList<ArrayList<Object>> heros) {
+//        List<String> headers = new ArrayList<>();
+//                headers.add("Hero Name");
+//                headers.add("Hero Class");
+//                headers.add("Attack");
+//                headers.add("Defense");
+//                headers.add("Experience");
+//                headers.add("Hit points");
+//                headers.add("Level");
+//        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
+//        String[][] data = {
+//                {"Mercury", "0.382", "0.06", "minimal"},
+//                {"Venus", "0.949", "0.82", "Carbon dioxide, Nitrogen"},
+//                {"Earth", "1.000", "1.00", "Nitrogen, Oxygen, Argon"},
+//                {"Mars", "0.532", "0.11", "Carbon dioxide, Nitrogen, Argon"}};
+
+//        ArrayList<Object> data = new ArrayList<>();
+//        for (int i = 0; i < heros.size(); i++) {
+//            data.add(heros.get(i));
+//        }
+//        System.out.println(AsciiTable.getTable(headers, data));
+//        AsciiTable table = new AsciiTable();
+//        String rend = table.render();
+//        table.addRule();
+//        table.addRow("Hero Name");
+//        table.addRule();
+//        for (int i = 0; i < heros.size(); i++) {
+//            table.addRule();
+//            table.addRow(
+//                    heros.get(i).get(0),
+//                    heros.get(i).get(1),
+//                    heros.get(i).get(2),
+//                    heros.get(i).get(3),
+//                    heros.get(i).get(4),
+//                    heros.get(i).get(5),
+//                    heros.get(i).get(6));
+//            table.addRule();
+//        }
+//        System.out.println(rend.length());
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         inputSign();
     }
