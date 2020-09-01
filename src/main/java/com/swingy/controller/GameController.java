@@ -14,6 +14,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
 import static com.swingy.utils.StaticGlobal.*;
 
@@ -88,7 +89,10 @@ public class GameController {
                         break;
                 }
             } else {
-                log("Try again!");
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
+                inputSign();
+//                log("Try again!");
                 ConsoleView.displayActions();
             }
         }
@@ -119,7 +123,10 @@ public class GameController {
         }
         if (hero.getHitPoints() <= 0) {
             if (CONSOLE_MODE) {
-                log(ANSI_RED + "::: You Lost, Game Over!");
+                //                TODO refactor
+                log(ANSI_RED + ":::You Lost, Game Over!" + ANSI_RESET);
+//                inputSign();
+//                log(ANSI_RED + "::: You Lost, Game Over!");
                 ConsoleView.run();
             }
         } else {
@@ -127,7 +134,7 @@ public class GameController {
                 DatabaseWrapper.getInstance().updateHero(hero);
                 hero.setPosition(0, 0);
                 battleGains();
-                log(GREEN_BOLD_BRIGHT + ":::" + "Congratulations, You Won The Battle!" + ANSI_RESET);
+                log(ANSI_GREEN + ":::" + "Congratulations, You Won The Battle!" + ANSI_RESET);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -146,12 +153,12 @@ public class GameController {
         int chance = new Random().nextInt(2);
 
         if (chance == 1) {
-            log(ANSI_YELLOW + "::: Hahaha, You Can't Run My Friend, We Gonna Fight!" + ANSI_RESET);
+            log(ANSI_YELLOW + ":::Hahaha, You Can't Run My Friend, We Gonna Fight!" + ANSI_RESET);
             HERO_RAN = true;
             fight();
         } else {
             HERO_RAN = false;
-            log(ANSI_RED + "::: Coward! You Ran Away!" + ANSI_RESET);
+            log(ANSI_RED + ":::Coward! You Ran Away!" + ANSI_RESET);
             hero.setPosition(previousPosition[0] * -1, previousPosition[1] * -1);
         }
     }
@@ -198,7 +205,7 @@ public class GameController {
                 exception.printStackTrace();
             }
         } else if (!artifactIsDropped) {
-            log( ANSI_RED + "::: Sorry, No Artifact Dropped!");
+            log( ANSI_RED + ":::Sorry, No Artifact Dropped!");
         }
     }
 
@@ -213,10 +220,11 @@ public class GameController {
         if (CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
             log(ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + ANSI_RESET);
+            inputSign();
             while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (line.equals("1") || line.equals("2")) {
-                    int choice = Integer.parseInt(line.trim());
+                String input = scanner.nextLine();
+                if (input.equals("1") || input.equals("2")) {
+                    int choice = Integer.parseInt(input.trim());
                     if (choice == 1) {
                         hero.equipHero(artifact, artifact.getType());
                         log("::: " + hero.getName() + " Is Equipped With " + artifactType);
@@ -225,7 +233,9 @@ public class GameController {
                         break;
                     }
                 } else {
+                    //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
+                    inputSign();
                 }
             }
         }
