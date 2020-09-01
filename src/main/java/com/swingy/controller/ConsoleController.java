@@ -26,7 +26,7 @@ public class ConsoleController {
 
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
-            if (input.equals("1") || input.equals("2") || input.equals("3")) {
+            if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4")) {
                 int choice = Integer.parseInt(input);
                 switch (choice) {
                     case 1:
@@ -37,6 +37,10 @@ public class ConsoleController {
                         break;
                     case 3:
                         ConsoleView.heroNameOption(CharacterType.WOLVERINE);
+                        break;
+                    case 4:
+                        //TODO: goodbye message
+                        System.exit(1);
                         break;
                 }
                 break;
@@ -172,6 +176,9 @@ public class ConsoleController {
                     GameController.goal();
                     ConsoleView.selectedHero(hero, map.getSize());
                     ConsoleView.displayMoveList();
+                } else if (direction == 5){
+//                    TODO: refactor
+                    System.exit(-1);
                 } else {
                     //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!" + ANSI_RESET);
@@ -230,7 +237,7 @@ public class ConsoleController {
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("1") || input.equals("2")
-                    || input.equals("3")) {
+                    || input.equals("3") || input.equals("4")) {
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
@@ -242,7 +249,10 @@ public class ConsoleController {
                     case 3:
 //                  GameWindow.run();
                         break;
-                    default:
+                    case 4:
+//                        TODO: goodbye message
+                        System.exit(1);
+                        break;
                 }
             } else {
                 //                TODO refactor
