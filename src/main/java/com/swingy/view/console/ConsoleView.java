@@ -49,9 +49,9 @@ public class ConsoleView {
     /** Display all validtypes of heroes. */
     public static void heroOptions() {
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
-        log(ANSI_RED + "  1." + ANSI_RESET + " Deadpool");
-        log(ANSI_RED + "  2." + ANSI_RESET + " Thor");
-        log(ANSI_RED + "  3." + ANSI_RESET + " Wolverine");
+        log(ANSI_RED + "  1." + ANSI_RESET + ANSI_YELLOW + " Deadpool " + ANSI_RESET + "Attack[7] Defense[2] Hit Points[26]");
+        log(ANSI_RED + "  2." + ANSI_RESET + ANSI_YELLOW + " Thor " + ANSI_RESET + "Attack[9] Defense[3] Hit Points[51]");
+        log(ANSI_RED + "  3." + ANSI_RESET + ANSI_YELLOW + " Wolverine " + ANSI_RESET + "Attack[10] Defense[3] Hit Points[75]");
         log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
         inputSign();
         ConsoleController.heroType();
@@ -97,7 +97,8 @@ public class ConsoleView {
         log( "Stats: " + "Name" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getName() + ANSI_YELLOW + "] " + ANSI_RESET
                 + "Type" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getType() + ANSI_YELLOW + "] "
                 + ANSI_RESET + " Level" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getLevel() + ANSI_YELLOW + "] " + ANSI_RESET
-                + " Hit Points" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + "] " + ANSI_RESET
+                + " Hit Points" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + "] " +
+                ANSI_RESET+ " Experience" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getExperience() + ANSI_YELLOW + "] " + ANSI_RESET
                 + " Map size" + ANSI_YELLOW + "[" + ANSI_RESET + mapSize + ANSI_YELLOW + "] " + ANSI_RESET);
     }
 
