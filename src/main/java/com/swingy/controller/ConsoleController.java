@@ -75,10 +75,10 @@ public class ConsoleController {
                     // Create the hero and store it in the database.
                     if (!DatabaseWrapper.getInstance().heroExists(input)) {
                         DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(input.trim(), type));
-                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
-                        DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
-                        ConsoleView.selectedHero(hero, map.getSize());
+//                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
+                        hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                         map = MapFactory.generateMap(hero);
+                        ConsoleView.selectedHero(hero, map.getSize());
                         directions();
 //                        ConsoleView.displayMoveList();
 
@@ -134,10 +134,10 @@ public class ConsoleController {
                 // Check if the specified character name exist in the database,
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
-                if (DatabaseWrapper.getInstance().heroExists(input)) {
+                if (DatabaseWrapper.getInstance().heroExists(input.trim())) {
 //                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
-                    Hero hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
+                    hero = DatabaseWrapper.getInstance().retrieveHeroData(input);
                     map = MapFactory.generateMap(hero);
                     ConsoleView.selectedHero(hero, map.getSize());
 //                    ConsoleView.heroStats(hero, map.getSize());
