@@ -4,6 +4,8 @@ import com.swingy.controller.ConsoleController;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.view.gui.GameWindow;
 
+import java.sql.SQLException;
+
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.log;
 
@@ -12,6 +14,7 @@ public class Swingy {
         try {
             String view = args[0];
             DatabaseWrapper.getInstance().setupDatabase();
+//            DatabaseWrapper.getInstance().retrieveHeroData("test");
             if (view.toLowerCase().equals("console")) {
                 ConsoleController.run();
             } else if (view.toLowerCase().equals("gui")) {
@@ -19,7 +22,7 @@ public class Swingy {
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (Exception e) {
             log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
         }
     }
