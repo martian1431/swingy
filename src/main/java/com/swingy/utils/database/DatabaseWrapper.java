@@ -144,7 +144,20 @@ public class DatabaseWrapper {
     }
 
 //    TODO
-    public Hero retrieveHeroData(String trim) {
+    public Hero retrieveHeroData(String name)  {
+        String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
+        System.out.println("debug " + name);
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs =  stmt.executeQuery(sql);
+            while (rs.next()) {
+                System.out.println(rs.getString("heroName") +  "\t" +
+                        rs.getString("heroClass") + "\t" +
+                        rs.getDouble("heroLevel"));
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return HeroFactory.newHero("test", CharacterType.DEADPOOL);
     }
 
