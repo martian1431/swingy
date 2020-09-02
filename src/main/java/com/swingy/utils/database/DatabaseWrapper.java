@@ -120,11 +120,11 @@ public class DatabaseWrapper {
         return rowCount;
     }
 
-    public ArrayList<ArrayList<Object>> retrieveAllHeroes() throws SQLException {
+    public List<Hero> retrieveAllHeroes() throws SQLException {
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
         ResultSet resultSet = stmt.executeQuery(sql);
-        return (parseResultset(resultSet));
+        return (parseResult(resultSet));
     }
 
     public ArrayList<ArrayList<Object>> parseResultset(ResultSet resultSet) throws SQLException {
@@ -143,22 +143,45 @@ public class DatabaseWrapper {
         return resultList;
     }
 
-//    TODO
-    public Hero retrieveHeroData(String name)  {
+//    TODO use prepared statement
+    public Hero retrieveHeroData(String name) throws SQLException {
         String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
-        System.out.println("debug " + name);
-        try {
-            Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery(sql);
-            while (rs.next()) {
-                System.out.println(rs.getString("heroName") +  "\t" +
-                        rs.getString("heroClass") + "\t" +
-                        rs.getDouble("heroLevel"));
+//        PreparedStatement pstmt = conn.prepareStatement(sql);
+//        pstmt.setString(1, name);
+        Statement stmt = conn.createStatement();
+//        ResultSet resultSet =  pstmt.executeQuery();
+        ResultSet resultSet =  stmt.executeQuery(sql);
+        Hero hero = parseResult(resultSet).get(0);
+        return hero;
+    }
+
+//    TODO handle resultset validation
+    private List<Hero> parseResult(ResultSet rs) throws SQLException {
+        List<Hero> list = new ArrayList<>();
+        CharacterType type = null;
+        while (rs.next()) {
+            String heroType = rs.getString("heroClass").toUpperCase();
+            switch (heroType) {
+                case "DEADPOOL":
+                    type = CharacterType.DEADPOOL;
+                    break;
+                case "THOR":
+                    type = CharacterType.THOR;
+                    break;
+                case "WOLVERINE":
+                    type = CharacterType.WOLVERINE;
+                    break;
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(type);
+            Hero hero = HeroFactory.newHero(rs.getString("heroName"), type);
+            hero.setAttack(rs.getInt("heroAttack"));
+            hero.setAttack(rs.getInt("heroDefense"));
+            hero.setAttack(rs.getInt("heroExperience"));
+            hero.setAttack(rs.getInt("heroHP"));
+            hero.setAttack(rs.getInt("heroLevel"));
+            list.add(hero);
         }
-        return HeroFactory.newHero("test", CharacterType.DEADPOOL);
+        return list;
     }
 
 //    TODO
