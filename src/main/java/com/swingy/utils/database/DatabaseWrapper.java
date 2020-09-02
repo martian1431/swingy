@@ -182,7 +182,7 @@ public class DatabaseWrapper {
         return list;
     }
 
-//    TODO
+//    TODO use prepared statement
     public void updateHero(Hero hero) throws SQLException {
 //        String sql = "UPDATE heroes SET heroAttack=, heroDefense, "
         String sql = String.format("UPDATE heroes " +
@@ -193,7 +193,6 @@ public class DatabaseWrapper {
                 "heroLevel='%s' WHERE heroName='%s'", hero.getAttack(), hero.getDefense(), hero.getExperience(), hero.getHitPoints(), hero.getLevel(), hero.getName());
         Statement stmt = conn.createStatement();
         ResultSet resultSet =  stmt.executeQuery(sql);
-        System.out.println(resultSet.getString(0));
     }
 
     public List<Hero> retrieveDatabase() {
