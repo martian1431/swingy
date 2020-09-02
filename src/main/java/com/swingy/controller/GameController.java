@@ -123,11 +123,8 @@ public class GameController {
         }
         if (hero.getHitPoints() <= 0) {
             if (CONSOLE_MODE) {
-                //                TODO refactor
-                log(ANSI_RED + ":::You Lost, Game Over!" + ANSI_RESET);
-//                inputSign();
-//                log(ANSI_RED + "::: You Lost, Game Over!");
-                ConsoleView.run();
+                ConsoleView.gameOver();
+//                ConsoleView.run();
             }
         } else {
             try {
