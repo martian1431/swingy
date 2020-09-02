@@ -127,6 +127,7 @@ public class DatabaseWrapper {
         return (parseResult(resultSet));
     }
 
+//    TODO remove
     public ArrayList<ArrayList<Object>> parseResultset(ResultSet resultSet) throws SQLException {
         ArrayList<ArrayList<Object>> resultList = new ArrayList<>();
         while (resultSet.next()) {
@@ -169,19 +170,30 @@ public class DatabaseWrapper {
                     type = CharacterType.WOLVERINE;
                     break;
             }
+            assert type != null;
             Hero hero = HeroFactory.newHero(rs.getString("heroName"), type);
             hero.setAttack(rs.getInt("heroAttack"));
-            hero.setAttack(rs.getInt("heroDefense"));
-            hero.setAttack(rs.getInt("heroExperience"));
-            hero.setAttack(rs.getInt("heroHP"));
-            hero.setAttack(rs.getInt("heroLevel"));
+            hero.setDefense(rs.getInt("heroDefense"));
+            hero.setExperience(rs.getInt("heroExperience"));
+            hero.setHitPoints(rs.getInt("heroHP"));
+            hero.setLevel(rs.getInt("heroLevel"));
             list.add(hero);
         }
         return list;
     }
 
 //    TODO
-    public void updateHero(Hero hero) {
+    public void updateHero(Hero hero) throws SQLException {
+//        String sql = "UPDATE heroes SET heroAttack=, heroDefense, "
+        String sql = String.format("UPDATE heroes " +
+                "SET heroAttack='%s', " +
+                "heroDefense='%s', " +
+                "heroExperience='%s', " +
+                "heroHP='%s', " +
+                "heroLevel='%s' WHERE heroName='%s'", hero.getAttack(), hero.getDefense(), hero.getExperience(), hero.getHitPoints(), hero.getLevel(), hero.getName());
+        Statement stmt = conn.createStatement();
+        ResultSet resultSet =  stmt.executeQuery(sql);
+        System.out.println(resultSet.getString(0));
     }
 
     public List<Hero> retrieveDatabase() {
