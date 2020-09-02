@@ -185,6 +185,10 @@ public abstract class Hero {
         return observer;
     }
 
+    public void setAttack(int attack) {
+        this.attack = attack;
+    }
+
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
