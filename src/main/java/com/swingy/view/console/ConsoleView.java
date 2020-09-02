@@ -27,8 +27,8 @@ public class ConsoleView {
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero.");
         log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero.");
-        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
-        log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
+//        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
+        log(ANSI_RED + "  3." + ANSI_RESET + " Quit");
         inputSign();
         ConsoleController.menuOption();
     }
@@ -128,5 +128,10 @@ public class ConsoleView {
         log(AsciiTable.getTable(headers, data));
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         inputSign();
+    }
+
+    public static void goodbye() {
+        log(ANSI_YELLOW + " :::Thank you for playing:::" + ANSI_RESET);
+        System.exit(1);
     }
 }
