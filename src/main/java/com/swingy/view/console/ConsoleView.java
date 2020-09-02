@@ -115,19 +115,20 @@ public class ConsoleView {
     * */
 //    TODO: use the collection feature to have the ability to format the table
 //    TODO: change parameter type to String[][]
-    public static void availableHeros(ArrayList<ArrayList<Object>> heros) {
-        int rows = heros.size();
-        int colums = 7;
-        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
-        String[][] data = new String[rows][colums];
-        for (int i = 0; i < heros.size(); i++) {
-            for (int j = 0; j < colums; j++) {
-                data[i][j] = (String) heros.get(i).get(j);
-            }
-        }
-        log(AsciiTable.getTable(headers, data));
-        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
-        inputSign();
+    public static void availableHeros(List<Hero> heros) {
+        System.out.println("Working on it");
+//        int rows = heros.size();
+//        int colums = 7;
+//        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
+//        String[][] data = new String[rows][colums];
+//        for (int i = 0; i < heros.size(); i++) {
+//            for (int j = 0; j < colums; j++) {
+//                data[i][j] = (String) heros.get(i).get(j);
+//            }
+//        }
+//        log(AsciiTable.getTable(headers, data));
+//        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
+//        inputSign();
     }
 
     public static void goodbye() {
@@ -138,5 +139,19 @@ public class ConsoleView {
     public static void gameOver() {
         log(ANSI_RED + ":::You Lost, do you want to try again? (Y)es or (N)o" + ANSI_RESET);
         ConsoleController.retry();
+    }
+
+//    TODO overload this methods
+    public static void heroStats(Hero hero, int size) {
+        String[][] data = new String[1][7];
+        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
+        data[0][0] = hero.getName();
+        data[0][1] = hero.getType();
+        data[0][2] = String.valueOf(hero.getAttack());
+        data[0][3] = String.valueOf(hero.getDefense());
+        data[0][4] = String.valueOf(hero.getExperience());
+        data[0][5] = String.valueOf(hero.getHitPoints());
+        data[0][6] = String.valueOf(hero.getLevel());
+        log(AsciiTable.getTable(headers, data));
     }
 }
