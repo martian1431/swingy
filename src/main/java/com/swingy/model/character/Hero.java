@@ -65,14 +65,14 @@ public abstract class Hero {
 
         enemy.defend(this.attack);
         if (enemy.getHitPoints() <= 0) {
-            if (enemy.getType().equals("Horsefish")) {
+            if (enemy.getType().equals("Magneto")) {
                 earnedExperience = (int) (Math.ceil((float)this.level / 2) * 750);
                 this.experience += earnedExperience;
-            } else if (enemy.getType().equals("Jellyfish")) {
+            } else if (enemy.getType().equals("Ultron")) {
                 earnedExperience = (int) (Math.ceil((float)this.level / 2) * 500);
                 this.experience += earnedExperience;
             }
-            log(ANSI_CYAN + " >>> Well Done, Your Earned " + earnedExperience + "XP" + ANSI_RESET);
+            log(ANSI_CYAN + " :::Well Done, Your Earned " + earnedExperience + "XP" + ANSI_RESET);
             if (this.experience >= (this.level * 1000 + Math.pow(this.level - 1, 2) * 450)) {
                 levelUp();
             }
