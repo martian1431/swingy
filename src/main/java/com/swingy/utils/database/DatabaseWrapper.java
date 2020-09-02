@@ -146,10 +146,7 @@ public class DatabaseWrapper {
 //    TODO use prepared statement
     public Hero retrieveHeroData(String name) throws SQLException {
         String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
-//        PreparedStatement pstmt = conn.prepareStatement(sql);
-//        pstmt.setString(1, name);
         Statement stmt = conn.createStatement();
-//        ResultSet resultSet =  pstmt.executeQuery();
         ResultSet resultSet =  stmt.executeQuery(sql);
         Hero hero = parseResult(resultSet).get(0);
         return hero;
@@ -172,7 +169,6 @@ public class DatabaseWrapper {
                     type = CharacterType.WOLVERINE;
                     break;
             }
-            System.out.println(type);
             Hero hero = HeroFactory.newHero(rs.getString("heroName"), type);
             hero.setAttack(rs.getInt("heroAttack"));
             hero.setAttack(rs.getInt("heroDefense"));
