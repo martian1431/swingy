@@ -1,23 +1,27 @@
 package com.swingy.utils;
 
+import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.Symbols.COPYRIGHT;
+import static com.swingy.utils.Symbols.HEART;
+
 //TODO: Refactor
 public class Logo {
     public static void displayLogo() {
         System.out.println();
         System.out.println();
-        System.out.println(Colors.ANSI_WHITE + "                                                                                         " + Colors.ANSI_RESET);
-        System.out.println(Colors.ANSI_WHITE + "                                                                                         " + Colors.ANSI_RESET);
-        System.out.println(Colors.BLUE_BRIGHT  + "      1|10|1    |01|        |11| |10| |10|101    |11|  10|10||1|    |10|     |01| " + Colors.ANSI_RESET);
-        System.out.println(Colors.BLUE_BRIGHT  + "    |01|  |11|  |11|        |00| |11| |11||11|   |01| |11|    |00|  |00|    |11|  " + Colors.ANSI_RESET);
-        System.out.println(Colors.BLUE_BRIGHT  + "    |10|        |01|        |10| |10| |11| |00|  |10| |01|    |00|   |01|  |01|   " + Colors.ANSI_RESET);
-        System.out.println(Colors.BLUE_BRIGHT  + "      |10|       |01| |10| |10|  |01| |01|  |11|1|10| |11|            |011101|    " + Colors.ANSI_RESET);
-        System.out.println(Colors.BLUE_BRIGHT  + "        |10|      |01||11||01|   |10| |00|   |10||11| |01|  |0|1|01|    |11|      " + Colors.ANSI_RESET);
-        System.out.println(Colors.CYAN_BRIGHT  + "    |11|  |01|    |00|   |10|    |01| |01|       |10| |11|    |01|      |01|      " + Colors.ANSI_RESET);
-        System.out.println(Colors.CYAN_BRIGHT  + "      0|01|1      |01|   |00|    |11| |10|       |11|   |01||11|        |10| " + Colors.ANSI_WHITE + "v1.0" + Colors.ANSI_RESET);
-        System.out.println(Colors.CYAN_BRIGHT  + "                                                                     " + Colors.ANSI_RESET);
+        System.out.println(ANSI_WHITE + "                                                                                         " + ANSI_RESET);
+        System.out.println(ANSI_WHITE + "                                                                                         " + ANSI_RESET);
+        System.out.println(BLUE_BRIGHT  + "      1|10|1    |01|        |11| |10| |10|101    |11|  10|10||1|    |10|     |01| " + ANSI_RESET);
+        System.out.println(BLUE_BRIGHT  + "    |01|  |11|  |11|        |00| |11| |11||11|   |01| |11|    |00|  |00|    |11|  " + ANSI_RESET);
+        System.out.println(BLUE_BRIGHT  + "    |10|        |01|        |10| |10| |11| |00|  |10| |01|    |00|   |01|  |01|   " + ANSI_RESET);
+        System.out.println(BLUE_BRIGHT  + "      |10|       |01| |10| |10|  |01| |01|  |11|1|10| |11|            |011101|    " + ANSI_RESET);
+        System.out.println(BLUE_BRIGHT  + "        |10|      |01||11||01|   |10| |00|   |10||11| |01|  |0|1|01|    |11|      " + ANSI_RESET);
+        System.out.println(CYAN_BRIGHT  + "    |11|  |01|    |00|   |10|    |01| |01|       |10| |11|    |01|      |01|      " + ANSI_RESET);
+        System.out.println(CYAN_BRIGHT  + "      0|01|1      |01|   |00|    |11| |10|       |11|   |01||11|        |10| " + ANSI_WHITE + "v1.0" + ANSI_RESET);
+        System.out.println(CYAN_BRIGHT  + "                                                                     " + ANSI_RESET);
 //        TODO Extract credits
         System.out.print("                       ");
-         System.out.println(Colors.CYAN_UNDERLINED + "Copyright " + Symbols.COPYRIGHT + " 2020  Made with " + Symbols.HEART + " by pmalope " + Colors.ANSI_RESET);
+         System.out.println(CYAN_UNDERLINED + "Copyright " + COPYRIGHT + " 2020  Made with " + HEART + " by pmalope " + ANSI_RESET);
         System.out.println();
 //       TODO Instrustions
         System.out.println(gameInfo());
@@ -29,24 +33,24 @@ public class Logo {
 //        "\tGood Luck on your Journey... STAY AWAY FROM THANOS at a lower Level";
 //        TODO (N.B) use this as soon as the user starts the game
 //        "\t * Villains are in Red_-_ Heros are Blue (Refactor)\n"+
-        return  Colors.CYAN_BOLD_BRIGHT + "Hi, Welcome!!!\n\n" + Colors.ANSI_RESET +
-                "Swingy is a minimalistic text-based Role Play Game in Java Swing...(TODO)\n\n" +
-                Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HOW TO PLAY " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
+        return  CYAN_BOLD_BRIGHT + " Hi, Welcome!!!\n" + ANSI_RESET +
+                " This game is a implementation of a minimalistic text-based RPG game in Java using the swingy Framework\n\n" +
+                ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "HOW TO PLAY" + ANSI_RESET + ANSI_YELLOW + ":::\n" + ANSI_RESET +
                 "  * North: Move Up\n" +
                 "  * East: Move Right\n" +
                 "  * West: Move Left\n" +
                 "  * South: Move Down\n\n" +
 
-                Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + " HERE ARE THE RULES " + Colors.ANSI_RESET + Colors.ANSI_YELLOW + ":::\n\n" + Colors.ANSI_RESET +
+                ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "HERE ARE THE RULES" + ANSI_RESET + ANSI_YELLOW + ":::\n" + ANSI_RESET +
                 "  * You can have multiple heros of different types\n" +
-                "  * Stats are affected by the hero's level and artifacts \n" +
-                "  * If you reach the end of the border of the map you win \n" +
-                "  * When you move to a position occupied by a villian you have two options; Run or Fight. \n" +
-                "  * If you win the fight you will gain experience and an artifact which you can choose to keep or drop. \n" +
-                "    You will also level up when you reach the next level experience \n" +
+                "  * Stats are affected by the hero's level and artifacts\n" +
+                "  * If you reach the end of the border of the map you win\n" +
+                "  * When you move to a position occupied by a villian you have two options; Run or Fight.\n" +
+                "  * If you win the fight you will gain experience and an artifact which you can choose to keep or drop.\n" +
+                "  * You will level up when you reach the next level experience \n" +
                 "  * If you Lose you will die and start over.\n" +
                 "  * To Advance to next Level You need to accumulate above 1000xp \n" +
-                "  * The Map is based on your level \n";
+                "  * The Map is based on your level\n";
     }
 
 
