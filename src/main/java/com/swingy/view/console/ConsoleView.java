@@ -1,6 +1,8 @@
 package com.swingy.view.console;
 
 import com.github.freva.asciitable.AsciiTable;
+import com.github.freva.asciitable.Column;
+import com.github.freva.asciitable.ColumnData;
 import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
@@ -8,6 +10,7 @@ import com.swingy.utils.Colors;
 import com.swingy.utils.Logo;
 import com.swingy.utils.database.DatabaseWrapper;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -25,8 +28,8 @@ public class ConsoleView {
     public static void menuOptions() {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your choice "
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
-        log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero.");
-        log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero.");
+        log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero");
+        log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero");
 //        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
         log(ANSI_RED + "  3." + ANSI_RESET + " Quit");
         inputSign();
@@ -45,8 +48,6 @@ public class ConsoleView {
 
     /** Display all validtypes of heroes. */
     public static void heroOptions() {
-//        boolean validInput = false;
-
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + " Deadpool");
         log(ANSI_RED + "  2." + ANSI_RESET + " Thor");
@@ -116,19 +117,16 @@ public class ConsoleView {
 //    TODO: use the collection feature to have the ability to format the table
 //    TODO: change parameter type to String[][]
     public static void availableHeros(List<Hero> heros) {
-        System.out.println("Working on it");
-//        int rows = heros.size();
-//        int colums = 7;
-//        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
-//        String[][] data = new String[rows][colums];
-//        for (int i = 0; i < heros.size(); i++) {
-//            for (int j = 0; j < colums; j++) {
-//                data[i][j] = (String) heros.get(i).get(j);
-//            }
-//        }
-//        log(AsciiTable.getTable(headers, data));
-//        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
-//        inputSign();
+        log(AsciiTable.getTable(heros, Arrays.<ColumnData<Hero>>asList(
+                new Column().header("Hero Name").with(hero -> hero.getName()),
+                new Column().header("Hero Class").with(hero -> hero.getType()),
+                new Column().header("Attack").with(hero -> Integer.toString(hero.getAttack())),
+                new Column().header("Defense").with(hero -> Integer.toString(hero.getDefense())),
+                new Column().header("Experience").with(hero -> Integer.toString(hero.getExperience())),
+                new Column().header("Hit points").with(hero -> Integer.toString(hero.getHitPoints())),
+                new Column().header("Level").with(hero -> Integer.toString(hero.getLevel())))));
+        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
+        inputSign();
     }
 
     public static void goodbye() {
@@ -143,15 +141,19 @@ public class ConsoleView {
 
 //    TODO overload this methods
     public static void heroStats(Hero hero, int size) {
+        int len = 7;
+        int index = 0;
         String[][] data = new String[1][7];
         String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
-        data[0][0] = hero.getName();
-        data[0][1] = hero.getType();
-        data[0][2] = String.valueOf(hero.getAttack());
-        data[0][3] = String.valueOf(hero.getDefense());
-        data[0][4] = String.valueOf(hero.getExperience());
-        data[0][5] = String.valueOf(hero.getHitPoints());
-        data[0][6] = String.valueOf(hero.getLevel());
-        log(AsciiTable.getTable(headers, data));
+        for (int i = 0; i < len; i++) {
+            data[index][i] = hero.getName();
+            data[index][i] = hero.getType();
+            data[index][i] = String.valueOf(hero.getAttack());
+            data[index][i] = String.valueOf(hero.getDefense());
+            data[index][i] = String.valueOf(hero.getExperience());
+            data[index][i] = String.valueOf(hero.getHitPoints());
+            data[index][i] = String.valueOf(hero.getLevel());
+            log(AsciiTable.getTable(headers, data));
+        }
     }
 }
