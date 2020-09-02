@@ -189,6 +189,12 @@ public abstract class Hero {
         this.attack = attack;
     }
 
+    public void setLevel(int level) { this.level = level; }
+
+    public void setDefense(int defense) { this.defense = defense; }
+
+    public void setExperience(int experience) { this.experience = experience; }
+
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
     }
