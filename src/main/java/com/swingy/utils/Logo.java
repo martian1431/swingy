@@ -34,7 +34,7 @@ public class Logo {
 //        TODO (N.B) use this as soon as the user starts the game
 //        "\t * Villains are in Red_-_ Heros are Blue (Refactor)\n"+
         return  CYAN_BOLD_BRIGHT + " Hi, Welcome!!!\n" + ANSI_RESET +
-                " This game is a implementation of a minimalistic text-based RPG game in Java using the swingy Framework\n\n" +
+                " Implementation of a minimalistic text-based RPG game in Java using the swingy Framework\n\n" +
                 ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "HOW TO PLAY" + ANSI_RESET + ANSI_YELLOW + ":::\n" + ANSI_RESET +
                 "  * North: Move Up\n" +
                 "  * East: Move Right\n" +
