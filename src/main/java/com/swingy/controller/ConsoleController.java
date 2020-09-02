@@ -74,7 +74,7 @@ public class ConsoleController {
                     if (!DatabaseWrapper.getInstance().heroExists(input)) {
                         DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(input.trim(), type));
                         log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
-                        hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
+                        DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                         ConsoleView.selectedHero(hero, map.getSize());
                         map = MapFactory.generateMap(hero);
                         directions();
@@ -255,5 +255,23 @@ public class ConsoleController {
             }
         }
         scanner.close();
+    }
+
+    public static void retry() {
+        Scanner scanner = new Scanner(System.in);
+
+        while(scanner.hasNext()) {
+            String input = scanner.nextLine();
+            if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+//                todo
+                ConsoleView.menuOptions();
+            } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")){
+//                todo
+               ConsoleView.goodbye();
+            } else {
+                log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
+                inputSign();
+            }
+        }
     }
 }
