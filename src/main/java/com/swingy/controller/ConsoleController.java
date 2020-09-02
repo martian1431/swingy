@@ -1,6 +1,7 @@
 package com.swingy.controller;
 
 import com.swingy.model.character.CharacterType;
+import com.swingy.model.character.Hero;
 import com.swingy.utils.Colors;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
@@ -9,6 +10,7 @@ import com.swingy.view.console.ConsoleView;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
@@ -112,7 +114,8 @@ public class ConsoleController {
                 // Display all the available heroes in the database.
 //                ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
 //                ConsoleView.availableHeros(heros);
-                ArrayList<ArrayList<Object>> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+//                ArrayList<ArrayList<Object>> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+                List<Hero> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
                 ConsoleView.availableHeros(heros);
             } else {
                 //                TODO refactor
@@ -137,11 +140,10 @@ public class ConsoleController {
                 if (DatabaseWrapper.getInstance().heroExists(input)) {
 //                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
-                    hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
+                    Hero hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                     map = MapFactory.generateMap(hero);
-                    ConsoleView.selectedHero(hero, map.getSize());
+                    ConsoleView.heroStats(hero, map.getSize());
                     directions();
-//                    ConsoleView.displayMoveList();
                 } else {
                     //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
@@ -151,7 +153,6 @@ public class ConsoleController {
                 //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
                 inputSign();
-//                System.out.println(e.getMessage());
             }
 //            catch (ClassNotFoundException | SQLException | IOException exception) {
 //                exception.printStackTrace();
