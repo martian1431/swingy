@@ -134,4 +134,9 @@ public class ConsoleView {
         log(ANSI_YELLOW + " :::Thank you for playing:::" + ANSI_RESET);
         System.exit(1);
     }
+
+    public static void gameOver() {
+        log(ANSI_RED + ":::You Lost, do you want to try again? (Y)es or (N)o" + ANSI_RESET);
+        ConsoleController.retry();
+    }
 }
