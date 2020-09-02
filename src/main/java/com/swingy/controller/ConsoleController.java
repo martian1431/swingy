@@ -112,9 +112,6 @@ public class ConsoleController {
             if (count > 0) {
                 ConsoleView.heroCount(count);
                 // Display all the available heroes in the database.
-//                ResultSet heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
-//                ConsoleView.availableHeros(heros);
-//                ArrayList<ArrayList<Object>> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
                 List<Hero> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
                 ConsoleView.availableHeros(heros);
             } else {
@@ -142,7 +139,8 @@ public class ConsoleController {
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
                     Hero hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                     map = MapFactory.generateMap(hero);
-                    ConsoleView.heroStats(hero, map.getSize());
+                    ConsoleView.selectedHero(hero, map.getSize());
+//                    ConsoleView.heroStats(hero, map.getSize());
                     directions();
                 } else {
                     //                TODO refactor
