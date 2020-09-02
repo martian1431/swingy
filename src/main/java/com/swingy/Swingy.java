@@ -4,6 +4,9 @@ import com.swingy.controller.ConsoleController;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.view.gui.GameWindow;
 
+import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.Log.log;
+
 public class Swingy {
     public static void main(String[] args) {
         try {
@@ -14,11 +17,10 @@ public class Swingy {
             } else if (view.toLowerCase().equals("gui")) {
                 GameWindow.run();
             } else {
-                System.err.println("Please choose a view to run...");
+                log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-//            FIXME
-            System.out.println("Invalid argument... ");
+            log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
         }
     }
 }
