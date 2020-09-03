@@ -82,7 +82,7 @@ public class ConsoleView {
                 + " Map size" + ANSI_YELLOW + "[" + ANSI_RESET + mapSize + ANSI_YELLOW + "] " + ANSI_RESET);
     }
 
-    public static void existingHero() {
+    public static void showExistingHero() {
         ConsoleController.selectExistingHero();
     }
 
@@ -97,17 +97,16 @@ public class ConsoleView {
     * */
 //    TODO: use the collection feature to have the ability to format the table
 //    TODO: change parameter type to String[][]
-    public static void availableHeros(List<Hero> heros) {
-        log(AsciiTable.getTable(heros, Arrays.<ColumnData<Hero>>asList(
-                new Column().header("Hero Name").with(hero -> hero.getName()),
-                new Column().header("Hero Class").with(hero -> hero.getType()),
+    public static void showAvailableHeros(List<Hero> heros) {
+        log(AsciiTable.getTable(heros, Arrays.asList(
+                new Column().header("Hero Class").with(Hero::getType),
+                new Column().header("Hero Name").with(Hero::getName),
                 new Column().header("Attack").with(hero -> Integer.toString(hero.getAttack())),
                 new Column().header("Defense").with(hero -> Integer.toString(hero.getDefense())),
                 new Column().header("Experience").with(hero -> Integer.toString(hero.getExperience())),
                 new Column().header("Hit points").with(hero -> Integer.toString(hero.getHitPoints())),
                 new Column().header("Level").with(hero -> Integer.toString(hero.getLevel())))));
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
-        inputSign();
     }
 
     public static void goodbye() {

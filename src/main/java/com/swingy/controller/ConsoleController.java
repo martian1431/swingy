@@ -55,17 +55,9 @@ public class ConsoleController {
     public static void createHero(CharacterType type) {
         Scanner scanner = getScanner();
 
-        /**
-         * Check if the name has atleast 2 and atmost 10
-         * characters.
-         */
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
-            /**
-             * Check if the name has atleast 2 and atmost 25
-             * characters.
-             */
             if (input.length() >= 2 && input.length() < 10) {
                 try {
                     // Create the hero and store it in the database.
@@ -101,7 +93,6 @@ public class ConsoleController {
 
 //   TODO Refactor
     public static void selectExistingHero() {
-        Scanner scanner = getScanner();
         try {
             // First check if there are heroes in the database.
             int count = DatabaseWrapper.getInstance().numberOfHeroes();
@@ -109,7 +100,7 @@ public class ConsoleController {
                 ConsoleView.heroCount(count);
                 // Display all the available heroes in the database.
                 List<Hero> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
-                ConsoleView.availableHeros(heros);
+                ConsoleView.showAvailableHeros(heros);
             } else {
                 //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
@@ -122,7 +113,13 @@ public class ConsoleController {
 //        catch (IOException | ClassNotFoundException | SQLException exception) {
 //            exception.printStackTrace();
 //        }
-//        TODO refactor
+//        TODO refactor selectedHero()
+        selectedHero();
+    }
+
+    private static void selectedHero() {
+        Scanner scanner = getScanner();
+
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
 
@@ -154,7 +151,7 @@ public class ConsoleController {
         }
     }
 
-//    TODO refactor
+    //    TODO refactor
     public static void directions() {
         Scanner scanner = getScanner();
 
@@ -242,7 +239,7 @@ public class ConsoleController {
                         ConsoleView.showHeroType();
                         break;
                     case 2:
-                        ConsoleView.existingHero();
+                        ConsoleView.showExistingHero();
                         break;
                     case 3:
 //                        TODO: goodbye message
