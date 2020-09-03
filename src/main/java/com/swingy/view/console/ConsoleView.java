@@ -18,7 +18,6 @@ import static com.swingy.utils.Logo.showWelcomeMessage;
 
 public class ConsoleView {
 
-    /** Display menu choices after launching the game. */
     public static void showMainOptions() {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your choice "
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
@@ -38,7 +37,6 @@ public class ConsoleView {
     private static void showMainOptions(String input) {
     }
 
-    /** Display all validtypes of heroes. */
     public static void showHeroType() {
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + ANSI_YELLOW + " Deadpool " + ANSI_RESET + "Attack[7] Defense[2] Hit Points[26]");
@@ -69,7 +67,6 @@ public class ConsoleView {
         log(ANSI_RED + "3." + ANSI_RESET + " Quit");
     }
 
-//    TODO delete
     public static void run() {
         showWelcomeMessage();
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Are ready to go down the Rabit hole? (Y)es or (N)o" + ANSI_RESET);
