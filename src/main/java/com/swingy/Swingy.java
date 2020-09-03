@@ -1,10 +1,11 @@
 package com.swingy;
 
-import com.swingy.controller.ConsoleController;
 import com.swingy.utils.database.DatabaseWrapper;
+import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GameWindow;
 
-import java.sql.SQLException;
+
+import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.log;
@@ -15,7 +16,7 @@ public class Swingy {
             String view = args[0];
             DatabaseWrapper.getInstance().setupDatabase();
             if (view.toLowerCase().equals("console")) {
-                ConsoleController.run();
+                ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
                 GameWindow.run();
             } else {
