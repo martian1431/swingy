@@ -8,15 +8,9 @@ import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
 import com.swingy.utils.Colors;
 import com.swingy.utils.Logo;
-import com.swingy.utils.database.DatabaseWrapper;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
@@ -60,7 +54,7 @@ public class ConsoleView {
 //    TODO refactor
     /** The menu with cool swingy logo :). */
     public static void welcomeBanner() {
-        Logo.displayLogo();
+        Logo.displayBanner();
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Are ready to go down the Rabit hole? (Y)es or (N)o" + ANSI_RESET);
         inputSign();
         ConsoleController.startGame();
@@ -87,7 +81,7 @@ public class ConsoleView {
         inputSign();
     }
 
-//    TODO overide
+//    TODO delete
     public static void run() {
         welcomeBanner(); // TODO refactor to promt.WelcomeBanner
 
