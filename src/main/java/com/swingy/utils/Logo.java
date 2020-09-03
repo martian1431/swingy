@@ -7,9 +7,9 @@ import static com.swingy.utils.Log.log;
 
 //TODO: Rename class
 public class Logo {
-    public static void displayBanner() {
+    public static void showWelcomeMessage() {
         log(logo());
-        log(welcomeMessage());
+        log(introduction());
         log(instructions());
     }
 
@@ -25,7 +25,7 @@ public class Logo {
                 "\t\t\t\t" + CYAN_UNDERLINED + "Copyright " + COPYRIGHT + " 2020 Wethinkcode_ Developed with " + HEART + " by pmalope\n" + ANSI_RESET;
     }
 
-    private static String welcomeMessage() {
+    private static String introduction() {
         return CYAN_BOLD_BRIGHT + " Hi, Welcome!!!\n" + ANSI_RESET  +
                 "  Implementation of a minimalistic text-based RPG game in Java using the swingy Framework\n\n" +
                 ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "HOW TO PLAY" + ANSI_RESET + ANSI_YELLOW + ":::\n" + ANSI_RESET +
