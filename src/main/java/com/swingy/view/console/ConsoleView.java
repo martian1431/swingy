@@ -26,14 +26,12 @@ public class ConsoleView {
         log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero");
 //        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
         log(ANSI_RED + "  3." + ANSI_RESET + " Quit");
-        inputSign();
         ConsoleController.menuOption();
     }
 
 //    TODO
     public static void heroNameOption(CharacterType type) {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
-        inputSign();
         ConsoleController.createHero(type);
     }
 
@@ -47,18 +45,9 @@ public class ConsoleView {
         log(ANSI_RED + "  2." + ANSI_RESET + ANSI_YELLOW + " Thor " + ANSI_RESET + "Attack[9] Defense[3] Hit Points[51]");
         log(ANSI_RED + "  3." + ANSI_RESET + ANSI_YELLOW + " Wolverine " + ANSI_RESET + "Attack[10] Defense[3] Hit Points[75]");
         log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
-        inputSign();
         ConsoleController.heroType();
     }
 
-//    TODO refactor
-    /** The menu with cool swingy logo :). */
-    public static void welcomeBanner() {
-        Logo.displayBanner();
-        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Are ready to go down the Rabit hole? (Y)es or (N)o" + ANSI_RESET);
-        inputSign();
-        ConsoleController.startGame();
-    }
 
 //    TODO debug
     /** Display Directions or move list. */
@@ -78,13 +67,13 @@ public class ConsoleView {
         log(ANSI_RED + "1." + ANSI_CYAN + " Fight" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " Run" + ANSI_RESET);
         log(ANSI_RED + "3." + ANSI_RESET + " Quit");
-        inputSign();
     }
 
 //    TODO delete
     public static void run() {
-        welcomeBanner(); // TODO refactor to promt.WelcomeBanner
-
+        Logo.showWelcomeMessage();
+        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Are ready to go down the Rabit hole? (Y)es or (N)o" + ANSI_RESET);
+        ConsoleController.startGame();
     }
 
     public static void selectedHero(Hero hero, int mapSize) {
