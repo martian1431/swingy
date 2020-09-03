@@ -15,13 +15,13 @@ public class Logo {
 
     private static String  logo() {
         return  ANSI_WHITE + "                                                                                    \n" + ANSI_RESET +
-                BLUE_BRIGHT  + "      1|10|1    |01|        |11| |10| |10|101    |11|  10|10||1|    |10|     |01| \n" + ANSI_RESET +
-                BLUE_BRIGHT  + "    |01|  |11|  |11|        |00| |11| |11||11|   |01| |11|    |00|  |00|    |11|  \n" + ANSI_RESET +
-                BLUE_BRIGHT  + "    |10|        |01|        |10| |10| |11| |00|  |10| |01|    |00|   |01|  |01|   \n" + ANSI_RESET +
-                BLUE_BRIGHT  + "      |10|       |01| |10| |10|  |01| |01|  |11|1|10| |11|            |011101|    \n" + ANSI_RESET +
-                BLUE_BRIGHT  + "        |10|      |01||11||01|   |10| |00|   |10||11| |01|  |0|1|01|    |11|      \n" + ANSI_RESET +
-                CYAN_BRIGHT  + "    |11|  |01|    |00|   |10|    |01| |01|       |10| |11|    |01|      |01|      \n" + ANSI_RESET +
-                CYAN_BRIGHT  + "      0|01|1      |01|   |00|    |11| |10|       |11|   |01||11|        |10| " + ANSI_WHITE + "v1.0\n" + ANSI_RESET +
+                BLUE_BRIGHT  + "      111011    1010        0111 1101 1100101    0110  100101111    1101     1010 \n" + ANSI_RESET +
+                BLUE_BRIGHT  + "    0010  0111  0111        0001 0111 11101111   0010 1110    1001  1001    1111  \n" + ANSI_RESET +
+                BLUE_BRIGHT  + "    1101        0011        1101 0100 0110 1001  0101 1011    1001   1011  1011   \n" + ANSI_RESET +
+                BLUE_BRIGHT  + "      1101       1010 1101 0101  1010 0010  111110101 1111            10011011    \n" + ANSI_RESET +
+                BLUE_BRIGHT  + "        1101      101011101011   1101 1000   11011111 1010  00111010    0110      \n" + ANSI_RESET +
+                CYAN_BRIGHT  + "    0111  1011    1000   1100    1011 1010       0101 1110    1011      0010      \n" + ANSI_RESET +
+                CYAN_BRIGHT  + "      010111      1011   1000    1110 1100       0110   10110111        0101 " + ANSI_WHITE + "v1.0\n" + ANSI_RESET +
                 "\t\t\t\t" + CYAN_UNDERLINED + "Copyright " + COPYRIGHT + " 2020 Wethinkcode_ Developed with " + HEART + " by pmalope\n" + ANSI_RESET;
     }
 
