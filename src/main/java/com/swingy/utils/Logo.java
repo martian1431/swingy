@@ -14,8 +14,7 @@ public class Logo {
     }
 
     private static String  logo() {
-        return ANSI_WHITE + "                                                                             \n" + ANSI_RESET +
-                ANSI_WHITE + "                                                                                    \n" + ANSI_RESET +
+        return  ANSI_WHITE + "                                                                                    \n" + ANSI_RESET +
                 BLUE_BRIGHT  + "      1|10|1    |01|        |11| |10| |10|101    |11|  10|10||1|    |10|     |01| \n" + ANSI_RESET +
                 BLUE_BRIGHT  + "    |01|  |11|  |11|        |00| |11| |11||11|   |01| |11|    |00|  |00|    |11|  \n" + ANSI_RESET +
                 BLUE_BRIGHT  + "    |10|        |01|        |10| |10| |11| |00|  |10| |01|    |00|   |01|  |01|   \n" + ANSI_RESET +
@@ -48,4 +47,7 @@ public class Logo {
                 "  * To Advance to next Level You need to accumulate above 1000xp \n" +
                 "  * The Map is based on your level\n";
     }
+
+    public static String logoText = "\n\n\n\n\n\n\nSwingy 1.0 We Think Code Developed by pmalope 2020:"
+            +  "\n\nA minimalistic text-based Role Play Game in Java Swing.";
 }
