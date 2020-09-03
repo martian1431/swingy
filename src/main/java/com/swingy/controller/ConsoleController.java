@@ -24,7 +24,7 @@ public class ConsoleController {
 
 
     public static void heroType() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
 
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
@@ -57,7 +57,7 @@ public class ConsoleController {
 
 //    Refactor TODO fix return statement
     public static void createHero(CharacterType type) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
 
         /**
          * Check if the name has atleast 2 and atmost 10
@@ -105,7 +105,7 @@ public class ConsoleController {
 
 //   TODO Refactor
     public static void selectExistingHero() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
         try {
             // First check if there are heroes in the database.
             int count = DatabaseWrapper.getInstance().numberOfHeroes();
@@ -160,7 +160,7 @@ public class ConsoleController {
 
 //    TODO refactor
     public static void directions() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
 
         ConsoleView.displayMoveList();
         while (scanner.hasNextLine()) {
@@ -189,12 +189,12 @@ public class ConsoleController {
         scanner.close();
     }
 
-    public static void run() {
-        ConsoleView.welcomeBanner();
-    }
+//    public static void run() {
+//        ConsoleView.welcomeBanner();
+//    }
 
     public static int welcomeOption() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
         String input = scanner.nextLine().trim();
 
         if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
@@ -208,7 +208,7 @@ public class ConsoleController {
     }
 
     public static void startGame() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
 
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
@@ -227,9 +227,15 @@ public class ConsoleController {
         scanner.close();
     }
 
-    public static void menuOption() {
-
+    private static Scanner getScanner() {
         Scanner scanner = new Scanner(System.in);
+        System.out.print("$ ");
+        return scanner;
+    }
+
+    public static void menuOption() {
+        Scanner scanner = getScanner();
+
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.equals("1") || input.equals("2")
@@ -257,7 +263,7 @@ public class ConsoleController {
     }
 
     public static void retry() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = getScanner();
 
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
