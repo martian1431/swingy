@@ -14,7 +14,6 @@ public class Swingy {
         try {
             String view = args[0];
             DatabaseWrapper.getInstance().setupDatabase();
-//            DatabaseWrapper.getInstance().retrieveHeroData("test");
             if (view.toLowerCase().equals("console")) {
                 ConsoleController.run();
             } else if (view.toLowerCase().equals("gui")) {
