@@ -2,28 +2,24 @@ package com.swingy.controller;
 
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
-import com.swingy.utils.Colors;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
-import static com.swingy.utils.StaticGlobal.CONSOLE_MODE;
 import static com.swingy.utils.StaticGlobal.hero;
 import static com.swingy.utils.StaticGlobal.map;
 
 public class ConsoleController {
 
 
-    public static void heroType() {
+    public static void selectHeroType() {
         Scanner scanner = getScanner();
 
         while (scanner.hasNextLine()) {
@@ -32,13 +28,13 @@ public class ConsoleController {
                 int choice = Integer.parseInt(input);
                 switch (choice) {
                     case 1:
-                        ConsoleView.heroNameOption(CharacterType.DEADPOOL);
+                        ConsoleView.showHeroNameOption(CharacterType.DEADPOOL);
                         break;
                     case 2:
-                        ConsoleView.heroNameOption(CharacterType.THOR);
+                        ConsoleView.showHeroNameOption(CharacterType.THOR);
                         break;
                     case 3:
-                        ConsoleView.heroNameOption(CharacterType.WOLVERINE);
+                        ConsoleView.showHeroNameOption(CharacterType.WOLVERINE);
                         break;
                     case 4:
                         ConsoleView.goodbye();
@@ -118,7 +114,7 @@ public class ConsoleController {
                 //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
                 inputSign();
-                ConsoleView.menuOptions();
+                ConsoleView.showMainOptions();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -213,7 +209,7 @@ public class ConsoleController {
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
-                ConsoleView.menuOptions();
+                ConsoleView.showMainOptions();
             }
 
             if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
@@ -233,7 +229,7 @@ public class ConsoleController {
         return scanner;
     }
 
-    public static void menuOption() {
+    public static void selectMainOption() {
         Scanner scanner = getScanner();
 
         while(scanner.hasNextLine()) {
@@ -243,7 +239,7 @@ public class ConsoleController {
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
-                        ConsoleView.heroOptions();
+                        ConsoleView.showHeroType();
                         break;
                     case 2:
                         ConsoleView.existingHero();
@@ -269,7 +265,7 @@ public class ConsoleController {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
 //                todo
-                ConsoleView.menuOptions();
+                ConsoleView.showMainOptions();
             } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")){
 //                todo
                ConsoleView.goodbye();

@@ -7,7 +7,6 @@ import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
 import com.swingy.utils.Colors;
-import com.swingy.utils.Logo;
 
 import java.util.Arrays;
 import java.util.List;
@@ -15,37 +14,38 @@ import java.util.List;
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
+import static com.swingy.utils.Logo.showWelcomeMessage;
 
 public class ConsoleView {
 
     /** Display menu choices after launching the game. */
-    public static void menuOptions() {
+    public static void showMainOptions() {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your choice "
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero");
         log(ANSI_RED + "  2." + ANSI_RESET + " Select A Hero");
 //        log(ANSI_RED + "  3." + ANSI_RESET + " Switch To GUI view.");
         log(ANSI_RED + "  3." + ANSI_RESET + " Quit");
-        ConsoleController.menuOption();
+        ConsoleController.selectMainOption();
     }
 
-//    TODO
-    public static void heroNameOption(CharacterType type) {
+//    TODO find a better name
+    public static void showHeroNameOption(CharacterType type) {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         ConsoleController.createHero(type);
     }
 
-    private static void menuOptions(String input) {
+    private static void showMainOptions(String input) {
     }
 
     /** Display all validtypes of heroes. */
-    public static void heroOptions() {
+    public static void showHeroType() {
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + ANSI_YELLOW + " Deadpool " + ANSI_RESET + "Attack[7] Defense[2] Hit Points[26]");
         log(ANSI_RED + "  2." + ANSI_RESET + ANSI_YELLOW + " Thor " + ANSI_RESET + "Attack[9] Defense[3] Hit Points[51]");
         log(ANSI_RED + "  3." + ANSI_RESET + ANSI_YELLOW + " Wolverine " + ANSI_RESET + "Attack[10] Defense[3] Hit Points[75]");
         log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
-        ConsoleController.heroType();
+        ConsoleController.selectHeroType();
     }
 
 
@@ -71,7 +71,7 @@ public class ConsoleView {
 
 //    TODO delete
     public static void run() {
-        Logo.showWelcomeMessage();
+        showWelcomeMessage();
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Are ready to go down the Rabit hole? (Y)es or (N)o" + ANSI_RESET);
         ConsoleController.startGame();
     }
