@@ -7,6 +7,7 @@ import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -17,7 +18,6 @@ import static com.swingy.utils.StaticGlobal.hero;
 import static com.swingy.utils.StaticGlobal.map;
 
 public class ConsoleController {
-
 
     public static void selectHeroType() {
         Scanner scanner = getScanner();
@@ -66,8 +66,8 @@ public class ConsoleController {
 //                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
                         hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                         map = MapFactory.generateMap(hero);
-                        ConsoleView.selectedHero(hero, map.getSize());
-                        directions();
+                        ConsoleView.showSelectedHero(hero, map.getSize());
+                        startMission();
 //                        ConsoleView.displayMoveList();
 
                     } else {
@@ -133,30 +133,32 @@ public class ConsoleController {
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(input);
 //                    TODO check if the hero is not null
                     map = MapFactory.generateMap(hero);
-                    ConsoleView.selectedHero(hero, map.getSize());
+                    ConsoleView.showSelectedHero(hero, map.getSize());
 
-                    directions();
+                    startMission();
                 } else {
                     //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
                     inputSign();
                 }
-            } catch (Exception e) {
-                //                TODO refactor
+            } catch (SQLException exception) {
                 log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
                 inputSign();
             }
-//            catch (ClassNotFoundException | SQLException | IOException exception) {
-//                exception.printStackTrace();
+//            catch (Exception e) {
+//                //                TODO refactor
+//                log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
+//                inputSign();
 //            }
+
         }
     }
 
     //    TODO refactor
-    public static void directions() {
+    public static void startMission() {
         Scanner scanner = getScanner();
 
-        ConsoleView.displayMoveList();
+        ConsoleView.showDirectionOptions();
         while (scanner.hasNextLine()) {
             try {
                 String line = scanner.nextLine().trim();
@@ -165,8 +167,8 @@ public class ConsoleController {
                         direction == 3 || direction == 4) {
                     GameController.moveHero(direction);
                     GameController.goal();
-                    ConsoleView.selectedHero(hero, map.getSize());
-                    ConsoleView.displayMoveList();
+                    ConsoleView.showSelectedHero(hero, map.getSize());
+                    ConsoleView.showDirectionOptions();
                 } else if (direction == 5){
                     ConsoleView.goodbye();
                 } else {
