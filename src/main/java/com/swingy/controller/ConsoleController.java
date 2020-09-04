@@ -23,7 +23,7 @@ public class ConsoleController {
         Scanner scanner = getScanner();
 
         while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             if (input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4")) {
                 int choice = Integer.parseInt(input);
                 switch (choice) {
@@ -56,7 +56,7 @@ public class ConsoleController {
         Scanner scanner = getScanner();
 
         while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
 
             if (input.length() >= 2 && input.length() < 10) {
                 try {
@@ -204,18 +204,18 @@ public class ConsoleController {
         Scanner scanner = getScanner();
 
         while(scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
+            String input = scanner.nextLine().trim().toLowerCase();
+            if (input.equals("y") || input.equals("yes")) {
                 ConsoleView.showMainOptions();
-            }
-
-            if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
+            } else if (input.equals("n") || input.equals("no")) {
                 log(ANSI_RED + ":::" + "SCARED?::: Go drink some water and try again later" + ANSI_RESET);
                 System.exit(-1);
+            } else {
+            //               TODO refactor
+                log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
+                inputSign();
             }
-            //                TODO refactor
-            log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
-            inputSign();
+
         }
         scanner.close();
     }
@@ -230,9 +230,9 @@ public class ConsoleController {
         Scanner scanner = getScanner();
 
         while(scanner.hasNextLine()) {
-            String input = scanner.nextLine();
+            String input = scanner.nextLine().trim();
             if (input.equals("1") || input.equals("2")
-                    || input.equals("3")) {
+                    || input.trim().equals("3")) {
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
