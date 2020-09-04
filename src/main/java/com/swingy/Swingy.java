@@ -4,9 +4,6 @@ import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GameWindow;
 
-
-import java.util.Scanner;
-
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.log;
 
