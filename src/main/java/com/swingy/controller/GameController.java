@@ -19,6 +19,9 @@ import static com.swingy.utils.Log.log;
 import static com.swingy.utils.StaticGlobal.*;
 
 public class GameController {
+
+
+//    TODO move to model class
     private static int[] previousPosition = new int[2];
 
     public static void moveHero(int direction) {
@@ -57,6 +60,8 @@ public class GameController {
         }
     }
 
+
+//    TODO move to base controller
     /**
      * When a character moves to a position occupied by
      * an enemy, the character has two options.
@@ -72,7 +77,7 @@ public class GameController {
         Scanner scanner = new Scanner(System.in);
 
         log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
-        ConsoleView.displayActions();
+        ConsoleView.showActionOption();
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             int choice = Integer.parseInt(input);
@@ -93,12 +98,14 @@ public class GameController {
                 log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
                 inputSign();
 //                log("Try again!");
-                ConsoleView.displayActions();
+                ConsoleView.showActionOption();
             }
         }
 
     }
 
+
+//    TODO move to model base controller
     /**
      * Engages the Hero in a battle with
      * the enemy. If the character ran and the odds
@@ -107,6 +114,7 @@ public class GameController {
      */
     public static void fight() {
         if (!HERO_RAN) {
+//            TODO refactor to model class
             while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
                 hero.attack(villian);
                 if (villian.getHitPoints() > 0) {
@@ -141,6 +149,7 @@ public class GameController {
         }
     }
 
+//    TODO move to base controller
     /**
      * Gives the character a 50% chance of returning to
      * the previous position. If the odds arent on
@@ -160,6 +169,8 @@ public class GameController {
         }
     }
 
+
+//    TODO move to model
     /**
      * If character wins a battle, he gains:
      * 1. Experience points, based on the enemy power.
@@ -206,6 +217,8 @@ public class GameController {
         }
     }
 
+
+//    TODO move to model
     /**
      * Equip the character with the chosen artifact.
      * The character wont be equiped if the Experience
@@ -238,6 +251,8 @@ public class GameController {
         }
     }
 
+
+//    TODO move to model
     /**
      * The character wins if he reaches one of
      * the borders of the map.
