@@ -7,6 +7,7 @@ import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -51,7 +52,6 @@ public class ConsoleController {
     }
 
 
-//    Refactor TODO fix return statement
     public static void createHero(CharacterType type) {
         Scanner scanner = getScanner();
 
@@ -107,12 +107,10 @@ public class ConsoleController {
                 inputSign();
                 ConsoleView.showMainOptions();
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (SQLException exception) {
+            log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
+            inputSign();
         }
-//        catch (IOException | ClassNotFoundException | SQLException exception) {
-//            exception.printStackTrace();
-//        }
 //        TODO refactor selectedHero()
         selectedHero();
     }
@@ -145,12 +143,6 @@ public class ConsoleController {
                 log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
                 inputSign();
             }
-//            catch (Exception e) {
-//                //                TODO refactor
-//                log(ANSI_RED + ":::ERROR::: Something went wrong, please try again" + ANSI_RESET);
-//                inputSign();
-//            }
-
         }
     }
 
