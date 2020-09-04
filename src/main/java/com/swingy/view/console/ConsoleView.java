@@ -2,7 +2,6 @@ package com.swingy.view.console;
 
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
-import com.github.freva.asciitable.ColumnData;
 import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
@@ -34,9 +33,6 @@ public class ConsoleView {
         ConsoleController.createHero(type);
     }
 
-    private static void showMainOptions(String input) {
-    }
-
     public static void showHeroType() {
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + ANSI_YELLOW + " Deadpool " + ANSI_RESET + "Attack[7] Defense[2] Hit Points[26]");
@@ -48,8 +44,7 @@ public class ConsoleView {
 
 
 //    TODO debug
-    /** Display Directions or move list. */
-    public static void displayMoveList() {
+    public static void showDirectionOptions() {
         log(CYAN_BOLD_BRIGHT + ">> Move <<" + ANSI_RESET);
         log(ANSI_RED + "1." + ANSI_CYAN + " North" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " East" + ANSI_RESET);
@@ -59,8 +54,7 @@ public class ConsoleView {
         inputSign();
     }
 
-    /** Display Actions i.e fight or run. */
-    public static void displayActions() {
+    public static void showActionOption() {
         log(CYAN_BOLD_BRIGHT + ">> Action <<");
         log(ANSI_RED + "1." + ANSI_CYAN + " Fight" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " Run" + ANSI_RESET);
@@ -73,7 +67,7 @@ public class ConsoleView {
         ConsoleController.startGame();
     }
 
-    public static void selectedHero(Hero hero, int mapSize) {
+    public static void showSelectedHero(Hero hero, int mapSize) {
         log( "Stats: " + "Name" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getName() + ANSI_YELLOW + "] " + ANSI_RESET
                 + "Type" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getType() + ANSI_YELLOW + "] "
                 + ANSI_RESET + " Level" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getLevel() + ANSI_YELLOW + "] " + ANSI_RESET
