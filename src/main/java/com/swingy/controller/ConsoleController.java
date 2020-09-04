@@ -1,6 +1,7 @@
 package com.swingy.controller;
 
 //import com.swingy.model.GameModel;
+import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
 import com.swingy.utils.database.DatabaseWrapper;
@@ -12,13 +13,13 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.swingy.model.GameModel.fight;
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
-import static com.swingy.utils.StaticGlobal.hero;
-import static com.swingy.utils.StaticGlobal.map;
+import static com.swingy.utils.StaticGlobal.*;
 
-public class ConsoleController extends GameController{
+public class ConsoleController extends GameController {
 
     public static void selectHeroType() {
         Scanner scanner = getScanner();
@@ -157,8 +158,8 @@ public class ConsoleController extends GameController{
                 int direction = Integer.parseInt(line);
                 if (direction == 1 || direction == 2 ||
                         direction == 3 || direction == 4) {
-                    GameController.moveHero(direction);
-                    GameController.goal();
+                    GameModel.moveHero(direction);
+                    GameModel.goal();
                     ConsoleView.showSelectedHero(hero, map.getSize());
                     ConsoleView.showDirectionOptions();
                 } else if (direction == 5){
@@ -248,5 +249,80 @@ public class ConsoleController extends GameController{
                 inputSign();
             }
         }
+    }
+
+    /**
+     * Equip the character with the chosen artifact.
+     * The character wont be equiped if the Experience
+     * is chosen instead of an Artifact.
+     *
+     * @param artifactType The artifact type.
+     */
+    public static void equip(String artifactType) {
+        if (CONSOLE_MODE) {
+            Scanner scanner = new Scanner(System.in);
+            log(ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + ANSI_RESET);
+            inputSign();
+            while (scanner.hasNextLine()) {
+                String input = scanner.nextLine();
+                if (input.equals("1") || input.equals("2")) {
+                    int choice = Integer.parseInt(input.trim());
+                    if (choice == 1) {
+                        hero.equipHero(artifact, artifact.getType());
+                        log("::: " + hero.getName() + " Is Equipped With " + artifactType);
+                        break;
+                    } else if (choice == 2) {
+                        break;
+                    }
+                } else {
+                    //                TODO refactor
+                    log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
+                    inputSign();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * When a character moves to a position occupied by
+     * an enemy, the character has two options.
+     *
+     * 1. Fight: {@code fight()}, which engages him in
+     * a battle with the enemy.
+     *
+     * 2. Run: {@code run()},  which gives him a 50% chance
+     * of returning to the position. If the odds arent on his side,
+     * he must fight the eneny.
+     */
+    public static void action() {
+        Scanner scanner = new Scanner(System.in);
+
+        log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
+        ConsoleView.showActionOption();
+        while (scanner.hasNextLine()) {
+            String input = scanner.nextLine();
+            int choice = Integer.parseInt(input);
+
+            if (choice == 1 || choice == 2) {
+                switch (choice) {
+                    case 1:
+                        fight();
+                        return;
+                    case 2:
+                        GameModel.run();
+                        return;
+                    default:
+                        break;
+                }
+            } else {
+                //                TODO refactor
+                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
+                inputSign();
+//                log("Try again!");
+                ConsoleView.showActionOption();
+            }
+        }
+
     }
 }

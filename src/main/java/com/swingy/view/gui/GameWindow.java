@@ -1,6 +1,6 @@
 package com.swingy.view.gui;
 
-import com.swingy.controller.GameController;
+import com.swingy.model.GameModel;
 import com.swingy.model.character.Hero;
 import com.swingy.model.character.CharacterType;
 import com.swingy.utils.Logo;
@@ -208,7 +208,7 @@ public class GameWindow extends JFrame{
                                 int fightOption = JOptionPane.showConfirmDialog(GameWindow.this, message, title, optionType);
 
                                 if (fightOption == JOptionPane.YES_OPTION) {
-                                    GameController.fight();
+                                    GameModel.fight();
                                     if (villian.getHitPoints() <= 0) {
                                         JOptionPane.showMessageDialog(GameWindow.this, "You Won The Battle!");
                                         displayTextArea.setText("::: HERO STATISTICS :::"
@@ -228,7 +228,7 @@ public class GameWindow extends JFrame{
                                         GameWindow.run();
                                     }
                                 } else if (fightOption == JOptionPane.NO_OPTION) {
-                                    GameController.run();
+                                    GameModel.run();
                                     if (villian.getHitPoints() <= 0) {
                                         JOptionPane.showMessageDialog(GameWindow.this, "You Won The Battle!");
                                         displayTextArea.setText("::: HERO STATISTICS :::"
@@ -496,9 +496,9 @@ public class GameWindow extends JFrame{
     private class NorthButtonListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
-            GameController.moveHero(1);
+            GameModel.moveHero(1);
             if (GOAL_REACHED == false) {
-                GameController.goal();
+                GameModel.goal();
             }
             if (GOAL_REACHED == true) {
                 String message = "CONGRATULATIONS, You Reached Your Goal!!!";
@@ -506,7 +506,7 @@ public class GameWindow extends JFrame{
                 int messageType = JOptionPane.INFORMATION_MESSAGE;
 
                 JOptionPane.showMessageDialog(GameWindow.this, message, title, messageType);
-                GameController.goal();
+                GameModel.goal();
                 GOAL_REACHED = false;
             }
 
@@ -524,9 +524,9 @@ public class GameWindow extends JFrame{
     private class EastButtonListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
-            GameController.moveHero(2);
+            GameModel.moveHero(2);
             if (GOAL_REACHED == false) {
-                GameController.goal();
+                GameModel.goal();
             }
             if (GOAL_REACHED == true) {
                 String message = "CONGRATULATIONS, You Reached Your Goal!!!";
@@ -551,9 +551,9 @@ public class GameWindow extends JFrame{
     private class SouthButtonListener implements ActionListener{
 
         public void actionPerformed(ActionEvent actionEvent) {
-            GameController.moveHero(3);
+            GameModel.moveHero(3);
             if (GOAL_REACHED == false) {
-                GameController.goal();
+                GameModel.goal();
             }
             if (GOAL_REACHED == true) {
                 String message = "CONGRATULATIONS, You Reached Your Goal!!!";
@@ -579,9 +579,9 @@ public class GameWindow extends JFrame{
     private class WestButtonListener implements ActionListener{
 
         public void actionPerformed(ActionEvent e) {
-            GameController.moveHero(4);
+            GameModel.moveHero(4);
             if (GOAL_REACHED == false) {
-                GameController.goal();
+                GameModel.goal();
             }
             if (GOAL_REACHED == true) {
                 String message = "CONGRATULATIONS, You Reached Your Goal!!!";
