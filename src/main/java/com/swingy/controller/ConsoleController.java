@@ -131,9 +131,10 @@ public class ConsoleController {
 //                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
                     hero = DatabaseWrapper.getInstance().retrieveHeroData(input);
+//                    TODO check if the hero is not null
                     map = MapFactory.generateMap(hero);
                     ConsoleView.selectedHero(hero, map.getSize());
-//                    ConsoleView.heroStats(hero, map.getSize());
+
                     directions();
                 } else {
                     //                TODO refactor
@@ -158,7 +159,7 @@ public class ConsoleController {
         ConsoleView.displayMoveList();
         while (scanner.hasNextLine()) {
             try {
-                String line = scanner.nextLine();
+                String line = scanner.nextLine().trim();
                 int direction = Integer.parseInt(line);
                 if (direction == 1 || direction == 2 ||
                         direction == 3 || direction == 4) {
@@ -180,24 +181,6 @@ public class ConsoleController {
             }
         }
         scanner.close();
-    }
-
-//    public static void run() {
-//        ConsoleView.welcomeBanner();
-//    }
-
-    public static int welcomeOption() {
-        Scanner scanner = getScanner();
-        String input = scanner.nextLine().trim();
-
-        if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
-            return 0;
-        } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")) {
-            return 1;
-
-        } else {
-            return -1;
-        }
     }
 
     public static void startGame() {
