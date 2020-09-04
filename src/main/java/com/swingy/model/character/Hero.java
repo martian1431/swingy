@@ -15,6 +15,7 @@ public abstract class Hero {
     @Size(min = 2, max = 30)
     protected String name;
 
+    protected int id;
     protected int level;
     protected int attack;
     protected int defense;
@@ -183,6 +184,14 @@ public abstract class Hero {
 
     public Map getObserver() {
         return observer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setAttack(int attack) {

@@ -95,6 +95,7 @@ public class ConsoleView {
 //    TODO: select hero by id
     public static void showAvailableHeros(List<Hero> heros) {
         log(AsciiTable.getTable(heros, Arrays.asList(
+                new Column().header("Hero ID").with(hero -> Integer.toString(hero.getId())),
                 new Column().header("Hero Class").with(Hero::getType),
                 new Column().header("Hero Name").with(Hero::getName),
                 new Column().header("Attack").with(hero -> Integer.toString(hero.getAttack())),

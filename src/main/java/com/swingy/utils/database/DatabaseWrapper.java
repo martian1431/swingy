@@ -128,21 +128,21 @@ public class DatabaseWrapper {
     }
 
 //    TODO remove
-    public ArrayList<ArrayList<Object>> parseResultset(ResultSet resultSet) throws SQLException {
-        ArrayList<ArrayList<Object>> resultList = new ArrayList<>();
-        while (resultSet.next()) {
-            ArrayList<Object> row =  new ArrayList<>();
-            row.add(resultSet.getString("heroName"));
-            row.add(resultSet.getString("heroClass"));
-            row.add(resultSet.getString("heroAttack"));
-            row.add(resultSet.getString("heroDefense"));
-            row.add(resultSet.getString("heroExperience"));
-            row.add(resultSet.getString("heroHP"));
-            row.add(resultSet.getString("heroLevel"));
-            resultList.add(row);
-        }
-        return resultList;
-    }
+//    public ArrayList<ArrayList<Object>> parseResultset(ResultSet resultSet) throws SQLException {
+//        ArrayList<ArrayList<Object>> resultList = new ArrayList<>();
+//        while (resultSet.next()) {
+//            ArrayList<Object> row =  new ArrayList<>();
+//            row.add(resultSet.getString("heroName"));
+//            row.add(resultSet.getString("heroClass"));
+//            row.add(resultSet.getString("heroAttack"));
+//            row.add(resultSet.getString("heroDefense"));
+//            row.add(resultSet.getString("heroExperience"));
+//            row.add(resultSet.getString("heroHP"));
+//            row.add(resultSet.getString("heroLevel"));
+//            resultList.add(row);
+//        }
+//        return resultList;
+//    }
 
 //    TODO use prepared statement
     public Hero retrieveHeroData(String name) throws SQLException {
@@ -172,6 +172,7 @@ public class DatabaseWrapper {
             }
             assert type != null;
             Hero hero = HeroFactory.newHero(rs.getString("heroName"), type);
+            hero.setId(rs.getInt("heroID"));
             hero.setAttack(rs.getInt("heroAttack"));
             hero.setDefense(rs.getInt("heroDefense"));
             hero.setExperience(rs.getInt("heroExperience"));
