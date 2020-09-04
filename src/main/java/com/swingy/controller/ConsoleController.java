@@ -1,5 +1,6 @@
 package com.swingy.controller;
 
+//import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.Hero;
 import com.swingy.utils.database.DatabaseWrapper;
@@ -7,7 +8,6 @@ import com.swingy.utils.factory.HeroFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ import static com.swingy.utils.Log.log;
 import static com.swingy.utils.StaticGlobal.hero;
 import static com.swingy.utils.StaticGlobal.map;
 
-public class ConsoleController {
+public class ConsoleController extends GameController{
 
     public static void selectHeroType() {
         Scanner scanner = getScanner();

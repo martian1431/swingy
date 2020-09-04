@@ -18,8 +18,13 @@ import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
 import static com.swingy.utils.StaticGlobal.*;
 
-public class GameController {
+public class GameController implements Test{
 
+
+//    TODO delete
+    public void test() {
+        testMethod();
+    }
 
 //    TODO move to model class
     private static int[] previousPosition = new int[2];

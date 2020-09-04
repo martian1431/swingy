@@ -59,6 +59,7 @@ public class ConsoleView {
         log(ANSI_RED + "1." + ANSI_CYAN + " Fight" + ANSI_RESET);
         log(ANSI_RED + "2." + ANSI_CYAN + " Run" + ANSI_RESET);
         log(ANSI_RED + "3." + ANSI_RESET + " Quit");
+//        ConsoleController.testMethod();
     }
 
     public static void run() {
