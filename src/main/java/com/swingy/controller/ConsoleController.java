@@ -126,6 +126,7 @@ public class ConsoleController extends GameController {
                 // Check if the specified character name exist in the database,
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
+
                 if (DatabaseWrapper.getInstance().heroExists(input.trim())) {
 //                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
