@@ -3,7 +3,6 @@ package com.swingy;
 import com.swingy.utils.database.DatabaseWrapper;
 import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GUIView;
-import com.swingy.view.gui.GameWindow;
 
 import javax.swing.*;
 
@@ -20,10 +19,12 @@ public class Swingy {
             } else if (view.toLowerCase().equals("gui")) {
 //                GameWindow.run();
                 SwingUtilities.invokeLater(GUIView::new);
+//                new Test();
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
         }
     }
