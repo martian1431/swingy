@@ -1,5 +1,9 @@
 package com.swingy.model.artifact;
 
+
+import lombok.Getter;
+
+@Getter
 public class Helm extends Artifact {
     private int hitPoints;
 
@@ -10,7 +14,7 @@ public class Helm extends Artifact {
     }
 
 //   TODO use lombok for getters and setters
-    public int getHitPoints() {
-        return hitPoints;
-    }
+//    public int getHitPoints() {
+//        return hitPoints;
+//    }
 }
