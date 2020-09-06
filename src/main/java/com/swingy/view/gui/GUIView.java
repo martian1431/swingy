@@ -38,7 +38,7 @@ public class GUIView extends JFrame {
         mainMenu.createHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Create Hero"));
         mainMenu.selectHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(),"Existing Heros"));
         existingHeros.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
-        createHero.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
+//        createHero.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
 
         // frame width & height
         int FRAME_WIDTH = 1200;

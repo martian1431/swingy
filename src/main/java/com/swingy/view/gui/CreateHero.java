@@ -17,17 +17,31 @@ public class CreateHero extends JPanel implements ItemListener {
 
         String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
 
-        JToolBar toolBar = new JToolBar();
+//        JToolBar toolBar = new JToolBar();
 //        jLabel = new JLabel("type your hero name");
         jComboBox = new JComboBox(s1);
+        jComboBox.setEditable(false);
+        jComboBox.addItemListener(this);
 
-        backButton = new JButton("Go Back");
-        add(toolBar);
-        toolBar.add(backButton);
-        toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
+        JPanel card1 = new JPanel();
+        card1.add(new JButton("Button 1"));
+        card1.add(new JButton("Button 2"));
+        card1.add(new JButton("Button 3"));
+
+        JPanel cards = new JPanel(new CardLayout());
+        cards.add(jComboBox);
+//        cards.add(card1);
+
+
+//        backButton = new JButton("Go Back");
+//        add(toolBar);
+//        toolBar.add(backButton);
+//        toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
 //        jComboBox.addItemListener(this);
 
-        add(jComboBox);
+//        add(jComboBox);
+        add(cards);
+        add(card1);
 //        add(jLabel);
     }
 
