@@ -2,6 +2,8 @@ package com.swingy.model.character;
 
 import com.swingy.model.artifact.*;
 import com.swingy.utils.Map;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -10,6 +12,8 @@ import static com.swingy.utils.Colors.ANSI_CYAN;
 import static com.swingy.utils.Colors.ANSI_RESET;
 import static com.swingy.utils.Log.log;
 
+@Getter
+@Setter
 public abstract class Hero {
     @NotNull
     @Size(min = 2, max = 30)
@@ -131,88 +135,5 @@ public abstract class Hero {
                 }
                 break;
         }
-    }
-
-    //   TODO use lombok for getters and setters
-    public String getName() {
-        return name;
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public int getAttack() {
-        return attack;
-    }
-
-    public int getDefense() {
-        return defense;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public int getHitPoints() {
-        return hitPoints;
-    }
-
-    public int getExperience() {
-        return experience;
-    }
-
-    public int getXCoordinate() {
-        return xCoordinate;
-    }
-
-    public int getYCoordinate() {
-        return yCoordinate;
-    }
-
-    public Armor getArmor() {
-        return armor;
-    }
-
-    public Helm getHelm() {
-        return helm;
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    public Map getObserver() {
-        return observer;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setAttack(int attack) {
-        this.attack = attack;
-    }
-
-    public void setLevel(int level) { this.level = level; }
-
-    public void setDefense(int defense) { this.defense = defense; }
-
-    public void setExperience(int experience) { this.experience = experience; }
-
-    public void setHitPoints(int hitPoints) {
-        this.hitPoints = hitPoints;
-    }
-
-    public void setXCoordinate(int xCoordinate) {
-        this.xCoordinate = xCoordinate;
-    }
-
-    public void setYCoordinate(int yCoordinate) {
-        this.yCoordinate = yCoordinate;
     }
 }
