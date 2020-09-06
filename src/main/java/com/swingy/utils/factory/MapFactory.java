@@ -2,9 +2,6 @@ package com.swingy.utils.factory;
 
 import com.swingy.model.character.Hero;
 import com.swingy.utils.Map;
-import com.swingy.view.console.ConsoleView;
-
-import static com.swingy.utils.Log.log;
 
 // TODO abstarct class
 public class MapFactory {
