@@ -24,7 +24,7 @@
             <version>2.0.0.Final</version>
             <scope>provided</scope>
         </dependency>
-<!--        FIXME-->
+<!--        -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -43,6 +43,7 @@
             <version>3.5.6-Final</version>
         </dependency>
 
+<!--        TODO remove-->
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations-java5</artifactId>
@@ -67,7 +68,28 @@
 
     <build>
         <plugins>
-            <!-- http://maven.apache.org/plugins/maven-assembly-plugin/usage.html -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.swingy.Swingy</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                </configuration>
+            </plugin>
+<!--             http://maven.apache.org/plugins/maven-assembly-plugin/usage.html-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
