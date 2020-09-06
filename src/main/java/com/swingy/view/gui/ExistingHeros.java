@@ -1,6 +1,7 @@
 package com.swingy.view.gui;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -24,6 +25,20 @@ public class ExistingHeros extends JPanel {
         toolBar.add(backButton);
         toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
         add(heroTableScroll);
+    }
+
+
+    // gets users from database and loads to table
+    public void getHeros() {
+//        DefaultTableModel defaultTableModel = (DefaultTableModel) heroTable.getModel();
+//        defaultTableModel.setColumnIdentifiers(heroTableColumn);
+//        int i = 0;
+//        while(i < objects.length) {
+//            String row = objects[i].toString().trim();
+//            String[] rows = row.split(",");
+//            defaultTableModel.addRow(rows);
+//            i++;
+//        }
     }
 
     // event listener for back button
