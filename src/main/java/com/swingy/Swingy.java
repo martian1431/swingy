@@ -19,7 +19,6 @@ public class Swingy {
             } else if (view.toLowerCase().equals("gui")) {
 //                GameWindow.run();
                 SwingUtilities.invokeLater(GUIView::new);
-//                new Test();
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
