@@ -1,5 +1,8 @@
 package com.swingy.model.artifact;
 
+import lombok.Getter;
+
+@Getter
 public class Armor extends Artifact {
 
     private int defense;
@@ -11,7 +14,7 @@ public class Armor extends Artifact {
     }
 
     //   TODO use lombok for getters and setters
-    public int getDefense() {
-        return defense;
-    }
+//    public int getDefense() {
+//        return defense;
+//    }
 }
