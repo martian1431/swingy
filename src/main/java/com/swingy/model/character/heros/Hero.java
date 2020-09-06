@@ -1,4 +1,4 @@
-package com.swingy.model.character;
+package com.swingy.model.character.heros;
 
 import com.swingy.model.artifact.*;
 import com.swingy.utils.Map;

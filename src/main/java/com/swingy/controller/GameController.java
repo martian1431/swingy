@@ -3,10 +3,10 @@ package com.swingy.controller;
 import com.swingy.model.artifact.Armor;
 import com.swingy.model.artifact.Helm;
 import com.swingy.model.artifact.Weapon;
-import com.swingy.model.character.Villian;
+import com.swingy.model.character.villian.Villian;
 import com.swingy.model.character.CharacterType;
 import com.swingy.utils.database.DatabaseWrapper;
-import com.swingy.utils.factory.HeroFactory;
+import com.swingy.model.character.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
@@ -49,9 +49,9 @@ public class GameController {
         if (map.getMap()[hero.getXCoordinate()][hero.getYCoordinate()] == 'X') {
             int random = new Random().nextInt(3);
             if (random == 2) {
-                villian = (Villian) HeroFactory.newEnemy(hero, CharacterType.MAGNETO);
+                villian = (Villian) CharacterFactory.newEnemy(hero, CharacterType.MAGNETO);
             } else {
-                villian = (Villian) HeroFactory.newEnemy(hero, CharacterType.ULTRON);
+                villian = (Villian) CharacterFactory.newEnemy(hero, CharacterType.ULTRON);
             }
             if (CONSOLE_MODE) {
                 action();

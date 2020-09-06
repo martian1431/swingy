@@ -1,6 +1,6 @@
 package com.swingy.utils.factory;
 
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 import com.swingy.utils.Map;
 
 // TODO abstarct class

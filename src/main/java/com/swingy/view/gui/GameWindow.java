@@ -1,11 +1,11 @@
 package com.swingy.view.gui;
 
 import com.swingy.model.GameModel;
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
 import com.swingy.utils.Logo;
 import com.swingy.utils.database.DatabaseWrapper;
-import com.swingy.utils.factory.HeroFactory;
+import com.swingy.model.character.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
@@ -322,13 +322,13 @@ public class GameWindow extends JFrame{
                 } else {
                     switch (index) {
                         case 0:
-                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.DEADPOOL);
+                            hero = CharacterFactory.newHero(inputTextField.getText(), CharacterType.DEADPOOL);
                             break;
                         case 1:
-                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.THOR);
+                            hero = CharacterFactory.newHero(inputTextField.getText(), CharacterType.THOR);
                             break;
                         case 2:
-                            hero = HeroFactory.newHero(inputTextField.getText(), CharacterType.WOLVERINE);
+                            hero = CharacterFactory.newHero(inputTextField.getText(), CharacterType.WOLVERINE);
                         default:
                             break;
                     }

@@ -3,9 +3,9 @@ package com.swingy.controller;
 //import com.swingy.model.GameModel;
 import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 import com.swingy.utils.database.DatabaseWrapper;
-import com.swingy.utils.factory.HeroFactory;
+import com.swingy.model.character.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 
@@ -13,7 +13,6 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.swingy.model.GameModel.fight;
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
@@ -63,7 +62,7 @@ public class ConsoleController extends GameController {
                 try {
                     // Create the hero and store it in the database.
                     if (!DatabaseWrapper.getInstance().heroExists(input)) {
-                        DatabaseWrapper.getInstance().insertHero(HeroFactory.newHero(input.trim(), type));
+                        DatabaseWrapper.getInstance().insertHero(CharacterFactory.newHero(input.trim(), type));
 //                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
                         hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
                         map = MapFactory.generateMap(hero);

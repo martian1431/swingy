@@ -4,7 +4,7 @@ import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
 import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 import com.swingy.utils.Colors;
 
 import java.util.Arrays;

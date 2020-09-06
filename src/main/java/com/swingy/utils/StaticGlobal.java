@@ -1,8 +1,8 @@
 package com.swingy.utils;
 
 import com.swingy.model.artifact.Artifact;
-import com.swingy.model.character.Villian;
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.villian.Villian;
+import com.swingy.model.character.heros.Hero;
 
 public class StaticGlobal {
     private StaticGlobal() {

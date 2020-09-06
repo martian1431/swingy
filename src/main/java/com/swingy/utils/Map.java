@@ -1,6 +1,6 @@
 package com.swingy.utils;
 
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 
 import java.util.Random;
 

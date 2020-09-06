@@ -1,18 +1,16 @@
 package com.swingy.utils.database;
 
-import com.swingy.model.character.Hero;
+import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
-import com.swingy.utils.factory.HeroFactory;
+import com.swingy.model.character.CharacterFactory;
 
 import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 //TODO debug
-import static com.swingy.utils.Colors.*;
-import static com.swingy.utils.Log.log;
+
 
 //TODO convert to wrapper
 public class DatabaseWrapper {
@@ -171,7 +169,7 @@ public class DatabaseWrapper {
                     break;
             }
             assert type != null;
-            Hero hero = HeroFactory.newHero(rs.getString("heroName"), type);
+            Hero hero = CharacterFactory.newHero(rs.getString("heroName"), type);
             hero.setId(rs.getInt("heroID"));
             hero.setAttack(rs.getInt("heroAttack"));
             hero.setDefense(rs.getInt("heroDefense"));

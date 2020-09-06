@@ -1,7 +1,5 @@
 package com.swingy.model.character.villian;
 
-import com.swingy.model.character.Villian;
-
 public class Magneto extends Villian {
 
     public Magneto(int level) {
