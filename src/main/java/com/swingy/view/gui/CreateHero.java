@@ -11,7 +11,7 @@ public class CreateHero extends JPanel implements ItemListener {
     private JLabel jLabel;
 
     public CreateHero() {
-        setLayout(new GridBagLayout());
+//        setLayout(new GridBagLayout());
 
         String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
 
@@ -21,7 +21,7 @@ public class CreateHero extends JPanel implements ItemListener {
 
         jComboBox.addItemListener(this);
 
-        add(jComboBox, jLabel);
+        add(jComboBox);
 //        add(jLabel);
     }
 
