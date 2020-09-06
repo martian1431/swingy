@@ -5,7 +5,7 @@ import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
 import com.swingy.utils.database.DatabaseWrapper;
-import com.swingy.model.character.CharacterFactory;
+import com.swingy.utils.factory.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
 

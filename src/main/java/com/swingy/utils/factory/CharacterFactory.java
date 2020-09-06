@@ -1,4 +1,4 @@
-package com.swingy.model.character;
+package com.swingy.utils.factory;
 
 import com.swingy.model.character.*;
 import com.swingy.model.character.heros.Deadpool;

@@ -2,7 +2,7 @@ package com.swingy.utils.database;
 
 import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
-import com.swingy.model.character.CharacterFactory;
+import com.swingy.utils.factory.CharacterFactory;
 
 import java.io.File;
 import java.sql.*;
