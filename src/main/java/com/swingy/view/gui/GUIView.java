@@ -9,6 +9,7 @@ public class GUIView extends JFrame {
     private static final long serialVersionUID = 1L;
 
     private CardLayout cardLayout;
+    private Container container;
 
     public GUIView() {
         super("Swingy");
@@ -16,19 +17,25 @@ public class GUIView extends JFrame {
         GetStarted getStarted = new GetStarted();
         MainMenu mainMenu = new MainMenu();
         ExistingHeros existingHeros = new ExistingHeros();
+        CreateHero createHero = new CreateHero();
 
+        container = getContentPane();
         setLayout(cardLayout);
+//        setLayout(cardLayout);
 
-//        new GUIController(getStarted);
+        new GUIController(getStarted);
+        new GUIController(mainMenu);
 
         // adds view to card layout with unique constraints
         add(getStarted, "Get started");
         add(mainMenu, "Main Menu");
+        add(createHero,"Create Hero");
         add(existingHeros, "Existing Heros");
 
 //        TODO
         // switch view according to its constraints on click
         getStarted.startButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
+        mainMenu.createHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Create Hero"));
         mainMenu.selectHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(),"Existing Heros"));
         existingHeros.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
 
