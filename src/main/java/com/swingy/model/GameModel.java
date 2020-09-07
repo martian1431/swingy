@@ -10,6 +10,7 @@ import com.swingy.utils.database.Database;
 import com.swingy.utils.factory.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import static com.swingy.utils.Log.log;
 //TODO convert to wrapper
 public class GameModel {
     private static GameModel instance;
-    private static Connection conn;
+    private static Connection conn = Database.getConnection();
     private static int[] previousPosition = new int[2];
 
     private GameModel() {}
@@ -44,7 +45,7 @@ public class GameModel {
     }
 
     private void createTable() {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
 
         String sql = String.format("CREATE TABLE IF NOT EXISTS heroes (\nheroID INTEGER PRIMARY KEY," +
                 "\nheroName TEXT NOT NULL UNIQUE ,\nheroClass TEXT NOT NULL ,\nheroLevel INTEGER NOT NULL ," +
@@ -64,7 +65,7 @@ public class GameModel {
     }
 
     public boolean heroExists(String name) throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         boolean exists = false;
         String sql = "SELECT * FROM heroes WHERE heroName='" + name + "'";
         Statement stmt = conn.createStatement();
@@ -76,7 +77,7 @@ public class GameModel {
     }
 
     public void insertHero(Hero newHero) throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         String sql = "INSERT INTO heroes (" +
                 "heroName, heroClass, " +
                 "heroLevel, heroExperience, " +
@@ -95,7 +96,7 @@ public class GameModel {
     }
 
     public int numberOfHeroes() throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         int rowCount = 0;
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
@@ -106,7 +107,7 @@ public class GameModel {
     }
 
     public List<Hero> retrieveAllHeroes() throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
         ResultSet resultSet = stmt.executeQuery(sql);
@@ -115,7 +116,7 @@ public class GameModel {
 
 //    TODO use prepared statement
     public Hero retrieveHeroData(String name) throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
         Statement stmt = conn.createStatement();
         ResultSet resultSet =  stmt.executeQuery(sql);
@@ -124,8 +125,9 @@ public class GameModel {
     }
 
 //    TODO handle resultset validation
+    @NotNull
     private List<Hero> parseResult(ResultSet rs) throws SQLException {
-        conn  = Database.getConnection();
+//        conn  = Database.getConnection();
         List<Hero> list = new ArrayList<>();
         CharacterType type = null;
         while (rs.next()) {
@@ -144,19 +146,19 @@ public class GameModel {
             assert type != null;
             Hero hero = CharacterFactory.newHero(rs.getString("heroName"), type);
             hero.setId(rs.getInt("heroID"));
-            hero.setAttack(rs.getInt("heroAttack"));
-            hero.setDefense(rs.getInt("heroDefense"));
+            hero.setAttack(rs.getInt("heroLevel"));
+            hero.setDefense(rs.getInt("heroHP"));
             hero.setExperience(rs.getInt("heroExperience"));
-            hero.setHitPoints(rs.getInt("heroHP"));
-            hero.setLevel(rs.getInt("heroLevel"));
+            hero.setHitPoints(rs.getInt("heroAttack"));
+            hero.setLevel(rs.getInt("heroDefense"));
             list.add(hero);
         }
         return list;
     }
 
 //    TODO use prepared statement
-    public void updateHero(Hero hero) throws SQLException {
-        conn  = Database.getConnection();
+    public void updateHero(@NotNull Hero hero) throws SQLException {
+//        conn  = Database.getConnection();
 //        String sql = "UPDATE heroes SET heroAttack=, heroDefense, "
         String sql = String.format("UPDATE heroes " +
                 "SET heroAttack='%s', " +
@@ -214,17 +216,6 @@ public class GameModel {
 
 
 //    TODO move to base controller
-    /**
-     * When a character moves to a position occupied by
-     * an enemy, the character has two options.
-     *
-     * 1. Fight: {@code fight()}, which engages him in
-     * a battle with the enemy.
-     *
-     * 2. Run: {@code run()},  which gives him a 50% chance
-     * of returning to the position. If the odds arent on his side,
-     * he must fight the eneny.
-     */
     public static void action() {
         Scanner scanner = new Scanner(System.in);
 
@@ -258,12 +249,6 @@ public class GameModel {
 
 
 //    TODO move to model base controller
-    /**
-     * Engages the Hero in a battle with
-     * the enemy. If the character ran and the odds
-     * were against him, the enemy will attack first
-     * otherwise the character will attack first.
-     */
     public static void fight() {
         if (!HERO_RAN) {
 //            TODO refactor to model class
@@ -302,11 +287,6 @@ public class GameModel {
     }
 
 //    TODO move to base controller
-    /**
-     * Gives the character a 50% chance of returning to
-     * the previous position. If the odds arent on
-     * their side, the character must fight the Enemy.
-     */
     public static void run() {
         int chance = new Random().nextInt(2);
 
@@ -323,13 +303,6 @@ public class GameModel {
 
 
 //    TODO move to model
-    /**
-     * If character wins a battle, he gains:
-     * 1. Experience points, based on the enemy power.
-     * 2. An artifact, which he can keep or leave.
-     * But winning a battle does guarantee that an arifact
-     * will be dropped.
-     */
     private static void battleGains() {
         int drop = new Random().nextInt(2);
         boolean artifactIsDropped = drop == 1;
@@ -371,13 +344,6 @@ public class GameModel {
 
 
 //    TODO move to model
-    /**
-     * Equip the character with the chosen artifact.
-     * The character wont be equiped if the Experience
-     * is chosen instead of an Artifact.
-     *
-     * @param artifactType The artifact type.
-     */
     private static void equip(String artifactType) {
         if (CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
@@ -405,10 +371,6 @@ public class GameModel {
 
 
 //    TODO move to model
-    /**
-     * The character wins if he reaches one of
-     * the borders of the map.
-     */
     public static void goal() {
         if (hero.getXCoordinate() == map.getSize() - 1 ||
                 hero.getYCoordinate() == map.getSize() - 1 ||
