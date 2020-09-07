@@ -1,10 +1,9 @@
 package com.swingy.controller;
 
 //import com.swingy.model.GameModel;
-import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
-import com.swingy.utils.database.DatabaseWrapper;
+import com.swingy.model.GameModel;
 import com.swingy.utils.factory.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
@@ -16,9 +15,9 @@ import java.util.Scanner;
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
-import static com.swingy.utils.StaticGlobal.*;
+import static com.swingy.utils.Globals.*;
 
-public class ConsoleController extends GameController {
+public class ConsoleController {
 
     public static void selectHeroType() {
         Scanner scanner = getScanner();
@@ -61,10 +60,10 @@ public class ConsoleController extends GameController {
             if (input.length() >= 2 && input.length() < 10) {
                 try {
                     // Create the hero and store it in the database.
-                    if (!DatabaseWrapper.getInstance().heroExists(input)) {
-                        DatabaseWrapper.getInstance().insertHero(CharacterFactory.newHero(input.trim(), type));
+                    if (!GameModel.getInstance().heroExists(input)) {
+                        GameModel.getInstance().insertHero(CharacterFactory.newHero(input.trim(), type));
 //                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
-                        hero = DatabaseWrapper.getInstance().retrieveHeroData(input.trim());
+                        hero = GameModel.getInstance().retrieveHeroData(input.trim());
                         map = MapFactory.generateMap(hero);
                         ConsoleView.showSelectedHero(hero, map.getSize());
                         startMission();
@@ -95,11 +94,11 @@ public class ConsoleController extends GameController {
     public static void selectExistingHero() {
         try {
             // First check if there are heroes in the database.
-            int count = DatabaseWrapper.getInstance().numberOfHeroes();
+            int count = GameModel.getInstance().numberOfHeroes();
             if (count > 0) {
                 ConsoleView.heroCount(count);
                 // Display all the available heroes in the database.
-                List<Hero> heros = DatabaseWrapper.getInstance().retrieveAllHeroes();
+                List<Hero> heros = GameModel.getInstance().retrieveAllHeroes();
                 ConsoleView.showAvailableHeros(heros);
             } else {
                 //                TODO refactor
@@ -125,10 +124,10 @@ public class ConsoleController extends GameController {
                 // Check if the specified character name exist in the database,
                 // If the character name exist in the database, retrieve the data to character object,
                 // And lastly generate the map.
-                if (DatabaseWrapper.getInstance().heroExists(input.trim())) {
+                if (GameModel.getInstance().heroExists(input.trim())) {
 //                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
-                    hero = DatabaseWrapper.getInstance().retrieveHeroData(input);
+                    hero = GameModel.getInstance().retrieveHeroData(input);
 //                    TODO check if the hero is not null
                     map = MapFactory.generateMap(hero);
                     ConsoleView.showSelectedHero(hero, map.getSize());
@@ -248,80 +247,5 @@ public class ConsoleController extends GameController {
                 inputSign();
             }
         }
-    }
-
-    /**
-     * Equip the character with the chosen artifact.
-     * The character wont be equiped if the Experience
-     * is chosen instead of an Artifact.
-     *
-     * @param artifactType The artifact type.
-     */
-    public static void equip(String artifactType) {
-        if (CONSOLE_MODE) {
-            Scanner scanner = new Scanner(System.in);
-            log(ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + ANSI_RESET);
-            inputSign();
-            while (scanner.hasNextLine()) {
-                String input = scanner.nextLine();
-                if (input.equals("1") || input.equals("2")) {
-                    int choice = Integer.parseInt(input.trim());
-                    if (choice == 1) {
-                        hero.equipHero(artifact, artifact.getType());
-                        log("::: " + hero.getName() + " Is Equipped With " + artifactType);
-                        break;
-                    } else if (choice == 2) {
-                        break;
-                    }
-                } else {
-                    //                TODO refactor
-                    log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
-                    inputSign();
-                }
-            }
-        }
-    }
-
-
-    /**
-     * When a character moves to a position occupied by
-     * an enemy, the character has two options.
-     *
-     * 1. Fight: {@code fight()}, which engages him in
-     * a battle with the enemy.
-     *
-     * 2. Run: {@code run()},  which gives him a 50% chance
-     * of returning to the position. If the odds arent on his side,
-     * he must fight the eneny.
-     */
-    public static void action() {
-        Scanner scanner = new Scanner(System.in);
-
-        log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
-        ConsoleView.showActionOption();
-        while (scanner.hasNextLine()) {
-            String input = scanner.nextLine();
-            int choice = Integer.parseInt(input);
-
-            if (choice == 1 || choice == 2) {
-                switch (choice) {
-                    case 1:
-                        fight();
-                        return;
-                    case 2:
-                        GameModel.run();
-                        return;
-                    default:
-                        break;
-                }
-            } else {
-                //                TODO refactor
-                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
-                inputSign();
-//                log("Try again!");
-                ConsoleView.showActionOption();
-            }
-        }
-
     }
 }
