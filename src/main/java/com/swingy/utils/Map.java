@@ -4,8 +4,8 @@ import com.swingy.model.character.heros.Hero;
 
 import java.util.Random;
 
-import static com.swingy.utils.StaticGlobal.CONSOLE_MODE;
-import static com.swingy.utils.StaticGlobal.hero;
+import static com.swingy.utils.Globals.CONSOLE_MODE;
+import static com.swingy.utils.Globals.hero;
 
 public class Map {
     private Hero heroObj; //TODO player
