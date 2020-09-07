@@ -1,6 +1,6 @@
 package com.swingy.utils;
 
-import static com.swingy.utils.StaticGlobal.CONSOLE_MODE;
+import static com.swingy.utils.Globals.CONSOLE_MODE;
 
 public class Log {
     public static void log(String message) {
