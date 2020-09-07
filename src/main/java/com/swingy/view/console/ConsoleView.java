@@ -98,11 +98,11 @@ public class ConsoleView {
                 new Column().header("Hero ID").with(hero -> Integer.toString(hero.getId())),
                 new Column().header("Hero Name").with(Hero::getName),
                 new Column().header("Hero Class").with(Hero::getType),
-                new Column().header("Level").with(hero -> Integer.toString(hero.getAttack())),
-                new Column().header("Hit Points").with(hero -> Integer.toString(hero.getDefense())),
+                new Column().header("Level").with(hero -> Integer.toString(hero.getLevel())),
+                new Column().header("Hit Points").with(hero -> Integer.toString(hero.getHitPoints())),
                 new Column().header("Experience").with(hero -> Integer.toString(hero.getExperience())),
-                new Column().header("Attack").with(hero -> Integer.toString(hero.getHitPoints())),
-                new Column().header("Defense").with(hero -> Integer.toString(hero.getLevel())))));
+                new Column().header("Attack").with(hero -> Integer.toString(hero.getAttack())),
+                new Column().header("Defense").with(hero -> Integer.toString(hero.getDefense())))));
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your hero by name" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
     }
 
