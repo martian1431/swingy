@@ -6,7 +6,7 @@ import static com.swingy.utils.Symbols.HEART;
 import static com.swingy.utils.Log.log;
 
 //TODO: Rename class
-public class Logo {
+public class Messages {
     public static void showWelcomeMessage() {
         log(logo());
         log(introduction());
