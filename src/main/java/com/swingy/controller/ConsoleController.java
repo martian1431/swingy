@@ -7,6 +7,7 @@ import com.swingy.model.GameModel;
 import com.swingy.utils.factory.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -196,6 +197,7 @@ public class ConsoleController {
         scanner.close();
     }
 
+    @NotNull
     private static Scanner getScanner() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("$ ");
