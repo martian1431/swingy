@@ -13,7 +13,7 @@ import java.util.List;
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
-import static com.swingy.utils.Logo.showWelcomeMessage;
+import static com.swingy.utils.Messages.showWelcomeMessage;
 
 public class ConsoleView {
 
