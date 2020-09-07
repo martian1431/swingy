@@ -146,11 +146,11 @@ public class GameModel {
             assert type != null;
             Hero hero = CharacterFactory.newHero(rs.getString("heroName"), type);
             hero.setId(rs.getInt("heroID"));
-            hero.setAttack(rs.getInt("heroLevel"));
-            hero.setDefense(rs.getInt("heroHP"));
+            hero.setLevel(rs.getInt("heroLevel"));
+            hero.setHitPoints(rs.getInt("heroHP"));
             hero.setExperience(rs.getInt("heroExperience"));
-            hero.setHitPoints(rs.getInt("heroAttack"));
-            hero.setLevel(rs.getInt("heroDefense"));
+            hero.setAttack(rs.getInt("heroAttack"));
+            hero.setDefense(rs.getInt("heroDefense"));
             list.add(hero);
         }
         return list;
