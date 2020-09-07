@@ -90,9 +90,6 @@ public class ConsoleView {
     /*
     * https://github.com/freva/ascii-table.git
     * */
-//    TODO: use the collection feature to have the ability to format the table
-//    TODO: change parameter type to String[][]
-//    TODO: select hero by id
     public static void showAvailableHeros(List<Hero> heros) {
         log(AsciiTable.getTable(heros, Arrays.asList(
                 new Column().header("Hero ID").with(hero -> Integer.toString(hero.getId())),
