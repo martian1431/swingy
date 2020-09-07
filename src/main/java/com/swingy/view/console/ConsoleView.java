@@ -27,7 +27,6 @@ public class ConsoleView {
         ConsoleController.selectMainOption();
     }
 
-//    TODO find a better name
     public static void showHeroNameOption(CharacterType type) {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
         ConsoleController.createHero(type);
@@ -43,11 +42,10 @@ public class ConsoleView {
     }
 
 
-//    TODO debug
     public static void showDirectionOptions() {
         log(CYAN_BOLD_BRIGHT + ">> Move <<" + ANSI_RESET);
         log(ANSI_RED + "1." + ANSI_RESET + " North");
-        log(ANSI_RED + "2." + ANSI_RESET+ "  East");
+        log(ANSI_RED + "2." + ANSI_RESET + " East");
         log(ANSI_RED + "3." + ANSI_RESET + " West");
         log(ANSI_RED + "4." + ANSI_RESET + " South");
         log(ANSI_RED + "5." + ANSI_RESET + " Quit");
@@ -59,7 +57,6 @@ public class ConsoleView {
         log(ANSI_RED + "1." + ANSI_RESET + " Fight");
         log(ANSI_RED + "2." + ANSI_RESET + " Run");
         log(ANSI_RED + "3." + ANSI_RESET + " Quit");
-//        ConsoleController.testMethod();
     }
 
     public static void run() {
@@ -111,23 +108,5 @@ public class ConsoleView {
     public static void gameOver() {
         log(ANSI_RED + ":::You Lost, do you want to try again? (Y)es or (N)o" + ANSI_RESET);
         ConsoleController.retry();
-    }
-
-//    TODO overload this methods
-    public static void heroStats(Hero hero, int size) {
-        int len = 7;
-        int index = 0;
-        String[][] data = new String[1][7];
-        String[] headers = {"Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit points", "Level"};
-        for (int i = 0; i < len; i++) {
-            data[index][i] = hero.getName();
-            data[index][i] = hero.getType();
-            data[index][i] = String.valueOf(hero.getAttack());
-            data[index][i] = String.valueOf(hero.getDefense());
-            data[index][i] = String.valueOf(hero.getExperience());
-            data[index][i] = String.valueOf(hero.getHitPoints());
-            data[index][i] = String.valueOf(hero.getLevel());
-            log(AsciiTable.getTable(headers, data));
-        }
     }
 }
