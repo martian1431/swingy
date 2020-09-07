@@ -1,10 +1,9 @@
 package com.swingy.view.gui;
 
-import com.swingy.model.GameModel;
 import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
-import com.swingy.utils.Logo;
-import com.swingy.utils.database.DatabaseWrapper;
+import com.swingy.utils.Messages;
+import com.swingy.model.GameModel;
 import com.swingy.utils.factory.CharacterFactory;
 import com.swingy.utils.factory.MapFactory;
 import com.swingy.view.console.ConsoleView;
@@ -15,7 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-import static com.swingy.utils.StaticGlobal.*;
+import static com.swingy.utils.Globals.*;
 
 public class GameWindow extends JFrame{
     private static final long serialVersionUID = 1L;
@@ -83,7 +82,7 @@ public class GameWindow extends JFrame{
         mapPanel.add(buttonContainerPanel);
         heroInputPanel.add(heroNameInputLabel);
         heroInputPanel.add(inputTextField);
-        logoTextArea.append(Logo.logoText);
+        logoTextArea.append(Messages.logoText);
         displayPanel.add(displayTextArea);
 
         containerPanel.add(mapPanel, BorderLayout.CENTER);
@@ -317,7 +316,7 @@ public class GameWindow extends JFrame{
             Hero hero = null;
 
             try {
-                if (DatabaseWrapper.getInstance().heroExists(inputTextField.getText())) {
+                if (GameModel.getInstance().heroExists(inputTextField.getText())) {
                     JOptionPane.showMessageDialog(GameWindow.this, "Hero Already Exists!", "Alert", JOptionPane.INFORMATION_MESSAGE);
                 } else {
                     switch (index) {
@@ -334,7 +333,7 @@ public class GameWindow extends JFrame{
                     }
                     if (hero != null && !inputTextField.getText().equals("")) {
                         try {
-                            DatabaseWrapper.getInstance().insertHero(hero);
+                            GameModel.getInstance().insertHero(hero);
                         } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
@@ -377,7 +376,7 @@ public class GameWindow extends JFrame{
 
         public void actionPerformed(ActionEvent actionEvent) {
             try {
-                if (DatabaseWrapper.getInstance().numberOfHeroes() > 0) {
+                if (GameModel.getInstance().numberOfHeroes() > 0) {
                     playButton.setPreferredSize(new Dimension(200, 50));
                     cancelButton.setPreferredSize(new Dimension(200, 50));
 
@@ -396,7 +395,7 @@ public class GameWindow extends JFrame{
                     imageContainerPanel.setVisible(false);
 
                     selectHeroComboList.removeAllItems();
-                    List<Hero> heros = DatabaseWrapper.getInstance().retrieveDatabase();
+                    List<Hero> heros = GameModel.getInstance().retrieveDatabase();
                     for (Hero hero : heros) {
                         selectHeroComboList.addItem(hero.getName());
                     }
@@ -420,7 +419,7 @@ public class GameWindow extends JFrame{
             imageContainerPanel.setVisible(false);
 
             try {
-                hero = DatabaseWrapper.getInstance().retrieveHeroData(selectHeroComboList.getSelectedItem().toString());
+                hero = GameModel.getInstance().retrieveHeroData(selectHeroComboList.getSelectedItem().toString());
                 map = MapFactory.generateMap(hero);
                 displayTextArea.setText("::: HERO STATISTICS :::"
                         + "\nName: " + hero.getName()
