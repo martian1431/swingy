@@ -1,6 +1,5 @@
 package com.swingy.controller;
 
-//import com.swingy.model.GameModel;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
 import com.swingy.model.GameModel;
@@ -13,10 +12,15 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 
+import static com.swingy.model.GameModel.goal;
+import static com.swingy.model.GameModel.moveHero;
+import static com.swingy.model.character.CharacterType.*;
 import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.GridFactory.generateMap;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
 import static com.swingy.utils.Globals.*;
+import static com.swingy.view.console.ConsoleView.*;
 
 public class ConsoleController {
 
@@ -29,16 +33,16 @@ public class ConsoleController {
                 int choice = Integer.parseInt(input);
                 switch (choice) {
                     case 1:
-                        ConsoleView.showHeroNameOption(CharacterType.DEADPOOL);
+                        showHeroNameOption(DEADPOOL);
                         break;
                     case 2:
-                        ConsoleView.showHeroNameOption(CharacterType.THOR);
+                        showHeroNameOption(THOR);
                         break;
                     case 3:
-                        ConsoleView.showHeroNameOption(CharacterType.WOLVERINE);
+                        showHeroNameOption(WOLVERINE);
                         break;
                     case 4:
-                        ConsoleView.goodbye();
+                        goodbye();
                         break;
                 }
                 break;
@@ -63,10 +67,9 @@ public class ConsoleController {
                     // Create the hero and store it in the database.
                     if (!GameModel.getInstance().heroExists(input)) {
                         GameModel.getInstance().insertHero(CharacterFactory.newHero(input.trim(), type));
-//                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
                         hero = GameModel.getInstance().retrieveHeroData(input.trim());
-                        grid = GridFactory.generateMap(hero);
-                        ConsoleView.showSelectedHero(hero, grid.getSize());
+                        grid = generateMap(hero);
+                        showSelectedHero(hero, grid.getSize());
                         startMission();
 //                        ConsoleView.displayMoveList();
 
@@ -75,16 +78,13 @@ public class ConsoleController {
                         log(ANSI_RED + " :::ERROR::: " + input + " Hero Exists, Try again!" + ANSI_RESET);
                         inputSign();
                     }
-                } catch (Exception e) {
+                } catch (SQLException e) {
                     System.out.println(e.getMessage());
                 }
-//                catch (SQLException | IOException | ClassNotFoundException exception) {
-//                    exception.printStackTrace();
-//                }
 //                break;
-            } else if (input.length() < 3 || input.length() > 10) {
+            } else if (input.length() < 3 || input.length() > 20) {
                 //                TODO refactor
-                log(ANSI_RED + ":::ERROR::: Name Must Have 2 - 10 Characters, Try Again!" + ANSI_RESET);
+                log(ANSI_RED + ":::ERROR::: Name Must Have 2 - 20 Characters, Try Again!" + ANSI_RESET);
                 inputSign();
             }
         }
@@ -94,24 +94,21 @@ public class ConsoleController {
 //   TODO Refactor
     public static void selectExistingHero() {
         try {
-            // First check if there are heroes in the database.
             int count = GameModel.getInstance().numberOfHeroes();
             if (count > 0) {
-                ConsoleView.heroCount(count);
-                // Display all the available heroes in the database.
+                heroCount(count);
                 List<Hero> heros = GameModel.getInstance().retrieveAllHeroes();
                 ConsoleView.showAvailableHeros(heros);
             } else {
                 //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
                 inputSign();
-                ConsoleView.showMainOptions();
+                showMainOptions();
             }
         } catch (SQLException exception) {
             log(ANSI_RED + ":::ERROR::: No Heroes Available!" + ANSI_RESET);
             inputSign();
         }
-//        TODO refactor selectedHero()
         selectedHero();
     }
 
@@ -122,20 +119,14 @@ public class ConsoleController {
             String input = scanner.nextLine();
 
             try {
-                // Check if the specified character name exist in the database,
-                // If the character name exist in the database, retrieve the data to character object,
-                // And lastly generate the map.
                 if (GameModel.getInstance().heroExists(input.trim())) {
-//                    TODO: refactor
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
                     hero = GameModel.getInstance().retrieveHeroData(input);
-//                    TODO check if the hero is not null
-                    grid = GridFactory.generateMap(hero);
-                    ConsoleView.showSelectedHero(hero, grid.getSize());
+                    grid = generateMap(hero);
+                    showSelectedHero(hero, grid.getSize());
 
                     startMission();
                 } else {
-                    //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Hero Does not Exist, Try Again!!" + ANSI_RESET);
                     inputSign();
                 }
@@ -157,12 +148,12 @@ public class ConsoleController {
                 int direction = Integer.parseInt(line);
                 if (direction == 1 || direction == 2 ||
                         direction == 3 || direction == 4) {
-                    GameModel.moveHero(direction);
-                    GameModel.goal();
-                    ConsoleView.showSelectedHero(hero, grid.getSize());
-                    ConsoleView.showDirectionOptions();
+                    moveHero(direction);
+                    goal();
+                    showSelectedHero(hero, grid.getSize());
+                    showDirectionOptions();
                 } else if (direction == 5){
-                    ConsoleView.goodbye();
+                    goodbye();
                 } else {
                     //                TODO refactor
                     log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-4). Try Again!" + ANSI_RESET);
@@ -183,7 +174,7 @@ public class ConsoleController {
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("y") || input.equals("yes")) {
-                ConsoleView.showMainOptions();
+                showMainOptions();
             } else if (input.equals("n") || input.equals("no")) {
                 log(ANSI_RED + ":::" + "SCARED?::: Go drink some water and try again later" + ANSI_RESET);
                 System.exit(-1);
@@ -214,18 +205,16 @@ public class ConsoleController {
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
-                        ConsoleView.showHeroType();
+                        showHeroType();
                         break;
                     case 2:
-                        ConsoleView.showExistingHero();
+                        showExistingHero();
                         break;
                     case 3:
-//                        TODO: goodbye message
-                        ConsoleView.goodbye();
+                        goodbye();
                         break;
                 }
             } else {
-                //                TODO refactor
                 log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-3). Try Again!" + ANSI_RESET);
                 inputSign();
             }
@@ -239,11 +228,9 @@ public class ConsoleController {
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
-//                todo
-                ConsoleView.showMainOptions();
+                showMainOptions();
             } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")){
-//                todo
-               ConsoleView.goodbye();
+               goodbye();
             } else {
                 log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
                 inputSign();
