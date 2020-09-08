@@ -71,8 +71,6 @@ public class ConsoleController {
                         grid = generateMap(hero);
                         showSelectedHero(hero, grid.getSize());
                         startMission();
-//                        ConsoleView.displayMoveList();
-
                     } else {
                         //                TODO refactor
                         log(ANSI_RED + " :::ERROR::: " + input + " Hero Exists, Try again!" + ANSI_RESET);
