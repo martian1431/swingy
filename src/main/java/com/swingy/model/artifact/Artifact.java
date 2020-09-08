@@ -16,13 +16,4 @@ public abstract class Artifact implements Serializable {
     Artifact(String name) {
         this.name = name;
     }
-
-//   TODO use lombok for getters and setters
-//    public String getName() {
-//        return name;
-//    }
-//
-//    public ArtifactEnum getType() {
-//        return type;
-//    }
 }
