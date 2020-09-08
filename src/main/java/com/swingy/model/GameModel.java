@@ -7,8 +7,8 @@ import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.villian.Villian;
 import com.swingy.utils.database.Database;
-import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.GridFactory;
+import com.swingy.model.character.CharacterFactory;
+import com.swingy.utils.GridFactory;
 import com.swingy.view.console.ConsoleView;
 import org.jetbrains.annotations.NotNull;
 
