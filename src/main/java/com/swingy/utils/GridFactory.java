@@ -1,10 +1,8 @@
-package com.swingy.utils.factory;
+package com.swingy.utils;
 
 import com.swingy.model.character.heros.Hero;
-import com.swingy.utils.Grid;
 
-// TODO abstarct class
-public class GridFactory {
+public abstract class GridFactory {
 
     public static Grid generateMap(Hero hero) {
         int mapSize = (hero.getLevel() - 1) * 5 + 10 - (hero.getLevel() % 2);
