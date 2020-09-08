@@ -17,7 +17,6 @@ public class Swingy {
             if (view.toLowerCase().equals("console")) {
                 ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
-//                GameWindow.run();
                 SwingUtilities.invokeLater(GUIView::new);
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
