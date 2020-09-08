@@ -5,7 +5,7 @@ import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
 import com.swingy.model.GameModel;
 import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.MapFactory;
+import com.swingy.utils.factory.GridFactory;
 import com.swingy.view.console.ConsoleView;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,8 +65,8 @@ public class ConsoleController {
                         GameModel.getInstance().insertHero(CharacterFactory.newHero(input.trim(), type));
 //                        log(ANSI_CYAN + "Created Hero Named: " + ANSI_YELLOW + input + ANSI_RESET);
                         hero = GameModel.getInstance().retrieveHeroData(input.trim());
-                        map = MapFactory.generateMap(hero);
-                        ConsoleView.showSelectedHero(hero, map.getSize());
+                        grid = GridFactory.generateMap(hero);
+                        ConsoleView.showSelectedHero(hero, grid.getSize());
                         startMission();
 //                        ConsoleView.displayMoveList();
 
@@ -130,8 +130,8 @@ public class ConsoleController {
                     log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Let's play" + ANSI_RESET + ANSI_YELLOW  + ANSI_RESET);
                     hero = GameModel.getInstance().retrieveHeroData(input);
 //                    TODO check if the hero is not null
-                    map = MapFactory.generateMap(hero);
-                    ConsoleView.showSelectedHero(hero, map.getSize());
+                    grid = GridFactory.generateMap(hero);
+                    ConsoleView.showSelectedHero(hero, grid.getSize());
 
                     startMission();
                 } else {
@@ -159,7 +159,7 @@ public class ConsoleController {
                         direction == 3 || direction == 4) {
                     GameModel.moveHero(direction);
                     GameModel.goal();
-                    ConsoleView.showSelectedHero(hero, map.getSize());
+                    ConsoleView.showSelectedHero(hero, grid.getSize());
                     ConsoleView.showDirectionOptions();
                 } else if (direction == 5){
                     ConsoleView.goodbye();
