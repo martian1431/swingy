@@ -18,7 +18,7 @@ public class Globals {
 
 
     public static Hero hero;
-    public static Map map;
+    public static Grid grid;
     public static Artifact artifact;
     public static Villian villian;
 }
