@@ -8,7 +8,7 @@ import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.villian.Villian;
 import com.swingy.utils.database.Database;
 import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.MapFactory;
+import com.swingy.utils.factory.GridFactory;
 import com.swingy.view.console.ConsoleView;
 import org.jetbrains.annotations.NotNull;
 
@@ -190,7 +190,7 @@ public class GameModel {
                 previousPosition[1] = 0;
                 break;
         }
-        if (map.getMap()[hero.getXCoordinate()][hero.getYCoordinate()] == 'X') {
+        if (grid.getMap()[hero.getXCoordinate()][hero.getYCoordinate()] == 'X') {
             int random = new Random().nextInt(3);
             if (random == 2) {
                 villian = (Villian) CharacterFactory.newEnemy(hero, CharacterType.MAGNETO);
@@ -363,12 +363,12 @@ public class GameModel {
 
 //    TODO move to model
     public static void goal() {
-        if (hero.getXCoordinate() == map.getSize() - 1 ||
-                hero.getYCoordinate() == map.getSize() - 1 ||
+        if (hero.getXCoordinate() == grid.getSize() - 1 ||
+                hero.getYCoordinate() == grid.getSize() - 1 ||
                 hero.getXCoordinate() == 0 ||
                 hero.getYCoordinate() == 0) {
             log(GREEN_BRIGHT + "::: Congratutations, You Reached Your Goal!" + ANSI_RESET);
-            map = MapFactory.generateMap(hero);
+            grid = GridFactory.generateMap(hero);
             GOAL_REACHED = true;
         } else {
             GOAL_REACHED = false;
