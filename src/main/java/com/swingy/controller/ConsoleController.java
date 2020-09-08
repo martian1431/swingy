@@ -4,8 +4,8 @@ package com.swingy.controller;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
 import com.swingy.model.GameModel;
-import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.GridFactory;
+import com.swingy.model.character.CharacterFactory;
+import com.swingy.utils.GridFactory;
 import com.swingy.view.console.ConsoleView;
 import org.jetbrains.annotations.NotNull;
 
@@ -58,7 +58,7 @@ public class ConsoleController {
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine().trim();
 
-            if (input.length() >= 2 && input.length() < 10) {
+            if (input.length() >= 2 && input.length() < 20) {
                 try {
                     // Create the hero and store it in the database.
                     if (!GameModel.getInstance().heroExists(input)) {
