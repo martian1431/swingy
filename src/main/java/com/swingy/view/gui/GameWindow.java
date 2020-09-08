@@ -4,8 +4,8 @@ import com.swingy.model.character.heros.Hero;
 import com.swingy.model.character.CharacterType;
 import com.swingy.utils.Messages;
 import com.swingy.model.GameModel;
-import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.GridFactory;
+import com.swingy.model.character.CharacterFactory;
+import com.swingy.utils.GridFactory;
 import com.swingy.view.console.ConsoleView;
 
 import javax.swing.*;
