@@ -45,17 +45,13 @@ public class GameModel {
     }
 
     private void createTable() {
-//        conn  = Database.getConnection();
-
         String sql = String.format("CREATE TABLE IF NOT EXISTS heroes (\nheroID INTEGER PRIMARY KEY," +
                 "\nheroName TEXT NOT NULL UNIQUE ,\nheroClass TEXT NOT NULL ,\nheroLevel INTEGER NOT NULL ," +
                 "\nheroExperience INTEGER NOT NULL ,\nheroHP INTEGER NOT NULL ,\nheroAttack INTEGER NOT NULL ," +
                 "\nheroDefense INTEGER NOT NULL \n );");
 
         try {
-            //create table
             Statement stmt = conn.createStatement();
-//            TODO check to see if table was created
             stmt.executeUpdate(sql);
             System.out.println("table added");
         } catch (SQLException e) {
@@ -65,7 +61,6 @@ public class GameModel {
     }
 
     public boolean heroExists(String name) throws SQLException {
-//        conn  = Database.getConnection();
         boolean exists = false;
         String sql = "SELECT * FROM heroes WHERE heroName='" + name + "'";
         Statement stmt = conn.createStatement();
@@ -77,7 +72,6 @@ public class GameModel {
     }
 
     public void insertHero(Hero newHero) throws SQLException {
-//        conn  = Database.getConnection();
         String sql = "INSERT INTO heroes (" +
                 "heroName, heroClass, " +
                 "heroLevel, heroExperience, " +
@@ -96,7 +90,6 @@ public class GameModel {
     }
 
     public int numberOfHeroes() throws SQLException {
-//        conn  = Database.getConnection();
         int rowCount = 0;
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
@@ -107,7 +100,6 @@ public class GameModel {
     }
 
     public List<Hero> retrieveAllHeroes() throws SQLException {
-//        conn  = Database.getConnection();
         String sql = "SELECT * FROM heroes";
         Statement stmt = conn.createStatement();
         ResultSet resultSet = stmt.executeQuery(sql);
@@ -116,7 +108,6 @@ public class GameModel {
 
 //    TODO use prepared statement
     public Hero retrieveHeroData(String name) throws SQLException {
-//        conn  = Database.getConnection();
         String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
         Statement stmt = conn.createStatement();
         ResultSet resultSet =  stmt.executeQuery(sql);
