@@ -1,7 +1,7 @@
 package com.swingy.model.character.heros;
 
 import com.swingy.model.artifact.*;
-import com.swingy.utils.Map;
+import com.swingy.utils.Grid;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -31,7 +31,7 @@ public abstract class Hero {
     protected Armor armor;
     protected Helm helm;
     protected Weapon weapon;
-    private Map observer;
+    private Grid observer;
 
     protected Hero() {
 
@@ -51,8 +51,8 @@ public abstract class Hero {
         equipHero(defaultWeapon, ArtifactEnum.WEAPON);
     }
 
-    public void register(Map map) {
-        observer = map;
+    public void register(Grid grid) {
+        observer = grid;
     }
 
     private void updateMap() {
