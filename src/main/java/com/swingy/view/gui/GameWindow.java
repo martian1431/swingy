@@ -5,7 +5,7 @@ import com.swingy.model.character.CharacterType;
 import com.swingy.utils.Messages;
 import com.swingy.model.GameModel;
 import com.swingy.utils.factory.CharacterFactory;
-import com.swingy.utils.factory.MapFactory;
+import com.swingy.utils.factory.GridFactory;
 import com.swingy.view.console.ConsoleView;
 
 import javax.swing.*;
@@ -165,12 +165,12 @@ public class GameWindow extends JFrame{
     }
 
     private void guiMapView() {
-        for (int i = 0; i < map.getSize(); i++) {
-            for (int j = 0; j < map.getSize(); j++) {
+        for (int i = 0; i < grid.getSize(); i++) {
+            for (int j = 0; j < grid.getSize(); j++) {
                 final JPanel block = new JPanel();
                 ((FlowLayout) block.getLayout()).setVgap(0);
                 ((FlowLayout) block.getLayout()).setHgap(0);
-                char mapCharacter = map.getMap()[i][j];
+                char mapCharacter = grid.getMap()[i][j];
 
                 block.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 switch (mapCharacter) {
@@ -420,7 +420,7 @@ public class GameWindow extends JFrame{
 
             try {
                 hero = GameModel.getInstance().retrieveHeroData(selectHeroComboList.getSelectedItem().toString());
-                map = MapFactory.generateMap(hero);
+                grid = GridFactory.generateMap(hero);
                 displayTextArea.setText("::: HERO STATISTICS :::"
                         + "\nName: " + hero.getName()
                         + "\nType: " + hero.getType()
@@ -440,8 +440,8 @@ public class GameWindow extends JFrame{
 //                exception.printStackTrace();
 //            }
 
-            gridLayout.setRows(map.getSize());
-            gridLayout.setColumns(map.getSize());
+            gridLayout.setRows(grid.getSize());
+            gridLayout.setColumns(grid.getSize());
             gridLayout.setHgap(-1);
             gridLayout.setVgap(-1);
             gridPanel.setVisible(true);
@@ -510,8 +510,8 @@ public class GameWindow extends JFrame{
             }
 
             gridPanel.removeAll();
-            gridLayout.setRows(map.getSize());
-            gridLayout.setColumns(map.getSize());
+            gridLayout.setRows(grid.getSize());
+            gridLayout.setColumns(grid.getSize());
             gridLayout.setHgap(-1);
             gridLayout.setVgap(-1);
             gridPanel.setLayout(gridLayout);
@@ -537,8 +537,8 @@ public class GameWindow extends JFrame{
             }
 
             gridPanel.removeAll();
-            gridLayout.setRows(map.getSize());
-            gridLayout.setColumns(map.getSize());
+            gridLayout.setRows(grid.getSize());
+            gridLayout.setColumns(grid.getSize());
             gridLayout.setHgap(-1);
             gridLayout.setVgap(-1);
             gridPanel.setLayout(gridLayout);
@@ -564,8 +564,8 @@ public class GameWindow extends JFrame{
             }
 
             gridPanel.removeAll();
-            gridLayout.setRows(map.getSize());
-            gridLayout.setColumns(map.getSize());
+            gridLayout.setRows(grid.getSize());
+            gridLayout.setColumns(grid.getSize());
             gridLayout.setHgap(-1);
             gridLayout.setVgap(-1);
             gridPanel.setLayout(gridLayout);
@@ -592,8 +592,8 @@ public class GameWindow extends JFrame{
             }
 
             gridPanel.removeAll();
-            gridLayout.setRows(map.getSize());
-            gridLayout.setColumns(map.getSize());
+            gridLayout.setRows(grid.getSize());
+            gridLayout.setColumns(grid.getSize());
             gridLayout.setHgap(-1);
             gridLayout.setVgap(-1);
             gridPanel.setLayout(gridLayout);
