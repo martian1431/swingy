@@ -187,7 +187,7 @@ public class ConsoleController {
     }
 
     @NotNull
-    private static Scanner getScanner() {
+    public static Scanner getScanner() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("$ ");
         return scanner;
