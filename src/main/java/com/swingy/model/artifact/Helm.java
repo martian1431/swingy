@@ -12,9 +12,4 @@ public class Helm extends Artifact {
         this.type = ArtifactEnum.HELM;
         this.hitPoints = hitPoints;
     }
-
-//   TODO use lombok for getters and setters
-//    public int getHitPoints() {
-//        return hitPoints;
-//    }
 }
