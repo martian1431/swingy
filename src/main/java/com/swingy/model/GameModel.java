@@ -1,5 +1,6 @@
 package com.swingy.model;
 
+import com.swingy.controller.ConsoleController;
 import com.swingy.model.artifact.Armor;
 import com.swingy.model.artifact.Helm;
 import com.swingy.model.artifact.Weapon;
@@ -23,6 +24,8 @@ import static com.swingy.utils.Globals.*;
 import static com.swingy.utils.Globals.GOAL_REACHED;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
+import static com.swingy.view.console.ConsoleView.goodbye;
+import static com.swingy.view.console.ConsoleView.showMainOptions;
 
 
 //TODO convert to wrapper
@@ -363,8 +366,25 @@ public class GameModel {
                 hero.getYCoordinate() == grid.getSize() - 1 ||
                 hero.getXCoordinate() == 0 ||
                 hero.getYCoordinate() == 0) {
-            log(GREEN_BRIGHT + "::: Congratutations, You Reached Your Goal!" + ANSI_RESET);
-            grid = GridFactory.generateMap(hero);
+//
+//            TODO factor
+//            ConsoleView.nextMission();
+            log(ANSI_GREEN + "::: Congratutations, You Reached Your Goal! Do you want to continue? (Y)es (N)o" + ANSI_RESET);
+            Scanner scanner = ConsoleController.getScanner();
+            while(scanner.hasNextLine()) {
+                String input = scanner.nextLine().trim().toLowerCase();
+                if (input.equals("y") || input.equals("yes")) {
+                    grid = GridFactory.generateMap(hero);
+                    break;
+                } else if (input.equals("n") || input.equals("no")) {
+                    goodbye();
+                    System.exit(-1);
+                } else {
+                    //               TODO refactor
+                    log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
+                    inputSign();
+                }
+            }
             GOAL_REACHED = true;
         } else {
             GOAL_REACHED = false;
