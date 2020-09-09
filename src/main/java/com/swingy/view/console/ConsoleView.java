@@ -67,12 +67,13 @@ public class ConsoleView {
 
     public static void showSelectedHero(Hero hero, int mapSize) {
         log(ANSI_CYAN + "Hero Stats" + ANSI_RESET);
-        String[] headers = {"Name", "Type", "Level", "Hit Points", "Experience", "Attack", "Defense"};
+        String[] headers = {"Name", "Type", "Level", "Hit Points", "Experience", "Attack", "Defense", "Map Size"};
         String[][] data = {
                 {
                     hero.getName(), hero.getType(), Integer.toString(hero.getLevel()),
                     Integer.toString(hero.getHitPoints()), Integer.toString(hero.getExperience()),
-                    Integer.toString(hero.getAttack()), Integer.toString(hero.getDefense())
+                    Integer.toString(hero.getAttack()), Integer.toString(hero.getDefense()),
+                    Integer.toString(mapSize),
                 }
         };
         log(AsciiTable.getTable(headers, data));
