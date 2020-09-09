@@ -5,12 +5,14 @@ import com.github.freva.asciitable.Column;
 import com.swingy.controller.ConsoleController;
 import com.swingy.model.character.CharacterType;
 import com.swingy.model.character.heros.Hero;
+import com.swingy.model.character.villian.Villian;
 import com.swingy.utils.Colors;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static com.swingy.utils.Colors.*;
+import static com.swingy.utils.Globals.villian;
 import static com.swingy.utils.Log.inputSign;
 import static com.swingy.utils.Log.log;
 import static com.swingy.utils.Messages.showWelcomeMessage;
