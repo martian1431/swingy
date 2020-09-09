@@ -85,7 +85,6 @@ public class GameModel {
         pstmt.setInt(5, newHero.getHitPoints());
         pstmt.setInt(6, newHero.getAttack());
         pstmt.setInt(7, newHero.getDefense());
-
         pstmt.execute();
     }
 
@@ -111,8 +110,7 @@ public class GameModel {
         String sql = String.format("SELECT * FROM heroes WHERE heroName='%s'", name);
         Statement stmt = conn.createStatement();
         ResultSet resultSet =  stmt.executeQuery(sql);
-        Hero hero = parseResult(resultSet).get(0);
-        return hero;
+        return parseResult(resultSet).get(0);
     }
 
 //    TODO handle resultset validation
@@ -149,8 +147,6 @@ public class GameModel {
 
 //    TODO use prepared statement
     public void updateHero(@NotNull Hero hero) throws SQLException {
-//        conn  = Database.getConnection();
-//        String sql = "UPDATE heroes SET heroAttack=, heroDefense, "
         String sql = String.format("UPDATE heroes " +
                 "SET heroAttack='%s', " +
                 "heroDefense='%s', " +
@@ -158,7 +154,7 @@ public class GameModel {
                 "heroHP='%s', " +
                 "heroLevel='%s' WHERE heroName='%s'", hero.getAttack(), hero.getDefense(), hero.getExperience(), hero.getHitPoints(), hero.getLevel(), hero.getName());
         Statement stmt = conn.createStatement();
-        ResultSet resultSet =  stmt.executeQuery(sql);
+        stmt.executeUpdate(sql);
     }
 
     public List<Hero> retrieveDatabase() {
