@@ -66,12 +66,16 @@ public class ConsoleView {
     }
 
     public static void showSelectedHero(Hero hero, int mapSize) {
-        log( "Stats: " + "Name" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getName() + ANSI_YELLOW + "] " + ANSI_RESET
-                + "Type" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getType() + ANSI_YELLOW + "] "
-                + ANSI_RESET + " Level" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getLevel() + ANSI_YELLOW + "] " + ANSI_RESET
-                + " Hit Points" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getHitPoints() + ANSI_YELLOW + "] " +
-                ANSI_RESET+ " Experience" + ANSI_YELLOW + "[" + ANSI_RESET + hero.getExperience() + ANSI_YELLOW + "] " + ANSI_RESET
-                + " Map size" + ANSI_YELLOW + "[" + ANSI_RESET + mapSize + ANSI_YELLOW + "] " + ANSI_RESET);
+        log(ANSI_CYAN + "Hero Stats" + ANSI_RESET);
+        String[] headers = {"Name", "Type", "Level", "Hit Points", "Experience", "Attack", "Defense"};
+        String[][] data = {
+                {
+                    hero.getName(), hero.getType(), Integer.toString(hero.getLevel()),
+                    Integer.toString(hero.getHitPoints()), Integer.toString(hero.getExperience()),
+                    Integer.toString(hero.getAttack()), Integer.toString(hero.getDefense())
+                }
+        };
+        log(AsciiTable.getTable(headers, data));
     }
 
     public static void showExistingHero() {
