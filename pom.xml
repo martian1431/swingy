@@ -68,27 +68,28 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>3.1.2</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <mainClass>com.swingy.Swingy</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-jar-plugin</artifactId>-->
+<!--                <version>3.1.2</version>-->
+<!--                <configuration>-->
+<!--                    <archive>-->
+<!--                        <manifest>-->
+<!--                            <addClasspath>true</addClasspath>-->
+<!--                            <mainClass>com.swingy.Swingy</mainClass>-->
+<!--                        </manifest>-->
+<!--                    </archive>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
 
-            <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <failOnError>false</failOnError>
-                </configuration>
-            </plugin>
+<!--            <plugin>-->
+<!--                <artifactId>maven-clean-plugin</artifactId>-->
+<!--                <version>3.1.0</version>-->
+<!--                <configuration>-->
+<!--                    <failOnError>false</failOnError>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+
 <!--             http://maven.apache.org/plugins/maven-assembly-plugin/usage.html-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -98,8 +99,8 @@
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
                     </descriptorRefs>
-                    <finalName>swingy</finalName>
-                    <appendAssemblyId>true</appendAssemblyId>
+                    <finalName>swingy-${project.version}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
                     <!--   https://stackoverflow.com/questions/1334999/is-it-possible-to-rename-a-maven-jar-with-dependencies -->
                         <archive>
                             <manifest>
@@ -111,7 +112,7 @@
                 </configuration>
                 <executions>
                     <execution>
-<!--                        <id>jar-with-dependencies</id>-->
+                        <id>jar-with-dependencies</id>
                         <phase>package</phase>
                         <goals>
                             <goal>single</goal>
