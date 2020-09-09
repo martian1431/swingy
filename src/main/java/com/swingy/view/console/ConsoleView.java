@@ -114,4 +114,8 @@ public class ConsoleView {
         log(ANSI_RED + ":::You Lost, do you want to try again? (Y)es or (N)o" + ANSI_RESET);
         ConsoleController.retry();
     }
+
+    public static void nextMission() {
+        log(GREEN_BRIGHT + "::: Congratutations, You Reached Your Goal!" + ANSI_RESET);
+    }
 }
