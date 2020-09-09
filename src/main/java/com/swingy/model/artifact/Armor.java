@@ -1,8 +1,10 @@
 package com.swingy.model.artifact;
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Armor extends Artifact {
 
     private int defense;
@@ -12,9 +14,4 @@ public class Armor extends Artifact {
         this.type = ArtifactEnum.ARMOR;
         this.defense = defense;
     }
-
-    //   TODO use lombok for getters and setters
-//    public int getDefense() {
-//        return defense;
-//    }
 }
