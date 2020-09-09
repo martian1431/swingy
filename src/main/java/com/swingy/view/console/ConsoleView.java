@@ -52,7 +52,18 @@ public class ConsoleView {
         inputSign();
     }
 
-    public static void showActionOption() {
+    public static void showActionOption(Villian villian) {
+        log(ANSI_YELLOW + ":::You Are Facing: " + villian.getName() + ANSI_RESET);
+        log(ANSI_CYAN + "Villian Stats" + ANSI_RESET);
+        String[] headers = {"Name", "Type", "Level", "Hit Points", "Attack", "Defense"};
+        String[][] data = {
+                {
+                        villian.getName(), villian.getType(), Integer.toString(villian.getLevel()),
+                        Integer.toString(villian.getHitPoints()), Integer.toString(villian.getAttack()),
+                        Integer.toString(villian.getDefense()),
+                }
+        };
+        log(AsciiTable.getTable(headers, data));
         log(CYAN_BOLD_BRIGHT + ">> Action <<");
         log(ANSI_RED + "1." + ANSI_RESET + " Fight");
         log(ANSI_RED + "2." + ANSI_RESET + " Run");
