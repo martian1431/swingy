@@ -209,8 +209,7 @@ public class GameModel {
     public static void action() {
         Scanner scanner = new Scanner(System.in);
 
-        log(ANSI_YELLOW + "::: You Are Facing: " + villian.getName() + ANSI_RESET);
-        ConsoleView.showActionOption();
+        ConsoleView.showActionOption(villian);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             int choice = Integer.parseInt(input);
@@ -231,7 +230,7 @@ public class GameModel {
                 log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
                 inputSign();
 //                log("Try again!");
-                ConsoleView.showActionOption();
+                ConsoleView.showActionOption(villian);
             }
         }
 
