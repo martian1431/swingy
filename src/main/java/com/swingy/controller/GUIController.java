@@ -18,12 +18,13 @@ public class GUIController {
         });
     }
 
-    public GUIController(MainMenu mainMenu) {
+    public GUIController(MainMenu mainMenu, ExistingHeros existingHeros) {
         this.mainMenu = mainMenu;
+        this.existingHeros = existingHeros;
 
         this.mainMenu.selectHeroButton(e -> {
             System.out.println("Get heroes from database");
-//            this.existingHeros.getHeros();
+            this.existingHeros.getHeros();
         });
     }
 }
