@@ -25,6 +25,7 @@ public class GUIView extends JFrame {
 
         new GUIController(getStarted);
         new GUIController(mainMenu, existingHeros);
+        new GUIController(createHero);
 
         // adds view to card layout with unique constraints
         add(getStarted, "Get started");
