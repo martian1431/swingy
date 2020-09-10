@@ -30,15 +30,46 @@ public class ExistingHeros extends JPanel {
 
     // FIXME gets heros from database and loads to table
     public void getHeros() {
-//        DefaultTableModel defaultTableModel = (DefaultTableModel) heroTable.getModel();
-//        defaultTableModel.setColumnIdentifiers(heroTableColumn);
-//        int i = 0;
-//        while(i < objects.length) {
-//            String row = objects[i].toString().trim();
-//            String[] rows = row.split(",");
-//            defaultTableModel.addRow(rows);
-//            i++;
-//        }
+        Object[] tableColumn = new Object[7];
+        tableColumn[0] = "ID";
+        tableColumn[1] = "Hero Name";
+        tableColumn[2] = "Hero Type";
+        tableColumn[3] = "Attack";
+        tableColumn[4] = "Defense";
+        tableColumn[5] = "Experience";
+        tableColumn[6] = "Hit Points";
+
+        DefaultTableModel defaultTableModel = (DefaultTableModel) heroTable.getModel();
+        defaultTableModel.setColumnIdentifiers(tableColumn);
+        try {
+            List<Hero> heroes = GameModel.getInstance().retrieveAllHeroes();
+            for (int i = 0; i < heroes.size(); i++) {
+                Object[] rowData = new Object[7];
+                rowData[0] = heroes.get(i).getId();
+                rowData[1] = heroes.get(i).getName();
+                rowData[2] = heroes.get(i).getType();
+                rowData[3] = heroes.get(i).getAttack();
+                rowData[4] = heroes.get(i).getDefense();
+                rowData[5] = heroes.get(i).getExperience();
+                rowData[6] = heroes.get(i).getHitPoints();
+//                TODO configure column width
+//                TableColumn tableColumn1 = heroTable.getColumn(i);
+//                tableColumn1.setPreferredWidth(20);
+                defaultTableModel.addRow(rowData);
+            }
+        } catch (Exception e) {
+//            TODO handle exception
+            System.out.println(e.getMessage());
+        } finally {
+            heroTable.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    super.mouseClicked(e);
+                    String selectedHero = (String) heroTable.getValueAt(heroTable.getSelectedRow(), 1);
+                    System.out.println("Selected hero -> " + selectedHero);
+                }
+            });
+        }
     }
 
     // event listener for back button
