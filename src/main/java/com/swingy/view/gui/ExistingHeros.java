@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class ExistingHeros extends JPanel {
 
     private JTable heroTable;
-    private String[] heroTableColumn = {"Id", "Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit Points"};
+//    private String[] heroTableColumn = {"Id", "Hero Name", "Hero Class", "Attack", "Defense", "Experience", "Hit Points"};
 
     private JButton backButton;
 
@@ -28,7 +28,7 @@ public class ExistingHeros extends JPanel {
     }
 
 
-    // gets users from database and loads to table
+    // FIXME gets heros from database and loads to table
     public void getHeros() {
 //        DefaultTableModel defaultTableModel = (DefaultTableModel) heroTable.getModel();
 //        defaultTableModel.setColumnIdentifiers(heroTableColumn);
