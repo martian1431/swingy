@@ -13,36 +13,35 @@ public class CreateHero extends JPanel implements ItemListener {
     private JLabel jLabel;
 
     public CreateHero() {
-//        setLayout(new GridBagLayout());
 
-        String s1[] = { "Jalpaiguri", "Mumbai", "Noida", "Kolkata", "New Delhi" };
-
+        // FIXME toolbar for buttons
 //        JToolBar toolBar = new JToolBar();
-//        jLabel = new JLabel("type your hero name");
-        jComboBox = new JComboBox(s1);
-        jComboBox.setEditable(false);
-        jComboBox.addItemListener(this);
-
-        JPanel card1 = new JPanel();
-        card1.add(new JButton("Button 1"));
-        card1.add(new JButton("Button 2"));
-        card1.add(new JButton("Button 3"));
-
-        JPanel cards = new JPanel(new CardLayout());
-        cards.add(jComboBox);
-//        cards.add(card1);
-
-
+//        JScrollPane heroTableScroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+//                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 //        backButton = new JButton("Go Back");
 //        add(toolBar);
 //        toolBar.add(backButton);
 //        toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
-//        jComboBox.addItemListener(this);
+//        add(heroTableScroll);
+        JLabel heroType = new JLabel("Select Hero Type");
+        JLabel heroTName = new JLabel("Hero Name");
+        JTextField inputTextField = new JTextField();
+        JButton submit = new JButton("Create");
+        submit.setPreferredSize(new Dimension(20, 20));
+        JComboBox<String> heroList = new JComboBox<String>();
+        JPanel jPanel = new JPanel();
+        heroList.addItem("Deadpool   - Attack | 0 - Defense | 0 - Hit Point | 0");
+        heroList.addItem("Thor           - Attack | 0 - Defense | 0 - Hit Point | 0");
+        heroList.addItem("Wolverine - Attack | 0 - Defense | 0 - Hit Point | 0");
 
-//        add(jComboBox);
-        add(cards);
-        add(card1);
-//        add(jLabel);
+        jPanel.add(heroType);
+        jPanel.add(heroList);
+        jPanel.add(heroTName);
+        jPanel.add(inputTextField);
+        jPanel.add(submit);
+        jPanel.setLayout(new GridLayout(5,1));
+        jPanel.setPreferredSize(new Dimension(400,100));
+        add(jPanel);
     }
 
     public void itemStateChanged(ItemEvent e)
