@@ -60,7 +60,7 @@ public class CreateHero extends JPanel implements ItemListener {
     public void itemStateChanged(ItemEvent e)
     {
         // if the state combobox is changed
-        if (e.getSource() == jComboBox) {
+        if (e.getSource() == heroType) {
             System.out.println("Okay");
 //            l1.setText(jComboBox.getSelectedItem() + " selected");
         }
