@@ -47,6 +47,16 @@ public class CreateHero extends JPanel implements ItemListener {
         add(jPanel);
     }
 
+    public String getHeroName() {
+        return inputTextField.getText();
+    }
+
+    public String getHeroType() {
+        System.out.println(heroType.getSelectedItem());
+        return (String) heroType.getSelectedItem();
+    }
+
+//    TODO delete
     public void itemStateChanged(ItemEvent e)
     {
         // if the state combobox is changed
