@@ -9,8 +9,11 @@ import java.awt.event.ItemListener;
 public class CreateHero extends JPanel implements ItemListener {
 
     private JButton backButton;
-    private JComboBox jComboBox;
-    private JLabel jLabel;
+    private JButton submit;
+    private JComboBox<String> heroType;
+    private JLabel heroTypeLabel;
+    private JLabel heroName;
+    private JTextField inputTextField;
 
     public CreateHero() {
 
