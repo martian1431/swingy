@@ -25,6 +25,8 @@ public class GUIController {
         this.existingHeros = existingHeros;
 
         this.mainMenu.selectHeroButton(e -> {
+//            TODO use the controller to get the heros from database
+//            TODO call a method in the view that will display the heros, pass the hero list
             System.out.println("Get heroes from database");
             this.existingHeros.getHeros();
         });
