@@ -42,6 +42,7 @@ public class ExistingHeros extends JPanel {
 
 
     // FIXME gets heros from database and loads to table
+//    TODO change method name to displayHeros or something along those lines
     public void getHeros() {
         Object[] tableColumn = new Object[7];
         tableColumn[0] = "ID";
