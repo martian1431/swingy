@@ -15,9 +15,52 @@ public class CreateHero extends JPanel implements ItemListener {
     private JLabel heroName;
     private JTextField inputTextField;
 
-    public CreateHero() {
+//    TODO testing something
+    private JPanel subPanelCenter;
+    private JPanel subPanelOne;
+    private JPanel subPanelTwo;
+    private JLabel userTextLabel;
+    private JTextField userTextInputField;
+    private JLabel menuLabel;
+    private JComboBox<String> heroClassesMenu;
+    private JLabel titlelabel;
+    private JLabel errorLabel;
 
-        // FIXME toolbar for buttons
+    public CreateHero() {
+        super(new BorderLayout());
+
+//      TODO new
+        subPanelCenter = new JPanel();
+        subPanelCenter.setLayout(new BoxLayout(subPanelCenter, BoxLayout.Y_AXIS));
+
+        subPanelOne = new JPanel();
+        subPanelTwo = new JPanel();
+
+        titlelabel = new JLabel("Top");
+        errorLabel = new JLabel("End");
+        userTextLabel = new JLabel("Hero name");
+        userTextInputField = new JTextField(20);
+        menuLabel = new JLabel("Hero class");
+        heroClassesMenu = new JComboBox<>();
+        heroClassesMenu.addItem("Test1");
+        heroClassesMenu.addItem("Test2");
+        heroClassesMenu.addItem("Test3");
+
+        subPanelOne.add(userTextLabel);
+        subPanelOne.add(userTextInputField);
+        subPanelTwo.add(menuLabel);
+        subPanelTwo.add(heroClassesMenu);
+
+        subPanelCenter.add(subPanelOne);
+        subPanelCenter.add(subPanelTwo);
+
+//        add(titlelabel, BorderLayout.PAGE_START);
+        add(subPanelCenter, BorderLayout.CENTER);
+//        add(errorLabel, BorderLayout.PAGE_END);
+
+        setBorder(BorderFactory.createEmptyBorder(300, 50, 300, 50));
+
+        // TODO old
 //        JToolBar toolBar = new JToolBar();
 //        JScrollPane heroTableScroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 //                JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
