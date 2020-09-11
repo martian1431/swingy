@@ -58,7 +58,7 @@ public class CreateHero extends JPanel implements ItemListener {
         add(subPanelCenter, BorderLayout.CENTER);
 //        add(errorLabel, BorderLayout.PAGE_END);
 
-        setBorder(BorderFactory.createEmptyBorder(300, 50, 300, 50));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         // TODO old
 //        JToolBar toolBar = new JToolBar();
