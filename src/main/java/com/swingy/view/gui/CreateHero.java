@@ -26,25 +26,25 @@ public class CreateHero extends JPanel implements ItemListener {
 //        toolBar.add(backButton);
 //        toolBar.setMaximumSize(new Dimension(Integer.MAX_VALUE, toolBar.getMinimumSize().height));
 //        add(heroTableScroll);
-        heroTypeLabel = new JLabel("Select Hero Type");
-        heroName = new JLabel("Hero Name");
-        inputTextField = new JTextField(25);
-        submit = new JButton("Create");
-        submit.setPreferredSize(new Dimension(20, 20));
-        heroType = new JComboBox<String>();
-        JPanel jPanel = new JPanel();
-        heroType.addItem("Deadpool");
-        heroType.addItem("Thor");
-        heroType.addItem("Wolverine");
-
-        jPanel.add(heroTypeLabel);
-        jPanel.add(heroType);
-        jPanel.add(heroName);
-        jPanel.add(inputTextField);
-        jPanel.add(submit);
-        jPanel.setLayout(new GridLayout(5,1));
-        jPanel.setPreferredSize(new Dimension(400,100));
-        add(jPanel);
+//        heroTypeLabel = new JLabel("Select Hero Type");
+//        heroName = new JLabel("Hero Name");
+//        inputTextField = new JTextField(25);
+//        submit = new JButton("Create");
+//        submit.setPreferredSize(new Dimension(20, 20));
+//        heroType = new JComboBox<String>();
+//        JPanel jPanel = new JPanel();
+//        heroType.addItem("Deadpool");
+//        heroType.addItem("Thor");
+//        heroType.addItem("Wolverine");
+//
+//        jPanel.add(heroTypeLabel);
+//        jPanel.add(heroType);
+//        jPanel.add(heroName);
+//        jPanel.add(inputTextField);
+//        jPanel.add(submit);
+//        jPanel.setLayout(new GridLayout(5,1));
+//        jPanel.setPreferredSize(new Dimension(400,100));
+//        add(jPanel);
     }
 
     public String getHeroName() {
