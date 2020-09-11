@@ -67,9 +67,9 @@ public class CreateHero extends JPanel implements ItemListener {
     }
 
     // event listener for back button
-    public void backButton(ActionListener actionListener) {
-        backButton.addActionListener(actionListener);
-    }
+//    public void backButton(ActionListener actionListener) {
+//        backButton.addActionListener(actionListener);
+//    }
 
     public void createHero(ActionListener actionListener) {
         submit.addActionListener(actionListener);
