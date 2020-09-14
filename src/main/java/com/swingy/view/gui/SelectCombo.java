@@ -19,6 +19,8 @@ public class SelectCombo extends JPanel implements ActionListener{
     private List<Hero> heroList;
 
     public SelectCombo(List<Hero> heroes) {
+        super(new BorderLayout());
+
         System.out.println("heros " + heroes);
         this.heroList = heroes;
         String[] heroTitles = new String[this.heroList.size()];
@@ -26,8 +28,7 @@ public class SelectCombo extends JPanel implements ActionListener{
         StringBuilder heroString = new StringBuilder();
 
         for (int i = 0; i < this.heroList.size(); i++) {
-            heroString.append(this.heroList.get(i));
-            heroString.append(" " + this.heroList.get(i));
+            heroString.append(this.heroList.get(i).getName());
             heroNames[i] = this.heroList.get(i).getName();
             heroTitles[i] = heroString.toString();
             heroString.delete(0, heroString.length());
@@ -80,11 +81,11 @@ public class SelectCombo extends JPanel implements ActionListener{
     protected void displayHeroStats(int index) {
         int totalHP = heroList.get(index).getHitPoints();
         String heroStatsString =  ""
-                + " Lvl " + heroList.get(index).getLevel()
+                + " Level " + heroList.get(index).getLevel()
                 + " "
-                + "\nArmor: " + heroList.get(index).getArmor().getName() + " (" + heroList.get(index).getArmor().getDefense() + " Defense)"
-                + "\nWeapon: " + heroList.get(index).getWeapon().getName() + " (" + heroList.get(index).getWeapon().getAttack() + " Attack)"
-                + "\nHelm: " + heroList.get(index).getHelm().getName() + " (" + heroList.get(index).getHelm().getHitPoints() + " hp)"
+                + "\nArmor: " + " (" + heroList.get(index).getArmor().getDefense() + " Defense)"
+                + "\nWeapon: " + " (" + heroList.get(index).getWeapon().getAttack() + " Attack)"
+                + "\nHelm: " + " (" + heroList.get(index).getHelm().getHitPoints() + " hp)"
                 + "\nXP: " + heroList.get(index).getExperience()
                 + "\nTotal HP: " + totalHP;
 

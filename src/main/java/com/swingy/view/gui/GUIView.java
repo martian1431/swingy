@@ -81,7 +81,8 @@ public class GUIView extends JFrame implements GameInterface{
     @Override
     public void showSelectScreen(List<Hero> heroList) {
         selectCombo = new SelectCombo(heroList);
-        System.out.println("select hero" + heroList);
+        setContentPane(selectCombo);
+        pack();
     }
 
     @Override
