@@ -1,11 +1,11 @@
 package com.swingy;
 
+import com.swingy.controller.GUIController;
 import com.swingy.model.GameModel;
+import com.swingy.utils.Globals;
 import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GUIView;
-import com.swingy.view.gui.GameWindow;
-
-import javax.swing.*;
+import com.swingy.view.gui.GameView;
 
 import static com.swingy.utils.Colors.*;
 import static com.swingy.utils.Log.log;
@@ -20,7 +20,10 @@ public class Swingy {
             } else if (view.toLowerCase().equals("gui")) {
 //                SwingUtilities.invokeLater(GUIView::new);
 //                new GameWindow();
-                GameWindow.run();
+                Globals.CONSOLE_MODE = false;
+                GUIView guiView = new GUIView();
+                GUIController guiController = new GUIController(guiView);
+//                GameView.run();
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
