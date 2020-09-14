@@ -13,7 +13,7 @@ public class Messages {
         log(instructions());
     }
 
-    private static String  logo() {
+    public static String  logo() {
         return  ANSI_WHITE + "                                                                                    \n" + ANSI_RESET +
                 BLUE_BRIGHT  + "      111011    1010        0111 1101 1100101    0110  100101111    1101     1010 \n" + ANSI_RESET +
                 BLUE_BRIGHT  + "    0010  0111  0111        0001 0111 11101111   0010 1110    1001  1001    1111  \n" + ANSI_RESET +
