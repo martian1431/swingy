@@ -1,49 +1,43 @@
 package com.swingy.controller;
 
-import com.swingy.view.gui.CreateHero;
-import com.swingy.view.gui.ExistingHeros;
-import com.swingy.view.gui.GetStarted;
-import com.swingy.view.gui.MainMenu;
+import com.swingy.model.GameModel;
+import com.swingy.utils.Globals;
+import com.swingy.view.gui.GameInterface;
+
+import java.util.Random;
 
 public class GUIController {
+    static GameModel model;
+    static GameInterface gameInterface;
+    static Random random = new Random();
 
-    private GetStarted getStarted;
-    private MainMenu mainMenu;
-    private ExistingHeros existingHeros;
-    private CreateHero createHero;
 
-    public GUIController(GetStarted getStarted) {
-        this.getStarted = getStarted;
+    public GUIController(GameInterface gameInterface) {
+        this.gameInterface = gameInterface;
+        gameInterface.setEnableStartButton(true);
+        gameInterface.clearLoadingLabel();
 
-        this.getStarted.startButton(e -> {
-            System.out.println("Someone clicke me for no reason");
-        });
     }
 
-    public GUIController(MainMenu mainMenu, ExistingHeros existingHeros) {
-        this.mainMenu = mainMenu;
-        this.existingHeros = existingHeros;
-
-        this.mainMenu.selectHeroButton(e -> {
-//            TODO use the controller to get the heros from database
-//            TODO call a method in the view that will display the heros, pass the hero list
-            System.out.println("Get heroes from database");
-            this.existingHeros.getHeros();
-        });
+    public static void eventHandler(String event) {
+        switch (event) {
+            case Globals.showStartScreen:
+                gameInterface.showStartScreen();
+                break;
+            case Globals.showSelect:
+                try {
+                    gameInterface.showSelectScreen(GameModel.getInstance().retrieveAllHeroes());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case Globals.showCreateScreen:
+                gameInterface.showCreateScreen();
+                break;
+        }
     }
 
-    public GUIController(CreateHero createHero) {
-        this.createHero = createHero;
+    public static void eventHandler(String input, String value) {
 
-        this.createHero.createHero(e -> {
-            String heroName = this.createHero.getHeroName();
-            String heroType = this.createHero.getHeroType();
-
-//            TODO validate input
-//            TODO create hero
-//            TODO generate grid
-            System.out.println("Hero Name -> " + heroName);
-            System.out.println("Hero type -> " + heroType);
-        });
     }
 }
