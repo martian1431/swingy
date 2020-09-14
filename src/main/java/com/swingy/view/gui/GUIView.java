@@ -1,52 +1,186 @@
 package com.swingy.view.gui;
 
 import com.swingy.controller.GUIController;
+import com.swingy.model.artifact.Artifact;
+import com.swingy.model.character.heros.Hero;
+import com.swingy.model.character.villian.Villian;
+import com.swingy.utils.Globals;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
-public class GUIView extends JFrame {
+public class GUIView extends JFrame implements GameInterface{
     private static final long serialVersionUID = 1L;
+    private JButton startButton;
 
-    private CardLayout cardLayout;
-    private Container container;
+    private JLabel error;
+    private JLabel loadLabel;
+
+    private JPanel mainPanel;
+
+    private StartView startView;
+    private SelectCombo selectCombo;
+    private CreateView createView;
+    private GameView gameView;
 
     public GUIView() {
-        super("Swingy");
-        cardLayout = new CardLayout();
-        GetStarted getStarted = new GetStarted();
-        MainMenu mainMenu = new MainMenu();
-        ExistingHeros existingHeros = new ExistingHeros();
-        CreateHero createHero = new CreateHero();
+        mainPanel = new JPanel(new BorderLayout());
+        JPanel subPanelCenter = new JPanel();
+        subPanelCenter.setLayout(new BoxLayout(subPanelCenter, BoxLayout.Y_AXIS));
 
-        container = getContentPane();
-        setLayout(cardLayout);
-//        setLayout(cardLayout);
+        loadLabel = new JLabel("Loading...");
+        loadLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        new GUIController(getStarted);
-        new GUIController(mainMenu, existingHeros);
-//        new GUIController(createHero);
+        error = new JLabel();
 
-        // adds view to card layout with unique constraints
-        add(getStarted, "Get started");
-        add(mainMenu, "Main Menu");
-        add(createHero,"Create Hero");
-        add(existingHeros, "Existing Heros");
+        startButton = new JButton();
+        startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-//        TODO
-        // switch view according to its constraints on click
-        getStarted.startButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
-        mainMenu.createHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Create Hero"));
-        mainMenu.selectHeroButton(e -> cardLayout.show(GUIView.this.getContentPane(),"Existing Heros"));
-        existingHeros.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
-//        createHero.backButton(e -> cardLayout.show(GUIView.this.getContentPane(), "Main Menu"));
+        JLabel logo = new JLabel();
+        ImageIcon logoImage = new ImageIcon("assets/Swingy_logo.png");
+        logo.setIcon(logoImage);
+        logo.setHorizontalAlignment(JLabel.CENTER);
+        logo.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
 
-        // frame width & height
-        int FRAME_WIDTH = 1200;
-        int FRAME_HEIGHT = 700;
-        // size of our application frame
-        setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setSize(600, 600);
+        this.setTitle("Swingy");
+
+        startButton.setText("Get started");
+        startButton.setEnabled(false);
+
+        startButton.addActionListener(e -> {GUIController.eventHandler(Globals.showStartScreen);});
+
+        subPanelCenter.add(loadLabel);
+        subPanelCenter.add(startButton);
+        mainPanel.add(logo, BorderLayout.PAGE_START);
+        mainPanel.add(subPanelCenter, BorderLayout.CENTER);
+        mainPanel.add(error, BorderLayout.PAGE_END);
+        this.add(mainPanel);
+        setResizable(false);
+        setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+
+    @Override
+    public void setEnableStartButton(boolean b) {
+        startButton.setEnabled(b);
+    }
+
+    @Override
+    public void showStartScreen() {
+        startView = new StartView();
+        setContentPane(startView);
+        pack();
+    }
+
+    @Override
+    public void showSelectScreen(List<Hero> heroList) {
+        selectCombo = new SelectCombo(heroList);
+        System.out.println("select hero" + heroList);
+    }
+
+    @Override
+    public void showCreateScreen() {
+        System.out.println("create hero");
+    }
+
+    @Override
+    public void showCreateScreenError(String error) {
+
+    }
+
+    @Override
+    public void upDateGameViewHeroStats(Hero hero) {
+
+    }
+
+    @Override
+    public void showErrorOnStart(String error) {
+
+    }
+
+    @Override
+    public void disableStartSelectScreen() {
+
+    }
+
+    @Override
+    public void showGameView(Hero hero) {
+
+    }
+
+    @Override
+    public void showCurrentCoords(int[] currentCoords) {
+
+    }
+
+    @Override
+    public void setMovementEnabled(boolean b) {
+
+    }
+
+    @Override
+    public void setFightRunEnabled(boolean b) {
+
+    }
+
+    @Override
+    public void setAttackEnabled(boolean b) {
+
+    }
+
+    @Override
+    public void setPickupLeaveEnabled(boolean b) {
+
+    }
+
+    @Override
+    public void showGameInfo(String info) {
+
+    }
+
+    @Override
+    public void showGameInfo(String info, Villian villian) {
+
+    }
+
+    @Override
+    public void showGameInfo(String info, Hero hero, Villian enemy) {
+
+    }
+
+    @Override
+    public void showGameInfo(String info, Hero hero, Artifact artifact) {
+
+    }
+
+    @Override
+    public void showGameViewError(String error) {
+
+    }
+
+    @Override
+    public void endGameMessage(String title, String message) {
+
+    }
+
+    @Override
+    public void quitGame() {
+
+    }
+
+    @Override
+    public void showErrorDialog(String error) {
+
+    }
+
+    @Override
+    public void clearLoadingLabel() {
+        loadLabel.setText("");
     }
 }
