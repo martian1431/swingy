@@ -55,10 +55,8 @@ public class GameWindow extends JFrame{
     private JComboBox createHeroComboList = new JComboBox();
     private JComboBox selectHeroComboList = new JComboBox();
 
-    /**
-     * GameWindow Constructor.
-     */
-    GameWindow() {
+
+    public GameWindow() {
         setTitle("Swingy 1.0");
         setSize(900, 750);
         setResizable(false);
@@ -142,9 +140,9 @@ public class GameWindow extends JFrame{
         selectHeroPanel.setVisible(false);
         selectHeroComboList.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        createHeroComboList.addItem("Crab");
-        createHeroComboList.addItem("Cuttlefish");
-        createHeroComboList.addItem("Octopus");
+        createHeroComboList.addItem("Deadpool");
+        createHeroComboList.addItem("Thor");
+        createHeroComboList.addItem("Wolverine");
 
         createHeroComboList.setPreferredSize(new Dimension(200, 50));
         selectHeroComboList.setPreferredSize(new Dimension(200, 50));
@@ -395,7 +393,7 @@ public class GameWindow extends JFrame{
                     imageContainerPanel.setVisible(false);
 
                     selectHeroComboList.removeAllItems();
-                    List<Hero> heros = GameModel.getInstance().retrieveDatabase();
+                    List<Hero> heros = GameModel.getInstance().retrieveAllHeroes();
                     for (Hero hero : heros) {
                         selectHeroComboList.addItem(hero.getName());
                     }

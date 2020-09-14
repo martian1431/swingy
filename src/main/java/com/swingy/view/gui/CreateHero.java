@@ -51,12 +51,13 @@ public class CreateHero extends JPanel implements ItemListener {
         subPanelTwo.add(menuLabel);
         subPanelTwo.add(heroClassesMenu);
 
-        subPanelCenter.add(subPanelOne);
+//        subPanelCenter.add(subPanelOne);
         subPanelCenter.add(subPanelTwo);
 
-//        add(titlelabel, BorderLayout.PAGE_START);
+
+        add(subPanelOne, BorderLayout.PAGE_START);
         add(subPanelCenter, BorderLayout.CENTER);
-//        add(errorLabel, BorderLayout.PAGE_END);
+        add(errorLabel, BorderLayout.PAGE_END);
 
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 

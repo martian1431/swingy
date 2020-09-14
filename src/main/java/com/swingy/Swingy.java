@@ -3,6 +3,7 @@ package com.swingy;
 import com.swingy.model.GameModel;
 import com.swingy.view.console.ConsoleView;
 import com.swingy.view.gui.GUIView;
+import com.swingy.view.gui.GameWindow;
 
 import javax.swing.*;
 
@@ -17,7 +18,9 @@ public class Swingy {
             if (view.toLowerCase().equals("console")) {
                 ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
-                SwingUtilities.invokeLater(GUIView::new);
+//                SwingUtilities.invokeLater(GUIView::new);
+//                new GameWindow();
+                GameWindow.run();
             } else {
                 log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
             }
