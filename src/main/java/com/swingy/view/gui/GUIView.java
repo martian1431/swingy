@@ -87,7 +87,10 @@ public class GUIView extends JFrame implements GameInterface{
 
     @Override
     public void showCreateScreen() {
-        System.out.println("create hero");
+        createView = new CreateView();
+        setContentPane(createView);
+        pack();
+//        System.out.println("create hero");
     }
 
     @Override
@@ -112,7 +115,9 @@ public class GUIView extends JFrame implements GameInterface{
 
     @Override
     public void showGameView(Hero hero) {
-
+        gameView = new GameView(hero);
+        setContentPane(gameView);
+        pack();
     }
 
     @Override
@@ -177,11 +182,23 @@ public class GUIView extends JFrame implements GameInterface{
 
     @Override
     public void showErrorDialog(String error) {
-
+        JOptionPane.showMessageDialog(
+                this,
+                labelFormatter(error),
+                "Swingy error",
+                JOptionPane.ERROR_MESSAGE
+        );
     }
 
     @Override
     public void clearLoadingLabel() {
         loadLabel.setText("");
+    }
+
+    private static String labelFormatter(String input) {
+        return "<html>" + input.replaceAll("<","&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll("\n", "<br/>")
+                + "</html>";
     }
 }
