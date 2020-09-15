@@ -315,26 +315,26 @@ public class GameModel {
         if (artifactIsDropped) {
             Globals.ARTIFACT_DROPPED = true;
             try {
-                Log.log(Colors.ANSI_YELLOW + "::: Artifact is Dropped!");
+                Log.log(Colors.ANSI_YELLOW + ":::Artifact is Dropped!" + ANSI_RESET);
                 String[] artifacts = {"ARMOR", "HELM", "WEAPON", "EXPERIENCE"};
                 String artifactType = artifacts[new Random().nextInt(4)];
                 int variety = Globals.hero.getLevel() + 1;
 
                 if ("ARMOR".equals(artifactType)) {
                     Globals.artifact = new Armor("Dropped Armor", variety);
-                    int gainedDefense = (((Armor) Globals.artifact).getDefense() - Globals.hero.getArmor().getDefense());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + ".");
+                    int gainedDefense = (((Armor) Globals.artifact).getDefense() + Globals.hero.getArmor().getDefense());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + "." + ANSI_RESET);
                 } else if ("HELM".equals(artifactType)) {
                     Globals.artifact = new Helm("Dropped Helmet", variety);
-                    int gainedHitPoints = (((Helm) Globals.artifact).getHitPoints() - Globals.hero.getHelm().getHitPoints());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + ".");
+                    int gainedHitPoints = (((Helm) Globals.artifact).getHitPoints() + Globals.hero.getHelm().getHitPoints());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + "." + ANSI_RESET);
                 } else if ("WEAPON".equals(artifactType)) {
                     Globals.artifact = new Weapon("Dropped Weapon", variety);
-                    int gainedAttack = (((Weapon) Globals.artifact).getAttack() - Globals.hero.getWeapon().getAttack());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + ".");
+                    int gainedAttack = (((Weapon) Globals.artifact).getAttack() + Globals.hero.getWeapon().getAttack());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + "." + ANSI_RESET);
                 } else if ("EXPERIENCE".equals(artifactType)) {
                     Globals.hero.setHitPoints(Globals.hero.getHitPoints() + variety);
-                    Log.log(Colors.ANSI_YELLOW  + "::: Healed Up, Current Health: " + Globals.hero.getHitPoints());
+                    Log.log(Colors.ANSI_YELLOW  + "::: Healed Up, Current Health: " + Globals.hero.getHitPoints() + ANSI_RESET);
                     return;
                 }
                 // Equip the character.
@@ -343,7 +343,7 @@ public class GameModel {
                 exception.printStackTrace();
             }
         } else if (!artifactIsDropped) {
-            Log.log( Colors.ANSI_RED + ":::Sorry, No Artifact Dropped!");
+            Log.log( Colors.ANSI_RED + ":::Sorry, No Artifact Dropped!" + ANSI_RESET);
         }
     }
 
