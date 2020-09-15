@@ -1,7 +1,14 @@
 package com.swingy.view.gui;
 
+import com.swingy.controller.GUIController;
+import com.swingy.utils.Globals;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CreateView extends JPanel {
     private JLabel titlelabel;
@@ -60,5 +67,42 @@ public class CreateView extends JPanel {
         add(subPanelCenter, BorderLayout.CENTER);
         add(errorLabel, BorderLayout.PAGE_END);
         setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+        createHeroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                GUIController.eventHandler(
+                        Globals.createNewHero,
+                        userInput,
+                        userClassChoice
+                );
+            }
+        });
+
+        heroClassesMenu.addActionListener(e -> {
+            JComboBox cb = (JComboBox) e.getSource();
+            userClassChoice = heroClasses[cb.getSelectedIndex()];
+        });
+
+        userTextInputField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                userInput = userTextInputField.getText();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                userInput = userTextInputField.getText();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                userInput = userTextInputField.getText();
+            }
+        });
+    }
+
+    public void setCreateScreenError(String error) {
+        errorLabel.setText(error);
     }
 }
