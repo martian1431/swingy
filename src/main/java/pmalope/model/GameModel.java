@@ -22,8 +22,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import static pmalope.utils.Colors.ANSI_RED;
-import static pmalope.utils.Colors.ANSI_RESET;
+import static pmalope.utils.Colors.*;
 import static pmalope.utils.Log.inputSign;
 import static pmalope.utils.Log.log;
 import static pmalope.view.console.ConsoleView.goodbye;
@@ -259,7 +258,6 @@ public class GameModel {
         if (Globals.hero.getHitPoints() <= 0) {
             if (Globals.CONSOLE_MODE) {
                 ConsoleView.gameOver();
-//                ConsoleView.run();
             }
         } else {
             try {
@@ -323,18 +321,21 @@ public class GameModel {
                 if ("ARMOR".equals(artifactType)) {
                     Globals.artifact = new Armor("Dropped Armor", variety);
                     int gainedDefense = (((Armor) Globals.artifact).getDefense() + Globals.hero.getArmor().getDefense());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + "." + ANSI_RESET);
+                    ((Armor) Globals.artifact).setDefense(gainedDefense);
+                    Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + "." + ANSI_RESET);
                 } else if ("HELM".equals(artifactType)) {
                     Globals.artifact = new Helm("Dropped Helmet", variety);
                     int gainedHitPoints = (((Helm) Globals.artifact).getHitPoints() + Globals.hero.getHelm().getHitPoints());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + "." + ANSI_RESET);
+                    ((Helm) Globals.artifact).setHitPoints(gainedHitPoints);
+                    Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN +"::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + "." + ANSI_RESET);
                 } else if ("WEAPON".equals(artifactType)) {
                     Globals.artifact = new Weapon("Dropped Weapon", variety);
                     int gainedAttack = (((Weapon) Globals.artifact).getAttack() + Globals.hero.getWeapon().getAttack());
-                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + "." + ANSI_RESET);
+                    ((Weapon) Globals.artifact).setAttack(gainedAttack);
+                    Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN + "If You Keep This Artifact Your Attack Increases by " + gainedAttack + "." + ANSI_RESET);
                 } else if ("EXPERIENCE".equals(artifactType)) {
                     Globals.hero.setHitPoints(Globals.hero.getHitPoints() + variety);
-                    Log.log(Colors.ANSI_YELLOW  + "::: Healed Up, Current Health: " + Globals.hero.getHitPoints() + ANSI_RESET);
+                    Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN +"::: Healed Up, Current Health: " + Globals.hero.getHitPoints() + ANSI_RESET);
                     return;
                 }
                 // Equip the character.
@@ -352,7 +353,9 @@ public class GameModel {
     private static void equip(String artifactType) {
         if (Globals.CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
-            Log.log(Colors.ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + Colors.ANSI_RESET);
+            Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN + "::: Do You Wanna Keep The Artifact?" + Colors.ANSI_RESET);
+            Log.log(ANSI_RED + "1." + ANSI_RESET + "Yes");
+            Log.log(ANSI_RED + "2." + ANSI_RESET + "NO");
             Log.inputSign();
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();

@@ -93,9 +93,6 @@ public abstract class Hero {
         }
     }
 
-    /**
-     * Level up the character.
-     */
     private void levelUp() {
         int levelUp;
 
@@ -109,28 +106,16 @@ public abstract class Hero {
     public void equipHero(Artifact artifact, ArtifactEnum type) {
         switch (type) {
             case ARMOR:
-                if (armor != null) {
-                    defense -= armor.getDefense();
-                } else {
-                    armor = (Armor)artifact;
-                    defense += armor.getDefense();
-                }
+                armor = (Armor)artifact;
+                defense += armor.getDefense();
                 break;
             case HELM:
-                if (helm != null) {
-                    hitPoints -= helm.getHitPoints();
-                } else {
-                    helm = (Helm)artifact;
-                    hitPoints += helm.getHitPoints();
-                }
+                helm = (Helm)artifact;
+                hitPoints += helm.getHitPoints();
                 break;
             case WEAPON:
-                if (weapon != null) {
-                    attack -= weapon.getAttack();
-                } else {
-                    weapon = (Weapon)artifact;
-                    attack += weapon.getAttack();
-                }
+                weapon = (Weapon)artifact;
+                attack += weapon.getAttack();
                 break;
         }
     }

@@ -2,8 +2,10 @@ package pmalope.model.artifact;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class Helm extends Artifact {
     private int hitPoints;
 

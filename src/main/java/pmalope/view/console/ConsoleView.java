@@ -78,6 +78,7 @@ public class ConsoleView {
         log(ANSI_RED + "1." + ANSI_RESET + " Fight");
         log(ANSI_RED + "2." + ANSI_RESET + " Run");
         log(ANSI_RED + "3." + ANSI_RESET + " Quit");
+        inputSign();
     }
 
     public static void run() {
