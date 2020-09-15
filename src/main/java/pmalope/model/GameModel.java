@@ -353,7 +353,7 @@ public class GameModel {
     private static void equip(String artifactType) {
         if (Globals.CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
-            Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN + "::: Do You Wanna Keep The Artifact?" + Colors.ANSI_RESET);
+            Log.log(Colors.ANSI_YELLOW + ":::" + ANSI_RESET + ANSI_CYAN + "Do You Wanna Keep The Artifact?" + Colors.ANSI_RESET);
             Log.log(ANSI_RED + "1." + ANSI_RESET + "Yes");
             Log.log(ANSI_RED + "2." + ANSI_RESET + "NO");
             Log.inputSign();
