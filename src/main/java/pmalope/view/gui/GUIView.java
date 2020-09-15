@@ -3,24 +3,25 @@ package pmalope.view.gui;
 import pmalope.controller.GUIController;
 import pmalope.model.character.heros.Hero;
 import pmalope.utils.Globals;
+import pmalope.view.ViewInterface;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
-public class GUIView extends JFrame implements GameInterface{
+public class GUIView extends JFrame implements ViewInterface {
     private static final long serialVersionUID = 1L;
-    private JButton startButton;
+    private static JButton startButton;
 
-    private JLabel error;
-    private JLabel loadLabel;
+    private static JLabel error;
+    private static JLabel loadLabel;
 
-    private JPanel mainPanel;
+    private static JPanel mainPanel;
 
-    private StartView startView;
-    private SelectCombo selectCombo;
-    private CreateView createView;
-    private GameView gameView;
+    private static StartView startView;
+    private static SelectCombo selectCombo;
+    private static CreateView createView;
+    private static GameView gameView;
 
     public GUIView() {
         mainPanel = new JPanel(new BorderLayout());
@@ -63,16 +64,7 @@ public class GUIView extends JFrame implements GameInterface{
         setVisible(true);
     }
 
-    public static void run() {
-        new GUIController(new GUIView());
-    }
-
-
-    @Override
-    public void setEnableStartButton(boolean b) {
-        startButton.setEnabled(b);
-    }
-
+//    interface
     @Override
     public void showStartScreen() {
         startView = new StartView();
@@ -92,8 +84,19 @@ public class GUIView extends JFrame implements GameInterface{
         createView = new CreateView();
         setContentPane(createView);
         pack();
-//        System.out.println("create hero");
     }
+
+    @Override
+    public void setEnableStartButton(boolean b) {
+        startButton.setEnabled(b);
+    }
+
+
+    @Override
+    public void clearLoadingLabel() {
+        loadLabel.setText("");
+    }
+
 
     @Override
     public void showGameView(Hero hero) {
@@ -102,7 +105,20 @@ public class GUIView extends JFrame implements GameInterface{
         pack();
     }
 
-    @Override
+//    static
+    public static void run() {
+        new GUIController(new GUIView());
+    }
+
+
+// non static
+    private String labelFormatter(String input) {
+        return "<html>" + input.replaceAll("<","&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll("\n", "<br/>")
+                + "</html>";
+    }
+
     public void showErrorDialog(String error) {
         JOptionPane.showMessageDialog(
                 this,
@@ -110,17 +126,5 @@ public class GUIView extends JFrame implements GameInterface{
                 "Swingy error",
                 JOptionPane.ERROR_MESSAGE
         );
-    }
-
-    @Override
-    public void clearLoadingLabel() {
-        loadLabel.setText("");
-    }
-
-    private static String labelFormatter(String input) {
-        return "<html>" + input.replaceAll("<","&lt;")
-                .replaceAll(">", "&gt;")
-                .replaceAll("\n", "<br/>")
-                + "</html>";
     }
 }

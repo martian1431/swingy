@@ -7,6 +7,7 @@ import pmalope.model.character.CharacterType;
 import pmalope.model.character.heros.Hero;
 import pmalope.model.character.villian.Villian;
 import pmalope.utils.Colors;
+import pmalope.view.ViewInterface;
 
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +19,9 @@ import static pmalope.utils.Messages.showWelcomeMessage;
 
 public class ConsoleView {
 
-    public static void showMainOptions() {
+//    TODO overide
+
+    public static void showStartScreen() {
         log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Select your choice "
                 + ANSI_RESET + ANSI_YELLOW + ":::" + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + " Create A New Hero");
@@ -28,18 +31,24 @@ public class ConsoleView {
         ConsoleController.selectMainOption();
     }
 
-    public static void showHeroNameOption(CharacterType type) {
-        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
-        ConsoleController.createHero(type);
-    }
-
-    public static void showHeroType() {
+//    TODO overide
+    public static void showCreateScreen() {
         log(Colors.ANSI_YELLOW + ":::" + Colors.ANSI_RESET + Colors.CYAN_BOLD_BRIGHT + "Select hero type" + Colors.ANSI_RESET + Colors.ANSI_YELLOW  + Colors.ANSI_RESET);
         log(ANSI_RED + "  1." + ANSI_RESET + " Deadpool " + ANSI_YELLOW + "   Attack" + ANSI_RESET + "[7]" + ANSI_YELLOW + "   Defense" + ANSI_RESET+ "[2]" + ANSI_YELLOW + "  Hit Points" + ANSI_RESET + "[26]");
         log(ANSI_RED + "  2." + ANSI_RESET + " Thor " + ANSI_YELLOW + "       Attack" + ANSI_RESET + "[9]" + ANSI_YELLOW + "   Defense" + ANSI_RESET+ "[3]" + ANSI_YELLOW + "  Hit Points" + ANSI_RESET + "[51]");
         log(ANSI_RED + "  3." + ANSI_RESET + " Wolverine " + ANSI_YELLOW + "  Attack" + ANSI_RESET + "[10]" + ANSI_YELLOW + "  Defense" + ANSI_RESET+ "[3]" + ANSI_YELLOW + "  Hit Points" + ANSI_RESET + "[75]");
         log(ANSI_RED + "  4." + ANSI_RESET + " Quit");
         ConsoleController.selectHeroType();
+    }
+
+    //    TODO overide
+    public static void showSelectScreen() {
+        ConsoleController.selectExistingHero();
+    }
+
+    public static void showHeroNameOption(CharacterType type) {
+        log(ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "Name your hero" + ANSI_RESET + ANSI_YELLOW + ANSI_RESET);
+        ConsoleController.createHero(type);
     }
 
 
@@ -91,14 +100,11 @@ public class ConsoleView {
         log(AsciiTable.getTable(headers, data));
     }
 
-    public static void showExistingHero() {
-        ConsoleController.selectExistingHero();
-    }
-
     public static void heroCount(int count) {
         if (count == 1)
             log(ANSI_YELLOW + count + " Hero Available " + ANSI_RESET);
-        log(count + " Heroes Available " + ANSI_RESET);
+        else
+            log(count + " Heroes Available " + ANSI_RESET);
     }
 
     /*

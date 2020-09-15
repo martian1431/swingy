@@ -4,40 +4,36 @@ import pmalope.model.GameModel;
 import pmalope.model.character.CharacterFactory;
 import pmalope.model.character.CharacterType;
 import pmalope.utils.Globals;
-import pmalope.view.gui.GameInterface;
-
-import java.util.Random;
+import pmalope.view.ViewInterface;
 
 public class GUIController {
-    static GameModel model;
-    static GameInterface gameInterface;
-    static Random random = new Random();
+    static ViewInterface viewInterface;
 
 
-    public GUIController(GameInterface gameInterface) {
-        this.gameInterface = gameInterface;
-        gameInterface.setEnableStartButton(true);
-        gameInterface.clearLoadingLabel();
+    public GUIController(ViewInterface viewInterface) {
+        this.viewInterface = viewInterface;
+        viewInterface.setEnableStartButton(true);
+        viewInterface.clearLoadingLabel();
 
     }
 
     public static void eventHandler(String event) {
         switch (event) {
             case Globals.showStartScreen:
-                gameInterface.showStartScreen();
+                viewInterface.showStartScreen();
                 break;
             case Globals.showSelect:
                 try {
-                    gameInterface.showSelectScreen(GameModel.getInstance().retrieveAllHeroes());
+                    viewInterface.showSelectScreen(GameModel.getInstance().retrieveAllHeroes());
                 } catch (Exception e) {
-                    gameInterface.showErrorDialog("Please create a hero...\n");
+                    viewInterface.showErrorDialog("Please create a hero...\n");
                 }
                 break;
             case Globals.showCreateScreen:
-                gameInterface.showCreateScreen();
+                viewInterface.showCreateScreen();
                 break;
             case Globals.showGameView:
-                gameInterface.showGameView(Globals.hero);
+                viewInterface.showGameView(Globals.hero);
         }
     }
 
@@ -49,7 +45,7 @@ public class GUIController {
                     Globals.hero = GameModel.getInstance().retrieveHeroData(value);
                     eventHandler(Globals.showGameView);
                 } catch (Exception e) {
-                    gameInterface.showErrorDialog(e.getMessage());
+                    viewInterface.showErrorDialog(e.getMessage());
                 }
         }
     }
@@ -59,9 +55,9 @@ public class GUIController {
             case Globals.createNewHero:
                 try {
                     if (valueOne.isEmpty()) {
-                      gameInterface.showErrorDialog("Input cannot be empty");
+                      viewInterface.showErrorDialog("Input cannot be empty");
                     } else if (valueOne.length() < 2 || valueOne.length() > 20) {
-                        gameInterface.showErrorDialog("Name can only 2 or 20 characters long");
+                        viewInterface.showErrorDialog("Name can only 2 or 20 characters long");
                     } else if (!GameModel.getInstance().heroExists(valueOne.trim())) {
                         GameModel.getInstance().insertHero(CharacterFactory.newHero(valueOne.trim(), heroType(valueTwo)));
                         Globals.hero = GameModel.getInstance().retrieveHeroData(valueOne.trim());
@@ -69,15 +65,15 @@ public class GUIController {
                             eventHandler(Globals.showGameView);
                         }
                         else {
-                            gameInterface.showErrorDialog("Hero was not initialized.\n");
+                            viewInterface.showErrorDialog("Hero was not initialized.\n");
                         }
                     }
                     else {
-                        gameInterface.showErrorDialog("Hero name already exits.\n");
+                        viewInterface.showErrorDialog("Hero name already exits.\n");
                     }
                 }
                 catch (Exception e) {
-                    gameInterface.showErrorDialog(e.getMessage());
+                    viewInterface.showErrorDialog(e.getMessage());
                 }
                 break;
         }

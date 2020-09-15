@@ -1,6 +1,5 @@
 package pmalope;
 
-import pmalope.controller.GUIController;
 import pmalope.model.GameModel;
 import pmalope.utils.Globals;
 import pmalope.view.console.ConsoleView;
@@ -17,7 +16,6 @@ public class Swingy {
                 ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
                 Globals.CONSOLE_MODE = false;
-                System.out.println("gui view");
                 GUIView.run();
             } else {
                 Log.log(Colors.ANSI_RED + ":::ERROR::: choose only console or gui" + Colors.ANSI_RESET);

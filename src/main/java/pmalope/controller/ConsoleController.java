@@ -94,7 +94,7 @@ public class ConsoleController {
                 //                TODO refactor
                 Log.log(Colors.ANSI_RED + ":::ERROR::: No Heroes Available!" + Colors.ANSI_RESET);
                 Log.inputSign();
-                ConsoleView.showMainOptions();
+                ConsoleView.showStartScreen();
             }
         } catch (SQLException exception) {
             Log.log(Colors.ANSI_RED + ":::ERROR::: No Heroes Available!" + Colors.ANSI_RESET);
@@ -165,7 +165,7 @@ public class ConsoleController {
         while(scanner.hasNextLine()) {
             String input = scanner.nextLine().trim().toLowerCase();
             if (input.equals("y") || input.equals("yes")) {
-                ConsoleView.showMainOptions();
+                ConsoleView.showStartScreen();
             } else if (input.equals("n") || input.equals("no")) {
                 Log.log(Colors.ANSI_RED + ":::" + "SCARED?::: Go drink some water and try again later" + Colors.ANSI_RESET);
                 System.exit(-1);
@@ -196,10 +196,10 @@ public class ConsoleController {
                 int option = Integer.parseInt(input);
                 switch (option) {
                     case 1:
-                        ConsoleView.showHeroType();
+                        ConsoleView.showCreateScreen();
                         break;
                     case 2:
-                        ConsoleView.showExistingHero();
+                        ConsoleView.showSelectScreen();
                         break;
                     case 3:
                         ConsoleView.goodbye();
@@ -219,7 +219,7 @@ public class ConsoleController {
         while(scanner.hasNext()) {
             String input = scanner.nextLine();
             if (input.toLowerCase().equals("y") || input.toLowerCase().equals("yes")) {
-                ConsoleView.showMainOptions();
+                ConsoleView.showStartScreen();
             } else if (input.toLowerCase().equals("n") || input.toLowerCase().equals("no")){
                ConsoleView.goodbye();
             } else {

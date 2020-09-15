@@ -22,6 +22,12 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import static pmalope.utils.Colors.ANSI_RED;
+import static pmalope.utils.Colors.ANSI_RESET;
+import static pmalope.utils.Log.inputSign;
+import static pmalope.utils.Log.log;
+import static pmalope.view.console.ConsoleView.goodbye;
+
 
 //TODO convert to wrapper
 public class GameModel {
@@ -273,13 +279,28 @@ public class GameModel {
 //    TODO move to base controller
     public static void run() {
         int chance = new Random().nextInt(2);
+        Scanner scanner = new Scanner(System.in);
 
         if (chance == 1) {
-            Log.log(Colors.ANSI_YELLOW + ":::Hahaha, You Can't Run My Friend, We Gonna Fight!" + Colors.ANSI_RESET);
-            Globals.HERO_RAN = true;
-            fight();
-        } else {
+            //            TODO Refactor
+            log(Colors.ANSI_YELLOW + ":::Hahaha, You Can't Run My Friend, We Gonna Fight!" + Colors.ANSI_RESET);
+            log(ANSI_RED + "1." + ANSI_RESET + " Fight");
+            log(ANSI_RED + "2." + ANSI_RESET + " Quit");
+            inputSign();
+            while (scanner.hasNextLine()) {
+                String input = scanner.nextLine().trim();
+                if (input.toLowerCase().equals("1")) {
+                    fight();
+                } else if (input.toLowerCase().equals("2")) {
+                    goodbye();
+                } else {
+                    log(Colors.ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!" + Colors.ANSI_RESET);
+                    inputSign();
+                }
+            }
             Globals.HERO_RAN = false;
+        } else {
+            Globals.HERO_RAN = true;
             Log.log(Colors.ANSI_RED + ":::Coward! You Ran Away!" + Colors.ANSI_RESET);
             Globals.hero.setPosition(previousPosition[0] * -1, previousPosition[1] * -1);
         }
@@ -371,7 +392,7 @@ public class GameModel {
                     Globals.grid = GridFactory.generateMap(Globals.hero);
                     break;
                 } else if (input.equals("n") || input.equals("no")) {
-                    ConsoleView.goodbye();
+                    goodbye();
                     System.exit(-1);
                 } else {
                     //               TODO refactor

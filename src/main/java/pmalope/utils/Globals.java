@@ -3,6 +3,7 @@ package pmalope.utils;
 import pmalope.model.artifact.Artifact;
 import pmalope.model.character.villian.Villian;
 import pmalope.model.character.heros.Hero;
+import pmalope.view.gui.GUIView;
 
 public class Globals {
     private Globals() {
@@ -21,6 +22,8 @@ public class Globals {
     public static Grid grid;
     public static Artifact artifact;
     public static Villian villian;
+
+    public static GUIView guiView;
 
     public static final String showStartScreen = "SHOW_START_SCREEN";
     public static final String showSelect = "SHOW_SELECT";
