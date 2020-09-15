@@ -20,12 +20,12 @@ public class Messages {
                 BLUE_BRIGHT  + "        1101      101011101011   1101 1000   11011111 1010  00111010    0110      \n" + ANSI_RESET +
                 CYAN_BRIGHT  + "    0111  1011    1000   1100    1011 1010       0101 1110    1011      0010      \n" + ANSI_RESET +
                 CYAN_BRIGHT  + "      010111      1011   1000    1110 1100       0110   10110111        0101 " + ANSI_WHITE + "v1.0\n" + ANSI_RESET +
-                "\t\t\t\t" + CYAN_UNDERLINED + "Copyright " + Symbols.COPYRIGHT + " 2020 Wethinkcode_ Developed with " + Symbols.HEART + " by pmalope\n" + ANSI_RESET;
+                "\t\t" + CYAN_UNDERLINED + "Copyright " + Symbols.COPYRIGHT + " 2020 Wethinkcode_ Developed with " + Symbols.HEART + " by pmalope\n" + ANSI_RESET;
     }
 
     private static String introduction() {
         return CYAN_BOLD_BRIGHT + " Hi, Welcome!!!\n" + ANSI_RESET  +
-                "  Implementation of a minimalistic text-based RPG game in Java using the swingy Framework\n\n" +
+                " This is an Implementation of a minimalistic text-based RPG game in Java\n\n" +
                 ANSI_YELLOW + ":::" + ANSI_RESET + CYAN_BOLD_BRIGHT + "HOW TO PLAY" + ANSI_RESET + ANSI_YELLOW + ":::\n" + ANSI_RESET +
                 "  * North: Move Up\n" +
                 "  * East: Move Right\n" +
