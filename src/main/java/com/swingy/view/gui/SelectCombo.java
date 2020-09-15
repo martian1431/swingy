@@ -83,11 +83,10 @@ public class SelectCombo extends JPanel implements ActionListener{
         String heroStatsString =  ""
                 + " Level " + heroList.get(index).getLevel()
                 + " "
-                + "\nArmor: " + " (" + heroList.get(index).getArmor().getDefense() + " Defense)"
-                + "\nWeapon: " + " (" + heroList.get(index).getWeapon().getAttack() + " Attack)"
-                + "\nHelm: " + " (" + heroList.get(index).getHelm().getHitPoints() + " hp)"
-                + "\nXP: " + heroList.get(index).getExperience()
-                + "\nTotal HP: " + totalHP;
+                + "\nArmor: " + " (" + heroList.get(index).getDefense() + " Defense)"
+                + "\nWeapon: " + " (" + heroList.get(index).getAttack() + " Attack)"
+                + "\nHelm: " + " (" + heroList.get(index).getHitPoints() + " hp)"
+                + "\nExperience: " + heroList.get(index).getExperience();
 
         heroStatsLabel.setText("<html>" + heroStatsString.replaceAll("<","&lt;")
                 .replaceAll(">", "&gt;")
