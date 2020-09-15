@@ -1,4 +1,4 @@
-package com.swingy.utils.database;
+package pmalope.utils.database;
 
 import org.jetbrains.annotations.Nullable;
 

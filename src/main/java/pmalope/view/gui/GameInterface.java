@@ -1,6 +1,6 @@
-package com.swingy.view.gui;
+package pmalope.view.gui;
 
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.character.heros.Hero;
 
 import java.util.List;
 

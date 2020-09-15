@@ -1,4 +1,4 @@
-package com.swingy.utils;
+package pmalope.utils;
 
 public class Symbols {
     public static final String COPYRIGHT = "\u00a9";

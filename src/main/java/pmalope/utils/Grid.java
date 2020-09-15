@@ -1,13 +1,13 @@
-package com.swingy.utils;
+package pmalope.utils;
 
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.character.heros.Hero;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Random;
 
-import static com.swingy.utils.Globals.CONSOLE_MODE;
-import static com.swingy.utils.Globals.hero;
+import static pmalope.utils.Globals.CONSOLE_MODE;
+import static pmalope.utils.Globals.hero;
 
 @Getter
 @Setter

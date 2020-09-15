@@ -102,7 +102,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.swingy.Swingy</mainClass>
+                            <mainClass>pmalope.Swingy</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

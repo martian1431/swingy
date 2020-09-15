@@ -1,4 +1,4 @@
-package com.swingy.model.character.heros;
+package pmalope.model.character.heros;
 
 public class Wolverine extends Hero {
 

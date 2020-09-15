@@ -1,6 +1,6 @@
-package com.swingy.model.character.villian;
+package pmalope.model.character.villian;
 
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.character.heros.Hero;
 
 public abstract class Villian extends Hero {
     public Villian(int level) {

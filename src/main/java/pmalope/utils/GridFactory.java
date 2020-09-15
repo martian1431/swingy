@@ -1,6 +1,6 @@
-package com.swingy.utils;
+package pmalope.utils;
 
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.character.heros.Hero;
 
 public abstract class GridFactory {
 

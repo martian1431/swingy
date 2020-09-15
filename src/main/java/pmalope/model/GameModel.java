@@ -1,31 +1,26 @@
-package com.swingy.model;
+package pmalope.model;
 
-import com.swingy.controller.ConsoleController;
-import com.swingy.model.artifact.Armor;
-import com.swingy.model.artifact.Helm;
-import com.swingy.model.artifact.Weapon;
-import com.swingy.model.character.heros.Hero;
-import com.swingy.model.character.CharacterType;
-import com.swingy.model.character.villian.Villian;
-import com.swingy.utils.database.Database;
-import com.swingy.model.character.CharacterFactory;
-import com.swingy.utils.GridFactory;
-import com.swingy.view.console.ConsoleView;
+import pmalope.controller.ConsoleController;
+import pmalope.model.artifact.Armor;
+import pmalope.model.artifact.Helm;
+import pmalope.model.artifact.Weapon;
+import pmalope.model.character.heros.Hero;
+import pmalope.model.character.CharacterType;
+import pmalope.model.character.villian.Villian;
+import pmalope.utils.database.Database;
+import pmalope.model.character.CharacterFactory;
+import pmalope.utils.GridFactory;
+import pmalope.view.console.ConsoleView;
 import org.jetbrains.annotations.NotNull;
+import pmalope.utils.Colors;
+import pmalope.utils.Globals;
+import pmalope.utils.Log;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-
-import static com.swingy.utils.Colors.*;
-import static com.swingy.utils.Globals.*;
-import static com.swingy.utils.Globals.GOAL_REACHED;
-import static com.swingy.utils.Log.inputSign;
-import static com.swingy.utils.Log.log;
-import static com.swingy.view.console.ConsoleView.goodbye;
-import static com.swingy.view.console.ConsoleView.showMainOptions;
 
 
 //TODO convert to wrapper
@@ -169,34 +164,34 @@ public class GameModel {
     public static void moveHero(int direction) {
         switch (direction) {
             case 1:
-                hero.setPosition(-1, 0);
+                Globals.hero.setPosition(-1, 0);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
             case 2:
-                hero.setPosition(0, 1);
+                Globals.hero.setPosition(0, 1);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
             case 3:
-                hero.setPosition(0, -1);
+                Globals.hero.setPosition(0, -1);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
             case 4:
-                hero.setPosition(1, 0);
+                Globals.hero.setPosition(1, 0);
                 previousPosition[0] = -1;
                 previousPosition[1] = 0;
                 break;
         }
-        if (grid.getMap()[hero.getXCoordinate()][hero.getYCoordinate()] == 'X') {
+        if (Globals.grid.getMap()[Globals.hero.getXCoordinate()][Globals.hero.getYCoordinate()] == 'X') {
             int random = new Random().nextInt(3);
             if (random == 2) {
-                villian = (Villian) CharacterFactory.newEnemy(hero, CharacterType.MAGNETO);
+                Globals.villian = (Villian) CharacterFactory.newEnemy(Globals.hero, CharacterType.MAGNETO);
             } else {
-                villian = (Villian) CharacterFactory.newEnemy(hero, CharacterType.ULTRON);
+                Globals.villian = (Villian) CharacterFactory.newEnemy(Globals.hero, CharacterType.ULTRON);
             }
-            if (CONSOLE_MODE) {
+            if (Globals.CONSOLE_MODE) {
                 action();
             }
         }
@@ -209,7 +204,7 @@ public class GameModel {
     public static void action() {
         Scanner scanner = new Scanner(System.in);
 
-        ConsoleView.showActionOption(villian);
+        ConsoleView.showActionOption(Globals.villian);
         while (scanner.hasNextLine()) {
             String input = scanner.nextLine();
             int choice = Integer.parseInt(input);
@@ -227,10 +222,10 @@ public class GameModel {
                 }
             } else {
                 //                TODO refactor
-                log(ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + ANSI_RESET);
-                inputSign();
+                Log.log(Colors.ANSI_RED + ":::ERROR::: Incorrect choice, please choose between (1-2). Try Again!\n" + Colors.ANSI_RESET);
+                Log.inputSign();
 //                log("Try again!");
-                ConsoleView.showActionOption(villian);
+                ConsoleView.showActionOption(Globals.villian);
             }
         }
 
@@ -239,33 +234,33 @@ public class GameModel {
 
 //    TODO move to model base controller
     public static void fight() {
-        if (!HERO_RAN) {
+        if (!Globals.HERO_RAN) {
 //            TODO refactor to model class
-            while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
-                hero.attack(villian);
-                if (villian.getHitPoints() > 0) {
-                    villian.attack(hero);
+            while (Globals.hero.getHitPoints() > 0 && Globals.villian.getHitPoints() > 0) {
+                Globals.hero.attack(Globals.villian);
+                if (Globals.villian.getHitPoints() > 0) {
+                    Globals.villian.attack(Globals.hero);
                 }
             }
         } else {
-            while (hero.getHitPoints() > 0 && villian.getHitPoints() > 0) {
-                villian.attack(hero);
-                if (hero.getHitPoints() > 0) {
-                    hero.attack(villian);
+            while (Globals.hero.getHitPoints() > 0 && Globals.villian.getHitPoints() > 0) {
+                Globals.villian.attack(Globals.hero);
+                if (Globals.hero.getHitPoints() > 0) {
+                    Globals.hero.attack(Globals.villian);
                 }
             }
         }
-        if (hero.getHitPoints() <= 0) {
-            if (CONSOLE_MODE) {
+        if (Globals.hero.getHitPoints() <= 0) {
+            if (Globals.CONSOLE_MODE) {
                 ConsoleView.gameOver();
 //                ConsoleView.run();
             }
         } else {
             try {
-                GameModel.getInstance().updateHero(hero);
-                hero.setPosition(0, 0);
+                GameModel.getInstance().updateHero(Globals.hero);
+                Globals.hero.setPosition(0, 0);
                 battleGains();
-                log(ANSI_GREEN + ":::" + "Congratulations, You Won The Battle!" + ANSI_RESET);
+                Log.log(Colors.ANSI_GREEN + ":::" + "Congratulations, You Won The Battle!" + Colors.ANSI_RESET);
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -280,13 +275,13 @@ public class GameModel {
         int chance = new Random().nextInt(2);
 
         if (chance == 1) {
-            log(ANSI_YELLOW + ":::Hahaha, You Can't Run My Friend, We Gonna Fight!" + ANSI_RESET);
-            HERO_RAN = true;
+            Log.log(Colors.ANSI_YELLOW + ":::Hahaha, You Can't Run My Friend, We Gonna Fight!" + Colors.ANSI_RESET);
+            Globals.HERO_RAN = true;
             fight();
         } else {
-            HERO_RAN = false;
-            log(ANSI_RED + ":::Coward! You Ran Away!" + ANSI_RESET);
-            hero.setPosition(previousPosition[0] * -1, previousPosition[1] * -1);
+            Globals.HERO_RAN = false;
+            Log.log(Colors.ANSI_RED + ":::Coward! You Ran Away!" + Colors.ANSI_RESET);
+            Globals.hero.setPosition(previousPosition[0] * -1, previousPosition[1] * -1);
         }
     }
 
@@ -297,28 +292,28 @@ public class GameModel {
         boolean artifactIsDropped = drop == 1;
 
         if (artifactIsDropped) {
-            ARTIFACT_DROPPED = true;
+            Globals.ARTIFACT_DROPPED = true;
             try {
-                log(ANSI_YELLOW + "::: Artifact is Dropped!");
+                Log.log(Colors.ANSI_YELLOW + "::: Artifact is Dropped!");
                 String[] artifacts = {"ARMOR", "HELM", "WEAPON", "EXPERIENCE"};
                 String artifactType = artifacts[new Random().nextInt(4)];
-                int variety = hero.getLevel() + 1;
+                int variety = Globals.hero.getLevel() + 1;
 
                 if ("ARMOR".equals(artifactType)) {
-                    artifact = new Armor("Dropped Armor", variety);
-                    int gainedDefense = (((Armor) artifact).getDefense() - hero.getArmor().getDefense());
-                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + ".");
+                    Globals.artifact = new Armor("Dropped Armor", variety);
+                    int gainedDefense = (((Armor) Globals.artifact).getDefense() - Globals.hero.getArmor().getDefense());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Defense Increases by " + gainedDefense + ".");
                 } else if ("HELM".equals(artifactType)) {
-                    artifact = new Helm("Dropped Helmet", variety);
-                    int gainedHitPoints = (((Helm) artifact).getHitPoints() - hero.getHelm().getHitPoints());
-                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + ".");
+                    Globals.artifact = new Helm("Dropped Helmet", variety);
+                    int gainedHitPoints = (((Helm) Globals.artifact).getHitPoints() - Globals.hero.getHelm().getHitPoints());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Hit Point(s) Increase by " + gainedHitPoints + ".");
                 } else if ("WEAPON".equals(artifactType)) {
-                    artifact = new Weapon("Dropped Weapon", variety);
-                    int gainedAttack = (((Weapon) artifact).getAttack() - hero.getWeapon().getAttack());
-                    log(ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + ".");
+                    Globals.artifact = new Weapon("Dropped Weapon", variety);
+                    int gainedAttack = (((Weapon) Globals.artifact).getAttack() - Globals.hero.getWeapon().getAttack());
+                    Log.log(Colors.ANSI_YELLOW + "::: If You Keep This Artifact Your Attack Increases by " + gainedAttack + ".");
                 } else if ("EXPERIENCE".equals(artifactType)) {
-                    hero.setHitPoints(hero.getHitPoints() + variety);
-                    log(ANSI_YELLOW  + "::: Healed Up, Current Health: " + hero.getHitPoints());
+                    Globals.hero.setHitPoints(Globals.hero.getHitPoints() + variety);
+                    Log.log(Colors.ANSI_YELLOW  + "::: Healed Up, Current Health: " + Globals.hero.getHitPoints());
                     return;
                 }
                 // Equip the character.
@@ -327,32 +322,32 @@ public class GameModel {
                 exception.printStackTrace();
             }
         } else if (!artifactIsDropped) {
-            log( ANSI_RED + ":::Sorry, No Artifact Dropped!");
+            Log.log( Colors.ANSI_RED + ":::Sorry, No Artifact Dropped!");
         }
     }
 
 
 //    TODO move to model
     private static void equip(String artifactType) {
-        if (CONSOLE_MODE) {
+        if (Globals.CONSOLE_MODE) {
             Scanner scanner = new Scanner(System.in);
-            log(ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + ANSI_RESET);
-            inputSign();
+            Log.log(Colors.ANSI_YELLOW + "::: Do You Wanna Keep The Artifact?\n1. YES!\n2. NO!" + Colors.ANSI_RESET);
+            Log.inputSign();
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
                 if (input.equals("1") || input.equals("2")) {
                     int choice = Integer.parseInt(input.trim());
                     if (choice == 1) {
-                        hero.equipHero(artifact, artifact.getType());
-                        log("::: " + hero.getName() + " Is Equipped With " + artifactType);
+                        Globals.hero.equipHero(Globals.artifact, Globals.artifact.getType());
+                        Log.log("::: " + Globals.hero.getName() + " Is Equipped With " + artifactType);
                         break;
                     } else if (choice == 2) {
                         break;
                     }
                 } else {
                     //                TODO refactor
-                    log(ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + ANSI_RESET);
-                    inputSign();
+                    Log.log(Colors.ANSI_RED + ":::ERROR::: Incorrect Choice, Try Again!" + Colors.ANSI_RESET);
+                    Log.inputSign();
                 }
             }
         }
@@ -361,32 +356,32 @@ public class GameModel {
 
 //    TODO move to model
     public static void goal() {
-        if (hero.getXCoordinate() == grid.getSize() - 1 ||
-                hero.getYCoordinate() == grid.getSize() - 1 ||
-                hero.getXCoordinate() == 0 ||
-                hero.getYCoordinate() == 0) {
+        if (Globals.hero.getXCoordinate() == Globals.grid.getSize() - 1 ||
+                Globals.hero.getYCoordinate() == Globals.grid.getSize() - 1 ||
+                Globals.hero.getXCoordinate() == 0 ||
+                Globals.hero.getYCoordinate() == 0) {
 //
 //            TODO factor
 //            ConsoleView.nextMission();
-            log(ANSI_GREEN + "::: Congratutations, You Reached Your Goal! Do you want to continue? (Y)es (N)o" + ANSI_RESET);
+            Log.log(Colors.ANSI_GREEN + "::: Congratutations, You Reached Your Goal! Do you want to continue? (Y)es (N)o" + Colors.ANSI_RESET);
             Scanner scanner = ConsoleController.getScanner();
             while(scanner.hasNextLine()) {
                 String input = scanner.nextLine().trim().toLowerCase();
                 if (input.equals("y") || input.equals("yes")) {
-                    grid = GridFactory.generateMap(hero);
+                    Globals.grid = GridFactory.generateMap(Globals.hero);
                     break;
                 } else if (input.equals("n") || input.equals("no")) {
-                    goodbye();
+                    ConsoleView.goodbye();
                     System.exit(-1);
                 } else {
                     //               TODO refactor
-                    log(ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + ANSI_RESET);
-                    inputSign();
+                    Log.log(Colors.ANSI_RED + ":::ERROR::: Expected input (Y)es or (N)o, Try Again!!!" + Colors.ANSI_RESET);
+                    Log.inputSign();
                 }
             }
-            GOAL_REACHED = true;
+            Globals.GOAL_REACHED = true;
         } else {
-            GOAL_REACHED = false;
+            Globals.GOAL_REACHED = false;
         }
     }
 }

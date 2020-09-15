@@ -1,12 +1,12 @@
-package com.swingy.model.character;
+package pmalope.model.character;
 
-import com.swingy.model.character.*;
-import com.swingy.model.character.heros.Deadpool;
-import com.swingy.model.character.heros.Hero;
-import com.swingy.model.character.heros.Thor;
-import com.swingy.model.character.heros.Wolverine;
-import com.swingy.model.character.villian.Magneto;
-import com.swingy.model.character.villian.Ultron;
+import pmalope.model.character.*;
+import pmalope.model.character.heros.Deadpool;
+import pmalope.model.character.heros.Hero;
+import pmalope.model.character.heros.Thor;
+import pmalope.model.character.heros.Wolverine;
+import pmalope.model.character.villian.Magneto;
+import pmalope.model.character.villian.Ultron;
 
 public abstract class CharacterFactory {
     private static Hero newHero;

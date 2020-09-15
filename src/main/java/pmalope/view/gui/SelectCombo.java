@@ -1,8 +1,8 @@
-package com.swingy.view.gui;
+package pmalope.view.gui;
 
-import com.swingy.controller.GUIController;
-import com.swingy.model.character.heros.Hero;
-import com.swingy.utils.Globals;
+import pmalope.controller.GUIController;
+import pmalope.model.character.heros.Hero;
+import pmalope.utils.Globals;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,10 +1,8 @@
-package com.swingy.utils;
-
-import static com.swingy.utils.Globals.CONSOLE_MODE;
+package pmalope.utils;
 
 public class Log {
     public static void log(String message) {
-        if (CONSOLE_MODE == true) {
+        if (Globals.CONSOLE_MODE == true) {
             System.out.println(message);
         }
     }

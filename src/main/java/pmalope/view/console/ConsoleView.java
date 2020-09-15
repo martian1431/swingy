@@ -1,21 +1,20 @@
-package com.swingy.view.console;
+package pmalope.view.console;
 
 import com.github.freva.asciitable.AsciiTable;
 import com.github.freva.asciitable.Column;
-import com.swingy.controller.ConsoleController;
-import com.swingy.model.character.CharacterType;
-import com.swingy.model.character.heros.Hero;
-import com.swingy.model.character.villian.Villian;
-import com.swingy.utils.Colors;
+import pmalope.controller.ConsoleController;
+import pmalope.model.character.CharacterType;
+import pmalope.model.character.heros.Hero;
+import pmalope.model.character.villian.Villian;
+import pmalope.utils.Colors;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.swingy.utils.Colors.*;
-import static com.swingy.utils.Globals.villian;
-import static com.swingy.utils.Log.inputSign;
-import static com.swingy.utils.Log.log;
-import static com.swingy.utils.Messages.showWelcomeMessage;
+import static pmalope.utils.Colors.*;
+import static pmalope.utils.Log.inputSign;
+import static pmalope.utils.Log.log;
+import static pmalope.utils.Messages.showWelcomeMessage;
 
 public class ConsoleView {
 

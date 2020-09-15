@@ -1,12 +1,10 @@
-package com.swingy.view.gui;
+package pmalope.view.gui;
 
-import com.swingy.controller.GUIController;
-import com.swingy.utils.Globals;
+import pmalope.controller.GUIController;
+import pmalope.utils.Globals;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class StartView extends JPanel {
 
@@ -23,7 +21,7 @@ public class StartView extends JPanel {
         JPanel subPanelOne = new JPanel();
         JPanel subPanelTwo = new JPanel();
 
-        startScreenTitle.setText("Select an old hero or ... create a new one?");
+        startScreenTitle.setText("Select an old hero or create a new one?");
         startScreenTitle.setHorizontalAlignment(JLabel.CENTER);
         startScreenTitle.setBorder(BorderFactory.createEmptyBorder(10, 10, 0, 10));
         startScreenTitle.setPreferredSize(new Dimension(600, 50));

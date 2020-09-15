@@ -1,8 +1,8 @@
-package com.swingy.utils;
+package pmalope.utils;
 
-import com.swingy.model.artifact.Artifact;
-import com.swingy.model.character.villian.Villian;
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.artifact.Artifact;
+import pmalope.model.character.villian.Villian;
+import pmalope.model.character.heros.Hero;
 
 public class Globals {
     private Globals() {

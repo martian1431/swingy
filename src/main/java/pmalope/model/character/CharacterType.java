@@ -1,4 +1,4 @@
-package com.swingy.model.character;
+package pmalope.model.character;
 
 public enum CharacterType {
     DEADPOOL,

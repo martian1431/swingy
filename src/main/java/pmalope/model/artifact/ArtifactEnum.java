@@ -1,4 +1,4 @@
-package com.swingy.model.artifact;
+package pmalope.model.artifact;
 
 public enum  ArtifactEnum {
     WEAPON,

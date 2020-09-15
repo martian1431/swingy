@@ -1,15 +1,11 @@
-package com.swingy.view.gui;
+package pmalope.view.gui;
 
-import com.swingy.controller.GUIController;
-import com.swingy.model.artifact.Artifact;
-import com.swingy.model.character.heros.Hero;
-import com.swingy.model.character.villian.Villian;
-import com.swingy.utils.Globals;
+import pmalope.controller.GUIController;
+import pmalope.model.character.heros.Hero;
+import pmalope.utils.Globals;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 public class GUIView extends JFrame implements GameInterface{
@@ -39,9 +35,10 @@ public class GUIView extends JFrame implements GameInterface{
         startButton = new JButton();
         startButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+//        TODO logo
         JLabel logo = new JLabel();
-        ImageIcon logoImage = new ImageIcon("assets/Swingy_logo.png");
-        logo.setIcon(logoImage);
+//        ImageIcon logoImage = new ImageIcon("assets/Swingy_logo.png");
+//        logo.setIcon(logoImage);
         logo.setHorizontalAlignment(JLabel.CENTER);
         logo.setBorder(BorderFactory.createEmptyBorder(20,0,20,0));
 
@@ -52,7 +49,8 @@ public class GUIView extends JFrame implements GameInterface{
         startButton.setText("Get started");
         startButton.setEnabled(false);
 
-        startButton.addActionListener(e -> {GUIController.eventHandler(Globals.showStartScreen);});
+        startButton.addActionListener(e -> {
+            GUIController.eventHandler(Globals.showStartScreen);});
 
         subPanelCenter.add(loadLabel);
         subPanelCenter.add(startButton);
@@ -63,6 +61,10 @@ public class GUIView extends JFrame implements GameInterface{
         setResizable(false);
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    public static void run() {
+        new GUIController(new GUIView());
     }
 
 

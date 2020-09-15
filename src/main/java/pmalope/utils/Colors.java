@@ -1,4 +1,4 @@
-package com.swingy.utils;
+package pmalope.utils;
 
 import java.awt.*;
 

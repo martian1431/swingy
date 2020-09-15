@@ -1,16 +1,14 @@
-package com.swingy.model.character.heros;
+package pmalope.model.character.heros;
 
-import com.swingy.model.artifact.*;
-import com.swingy.utils.Grid;
+import pmalope.model.artifact.*;
+import pmalope.utils.Grid;
 import lombok.Getter;
 import lombok.Setter;
+import pmalope.utils.Colors;
+import pmalope.utils.Log;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
-import static com.swingy.utils.Colors.ANSI_CYAN;
-import static com.swingy.utils.Colors.ANSI_RESET;
-import static com.swingy.utils.Log.log;
 
 @Getter
 @Setter
@@ -77,7 +75,7 @@ public abstract class Hero {
                 earnedExperience = (int) (Math.ceil((float)this.level / 2) * 500);
                 this.experience += earnedExperience;
             }
-            log(ANSI_CYAN + " :::Well Done, Your Earned " + earnedExperience + "XP" + ANSI_RESET);
+            Log.log(Colors.ANSI_CYAN + " :::Well Done, Your Earned " + earnedExperience + "XP" + Colors.ANSI_RESET);
             if (this.experience >= (this.level * 1000 + Math.pow(this.level - 1, 2) * 450)) {
                 levelUp();
             }

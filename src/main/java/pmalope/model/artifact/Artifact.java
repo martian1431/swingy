@@ -1,4 +1,4 @@
-package com.swingy.model.artifact;
+package pmalope.model.artifact;
 
 import lombok.Getter;
 import lombok.Setter;

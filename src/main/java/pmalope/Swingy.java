@@ -1,14 +1,12 @@
-package com.swingy;
+package pmalope;
 
-import com.swingy.controller.GUIController;
-import com.swingy.model.GameModel;
-import com.swingy.utils.Globals;
-import com.swingy.view.console.ConsoleView;
-import com.swingy.view.gui.GUIView;
-import com.swingy.view.gui.GameView;
-
-import static com.swingy.utils.Colors.*;
-import static com.swingy.utils.Log.log;
+import pmalope.controller.GUIController;
+import pmalope.model.GameModel;
+import pmalope.utils.Globals;
+import pmalope.view.console.ConsoleView;
+import pmalope.view.gui.GUIView;
+import pmalope.utils.Colors;
+import pmalope.utils.Log;
 
 public class Swingy {
     public static void main(String[] args) {
@@ -19,14 +17,13 @@ public class Swingy {
                 ConsoleView.run();
             } else if (view.toLowerCase().equals("gui")) {
                 Globals.CONSOLE_MODE = false;
-                GUIView guiView = new GUIView();
-                GUIController guiController = new GUIController(guiView);
-//                GameView.run();
+                System.out.println("gui view");
+                GUIView.run();
             } else {
-                log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
+                Log.log(Colors.ANSI_RED + ":::ERROR::: choose only console or gui" + Colors.ANSI_RESET);
             }
         } catch (Exception e) {
-            log(ANSI_RED + ":::ERROR::: Invalid argument" + ANSI_RESET);
+            Log.log(Colors.ANSI_RED + ":::ERROR::: something wrong" + Colors.ANSI_RESET);
         }
     }
 }

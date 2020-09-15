@@ -1,6 +1,6 @@
-package com.swingy.view.gui;
+package pmalope.view.gui;
 
-import com.swingy.model.character.heros.Hero;
+import pmalope.model.character.heros.Hero;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;

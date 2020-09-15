@@ -1,14 +1,12 @@
-package com.swingy.controller;
+package pmalope.controller;
 
-import com.swingy.model.GameModel;
-import com.swingy.model.character.CharacterFactory;
-import com.swingy.model.character.CharacterType;
-import com.swingy.utils.Globals;
-import com.swingy.view.gui.GameInterface;
+import pmalope.model.GameModel;
+import pmalope.model.character.CharacterFactory;
+import pmalope.model.character.CharacterType;
+import pmalope.utils.Globals;
+import pmalope.view.gui.GameInterface;
 
 import java.util.Random;
-
-import static com.swingy.utils.Globals.hero;
 
 public class GUIController {
     static GameModel model;
@@ -39,7 +37,7 @@ public class GUIController {
                 gameInterface.showCreateScreen();
                 break;
             case Globals.showGameView:
-                gameInterface.showGameView(hero);
+                gameInterface.showGameView(Globals.hero);
         }
     }
 
@@ -48,7 +46,7 @@ public class GUIController {
         switch (input) {
             case Globals.selectHeroById:
                 try {
-                    hero = GameModel.getInstance().retrieveHeroData(value);
+                    Globals.hero = GameModel.getInstance().retrieveHeroData(value);
                     eventHandler(Globals.showGameView);
                 } catch (Exception e) {
                     gameInterface.showErrorDialog(e.getMessage());
@@ -66,8 +64,8 @@ public class GUIController {
                         gameInterface.showErrorDialog("Name can only 2 or 20 characters long");
                     } else if (!GameModel.getInstance().heroExists(valueOne.trim())) {
                         GameModel.getInstance().insertHero(CharacterFactory.newHero(valueOne.trim(), heroType(valueTwo)));
-                        hero = GameModel.getInstance().retrieveHeroData(valueOne.trim());
-                        if (hero != null) {
+                        Globals.hero = GameModel.getInstance().retrieveHeroData(valueOne.trim());
+                        if (Globals.hero != null) {
                             eventHandler(Globals.showGameView);
                         }
                         else {
