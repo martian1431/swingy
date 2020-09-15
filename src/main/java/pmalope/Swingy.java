@@ -21,7 +21,7 @@ public class Swingy {
                 Log.log(Colors.ANSI_RED + ":::ERROR::: choose only console or gui" + Colors.ANSI_RESET);
             }
         } catch (Exception e) {
-            Log.log(Colors.ANSI_RED + ":::ERROR::: something wrong" + Colors.ANSI_RESET);
+            Log.log(Colors.ANSI_RED + ":::ERROR::: choose only console or gui" + Colors.ANSI_RESET);
         }
     }
 }
