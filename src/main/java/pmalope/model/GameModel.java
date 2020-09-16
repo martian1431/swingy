@@ -289,6 +289,7 @@ public class GameModel {
                 String input = scanner.nextLine().trim();
                 if (input.toLowerCase().equals("1")) {
                     fight();
+                    break;
                 } else if (input.toLowerCase().equals("2")) {
                     goodbye();
                 } else {
