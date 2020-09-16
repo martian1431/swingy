@@ -47,14 +47,15 @@ public class CreateView extends JPanel {
 
         createHeroButton = new JButton("Create Hero");
         createHeroButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        createHeroButton.setEnabled(false);
 
         subPanelOne = new JPanel();
         subPanelTwo = new JPanel();
 
-        subPanelOne.add(userTextLabel);
-        subPanelOne.add(userTextInputField);
         subPanelTwo.add(menuLabel);
         subPanelTwo.add(heroClassesMenu);
+        subPanelOne.add(userTextLabel);
+        subPanelOne.add(userTextInputField);
 
         subPanelCenter = new JPanel();
         subPanelCenter.setLayout(new BoxLayout(subPanelCenter, BoxLayout.Y_AXIS));

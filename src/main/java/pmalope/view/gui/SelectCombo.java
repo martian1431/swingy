@@ -50,6 +50,7 @@ public class SelectCombo extends JPanel implements ActionListener{
         screenTitle.setPreferredSize(new Dimension(600, 50));
         selectHeroButton.setText("Select hero");
         selectHeroButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        selectHeroButton.setEnabled(false);
 
         screenTitle.setHorizontalAlignment(JLabel.CENTER);
         displayHeroStats(heroID);
