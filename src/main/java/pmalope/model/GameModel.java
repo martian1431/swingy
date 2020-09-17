@@ -387,7 +387,6 @@ public class GameModel {
                 Globals.hero.getYCoordinate() == 0) {
 //
 //            TODO factor
-//            ConsoleView.nextMission();
             Log.log(Colors.ANSI_GREEN + "::: Congratutations, You Reached Your Goal! Do you want to continue? (Y)es (N)o" + Colors.ANSI_RESET);
             Scanner scanner = ConsoleController.getScanner();
             while(scanner.hasNextLine()) {
